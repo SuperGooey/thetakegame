@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,8 @@
 
     <style>
         @page {
-            size: letter;
-            margin: 0.25in;
+            size: letter landscape;
+            margin: 0.5in;
         }
 
         * {
@@ -39,8 +39,6 @@
 
         .page {
             page-break-after: always;
-            padding: 0.25in;
-            height: 10.5in;
         }
 
         .page:last-child {
@@ -49,7 +47,7 @@
 
         .page-title {
             font-family: 'Playfair Display', serif;
-            font-size: 24pt;
+            font-size: 28pt;
             font-weight: 900;
             color: var(--dark-brown);
             text-align: center;
@@ -58,40 +56,38 @@
 
         .page-subtitle {
             font-family: 'Space Mono', monospace;
-            font-size: 10pt;
+            font-size: 11pt;
             color: var(--navy-blue);
             text-align: center;
-            margin-bottom: 0.25in;
+            margin-bottom: 0.2in;
         }
 
-        /* Rap Sheet */
+        /* Rap Sheet - Landscape Layout */
         .rap-sheet {
             background: var(--cream);
             border: 6pt solid var(--purple-mauve);
             border-radius: 8pt;
             padding: 0.3in;
-            height: 9.5in;
-            position: relative;
         }
 
         .rap-sheet-header {
             text-align: center;
-            margin-bottom: 0.25in;
-            padding-bottom: 0.15in;
-            border-bottom: 3pt solid var(--purple-mauve);
+            margin-bottom: 0.2in;
+            padding-bottom: 0.12in;
+            border-bottom: 4pt solid var(--purple-mauve);
         }
 
         .rap-sheet-title {
             font-family: 'Playfair Display', serif;
-            font-size: 28pt;
+            font-size: 36pt;
             font-weight: 900;
             color: var(--purple-mauve);
-            margin-bottom: 8pt;
+            margin-bottom: 6pt;
         }
 
         .player-name-field {
             font-family: 'Space Mono', monospace;
-            font-size: 10pt;
+            font-size: 11pt;
             color: var(--navy-blue);
             text-transform: uppercase;
             letter-spacing: 1pt;
@@ -99,7 +95,7 @@
 
         .player-name-line {
             display: inline-block;
-            width: 3in;
+            width: 4in;
             border-bottom: 2pt solid var(--dark-brown);
             margin-left: 8pt;
         }
@@ -107,141 +103,173 @@
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 0.1in;
-            margin-bottom: 0.25in;
+            gap: 0.15in;
+            margin-bottom: 0.2in;
         }
 
         .category-column {
             background: white;
             border: 3pt solid var(--navy-blue);
-            border-radius: 4pt;
-            padding: 0.1in;
-            min-height: 4in;
+            border-radius: 6pt;
+            padding: 0.12in;
         }
 
         .category-header {
             text-align: center;
             padding-bottom: 0.08in;
-            margin-bottom: 0.08in;
+            margin-bottom: 0.1in;
             border-bottom: 2pt solid var(--navy-blue);
         }
 
         .category-icon {
-            font-size: 20pt;
+            font-size: 24pt;
             display: block;
             margin-bottom: 4pt;
         }
 
         .category-name {
             font-family: 'Space Mono', monospace;
-            font-size: 8pt;
+            font-size: 9pt;
             font-weight: 700;
             color: var(--dark-brown);
             text-transform: uppercase;
+            letter-spacing: 0.5pt;
         }
 
-        .category-column.precision { border-top: 5pt solid #4a90e2; }
-        .category-column.chaos { border-top: 5pt solid #e24a4a; }
-        .category-column.trust { border-top: 5pt solid #4ae290; }
-        .category-column.greed { border-top: 5pt solid #e2d44a; }
-        .category-column.hustle { border-top: 5pt solid #9b4ae2; }
+        .category-column.precision { border-top: 6pt solid #4a90e2; }
+        .category-column.chaos { border-top: 6pt solid #e24a4a; }
+        .category-column.trust { border-top: 6pt solid #4ae290; }
+        .category-column.greed { border-top: 6pt solid #e2d44a; }
+        .category-column.hustle { border-top: 6pt solid #9b4ae2; }
 
-        .contract-slots {
+        .contract-tracker {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6pt;
+            font-size: 10pt;
+        }
+
+        .contract-box {
             display: flex;
-            flex-direction: column;
-            gap: 4pt;
+            align-items: center;
+            padding: 6pt;
+            background: var(--cream);
+            border: 2pt solid var(--navy-blue);
+            border-radius: 3pt;
+            min-height: 0.35in;
         }
 
-        .contract-slot {
-            height: 0.25in;
-            border: 1pt dashed var(--navy-blue);
+        .contract-checkbox {
+            width: 16pt;
+            height: 16pt;
+            border: 2pt solid var(--dark-brown);
             border-radius: 2pt;
+            margin-right: 6pt;
+            flex-shrink: 0;
+        }
+
+        .contract-number {
+            font-family: 'Space Mono', monospace;
+            font-weight: 600;
+            color: var(--navy-blue);
         }
 
         .set-bonuses {
-            background: rgba(180, 199, 95, 0.2);
-            border: 3pt solid var(--lime-green);
-            border-radius: 4pt;
+            background: rgba(180, 199, 95, 0.25);
+            border: 4pt solid var(--lime-green);
+            border-radius: 6pt;
             padding: 0.15in;
         }
 
         .set-bonuses-title {
             font-family: 'Playfair Display', serif;
-            font-size: 14pt;
+            font-size: 16pt;
             font-weight: 700;
             color: var(--dark-brown);
             margin-bottom: 0.1in;
+            text-align: center;
         }
 
         .bonus-list {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6pt;
-            font-size: 9pt;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8pt;
+            font-size: 10pt;
         }
 
         .bonus-item {
             display: flex;
             justify-content: space-between;
-            padding: 4pt;
+            align-items: center;
+            padding: 6pt 8pt;
             background: white;
-            border-radius: 2pt;
+            border-radius: 3pt;
+            border: 2pt solid var(--lime-green);
         }
 
         .bonus-name {
             font-weight: 600;
+            font-size: 9pt;
         }
 
         .bonus-amount {
             font-family: 'Space Mono', monospace;
             font-weight: 700;
             color: #7ba865;
+            font-size: 11pt;
         }
 
-        /* Chips Tracker */
-        .chips-tracker {
-            background: var(--cream);
-            border: 4pt solid var(--purple-mauve);
+        /* Reference Cards - Portrait */
+        @page :not(.rap-sheet-page) {
+            size: letter portrait;
+            margin: 0.5in;
+        }
+
+        .reference-card {
+            background: var(--sky-blue);
+            border: 4pt solid var(--navy-blue);
             border-radius: 6pt;
-            padding: 0.2in;
-            margin-bottom: 0.15in;
+            padding: 0.25in;
+            margin-bottom: 0.25in;
+            page-break-inside: avoid;
         }
 
-        .chips-header {
-            font-family: 'Playfair Display', serif;
-            font-size: 18pt;
-            font-weight: 700;
-            color: var(--dark-brown);
-            text-align: center;
-            margin-bottom: 0.1in;
-        }
-
-        .chips-boxes {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.1in;
-        }
-
-        .chip-box {
-            background: white;
-            border: 2pt solid var(--navy-blue);
-            border-radius: 4pt;
-            padding: 0.1in;
-            text-align: center;
-        }
-
-        .chip-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 8pt;
-            color: var(--navy-blue);
-            margin-bottom: 4pt;
-        }
-
-        .chip-value {
+        .reference-title {
             font-family: 'Playfair Display', serif;
             font-size: 20pt;
             font-weight: 900;
-            color: var(--purple-mauve);
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+            border-bottom: 3pt solid var(--navy-blue);
+            padding-bottom: 0.1in;
+        }
+
+        .reference-section {
+            margin-bottom: 0.15in;
+        }
+
+        .reference-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-section h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 8pt;
+        }
+
+        .reference-section p,
+        .reference-section li {
+            font-size: 11pt;
+            line-height: 1.5;
+            margin-bottom: 6pt;
+        }
+
+        .reference-section ul {
+            margin-left: 0.25in;
         }
 
         /* Claim Sheets */
@@ -249,29 +277,30 @@
             background: var(--cream);
             border: 4pt solid var(--navy-blue);
             border-radius: 6pt;
-            padding: 0.25in;
-            margin-bottom: 0.15in;
-            height: 1.5in;
+            padding: 0.2in;
+            margin-bottom: 0.2in;
+            height: 1.4in;
         }
 
         .claim-title {
             font-family: 'Playfair Display', serif;
-            font-size: 14pt;
+            font-size: 16pt;
             font-weight: 700;
             color: var(--dark-brown);
             text-align: center;
-            margin-bottom: 0.1in;
+            margin-bottom: 0.12in;
         }
 
         .claim-line {
             display: flex;
             align-items: center;
-            margin-bottom: 8pt;
+            margin-bottom: 10pt;
         }
 
         .claim-line-label {
             font-family: 'Space Mono', monospace;
-            font-size: 10pt;
+            font-size: 11pt;
+            font-weight: 600;
             width: 1.5in;
         }
 
@@ -281,45 +310,25 @@
             border-bottom: 2pt solid var(--dark-brown);
         }
 
-        /* Reference Cards */
-        .reference-card {
-            background: var(--sky-blue);
-            border: 4pt solid var(--navy-blue);
-            border-radius: 6pt;
-            padding: 0.25in;
-            page-break-inside: avoid;
+        .print-info {
+            background: var(--lime-green);
+            padding: 0.15in;
+            margin-bottom: 0.2in;
+            border-radius: 4pt;
+            border: 3pt solid var(--dark-brown);
         }
 
-        .reference-title {
+        .print-info h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 18pt;
-            font-weight: 900;
+            font-size: 14pt;
             color: var(--dark-brown);
-            text-align: center;
-            margin-bottom: 0.15in;
+            margin-bottom: 8pt;
         }
 
-        .reference-section {
-            margin-bottom: 0.15in;
-        }
-
-        .reference-section h3 {
-            font-family: 'Space Mono', monospace;
-            font-size: 11pt;
-            font-weight: 700;
-            color: var(--navy-blue);
-            margin-bottom: 6pt;
-        }
-
-        .reference-section p,
-        .reference-section li {
+        .print-info p {
             font-size: 10pt;
-            line-height: 1.4;
             margin-bottom: 4pt;
-        }
-
-        .reference-section ul {
-            margin-left: 0.2in;
+            line-height: 1.4;
         }
 
         @media print {
@@ -327,48 +336,28 @@
                 display: none;
             }
         }
-
-        .print-info {
-            background: var(--lime-green);
-            padding: 0.15in;
-            margin-bottom: 0.25in;
-            border-radius: 4pt;
-            border: 2pt solid var(--dark-brown);
-        }
-
-        .print-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 12pt;
-            color: var(--dark-brown);
-            margin-bottom: 8pt;
-        }
-
-        .print-info p {
-            font-size: 9pt;
-            margin-bottom: 4pt;
-        }
     </style>
 </head>
 <body>
 
-    <!-- RAP SHEET PAGE -->
-    <div class="page">
+    <!-- ANTECEDENTES PAGE (Landscape) -->
+    <div class="page rap-sheet-page">
         <h1 class="page-title">THE TAKE</h1>
-        <p class="page-subtitle">Hoja de Antecedentes • Imprima 1 por Jugador</p>
+        <p class="page-subtitle">Hoja de Antecedentes • Imprima 1 por Jugador (Horizontal)</p>
 
         <div class="print-info">
-            <h3>📋 Uso</h3>
-            <p>• Imprima una Hoja por jugador (recomendado 6-12 copias)</p>
-            <p>• Escriba el nombre del jugador en la parte superior</p>
-            <p>• Coloque contratos completados en las columnas de categoría correspondientes</p>
-            <p>• Marque los bonos de conjunto a medida que se ganen</p>
+            <h3>📋 Instrucciones de Uso</h3>
+            <p>• Imprima una Hoja por jugador en orientación HORIZONTAL</p>
+            <p>• Cuando completes un contrato, marca con una palomita en el siguiente cuadro disponible en la categoría de ese contrato</p>
+            <p>• Guarda las cartas de contratos completados en una pila separada - esta hoja rastrea cuáles has completado</p>
+            <p>• Marca los bonos de conjunto al ganarlos y cobra el dinero inmediatamente</p>
         </div>
 
         <div class="rap-sheet">
             <div class="rap-sheet-header">
                 <div class="rap-sheet-title">ANTECEDENTES</div>
                 <div class="player-name-field">
-                    JUGADOR: <span class="player-name-line"></span>
+                    NOMBRE DEL JUGADOR: <span class="player-name-line"></span>
                 </div>
             </div>
 
@@ -378,12 +367,13 @@
                         <div class="category-icon">🎯</div>
                         <div class="category-name">Precisión</div>
                     </div>
-                    <div class="contract-slots">
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
+                    <div class="contract-tracker">
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">1</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">2</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">3</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">4</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">5</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">6+</span></div>
                     </div>
                 </div>
 
@@ -392,12 +382,13 @@
                         <div class="category-icon">💣</div>
                         <div class="category-name">Caos</div>
                     </div>
-                    <div class="contract-slots">
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
+                    <div class="contract-tracker">
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">1</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">2</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">3</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">4</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">5</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">6+</span></div>
                     </div>
                 </div>
 
@@ -406,12 +397,13 @@
                         <div class="category-icon">🤝</div>
                         <div class="category-name">Confianza</div>
                     </div>
-                    <div class="contract-slots">
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
+                    <div class="contract-tracker">
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">1</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">2</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">3</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">4</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">5</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">6+</span></div>
                     </div>
                 </div>
 
@@ -420,12 +412,13 @@
                         <div class="category-icon">💰</div>
                         <div class="category-name">Codicia</div>
                     </div>
-                    <div class="contract-slots">
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
+                    <div class="contract-tracker">
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">1</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">2</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">3</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">4</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">5</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">6+</span></div>
                     </div>
                 </div>
 
@@ -434,18 +427,19 @@
                         <div class="category-icon">🎲</div>
                         <div class="category-name">Empuje</div>
                     </div>
-                    <div class="contract-slots">
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
-                        <div class="contract-slot"></div>
+                    <div class="contract-tracker">
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">1</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">2</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">3</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">4</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">5</span></div>
+                        <div class="contract-box"><div class="contract-checkbox"></div><span class="contract-number">6+</span></div>
                     </div>
                 </div>
             </div>
 
             <div class="set-bonuses">
-                <div class="set-bonuses-title">BONOS DE CONJUNTO GANADOS</div>
+                <div class="set-bonuses-title">BONOS DE CONJUNTO - MARCA AL GANAR</div>
                 <div class="bonus-list">
                     <div class="bonus-item">
                         <span class="bonus-name">☐ Especialista (3 en uno)</span>
@@ -463,8 +457,8 @@
                         <span class="bonus-name">☐ Leyenda (6 total)</span>
                         <span class="bonus-amount">+$6,000</span>
                     </div>
-                    <div class="bonus-item" style="grid-column: 1 / -1;">
-                        <span class="bonus-name">☐ Cerebro (3+3 en dos categorías)</span>
+                    <div class="bonus-item" style="grid-column: 2 / 3;">
+                        <span class="bonus-name">☐ Cerebro (3+3 en dos)</span>
                         <span class="bonus-amount">+$10,000</span>
                     </div>
                 </div>
@@ -472,71 +466,71 @@
         </div>
     </div>
 
-    <!-- PLAYER REFERENCE CARD PAGE -->
+    <!-- PLAYER REFERENCE CARD PAGE (Portrait) -->
     <div class="page">
         <h1 class="page-title">THE TAKE</h1>
         <p class="page-subtitle">Referencia Rápida • Imprima 1 por Jugador</p>
 
-        <div class="reference-card" style="margin-bottom: 0.25in;">
+        <div class="reference-card">
             <div class="reference-title">ORDEN DE TURNOS</div>
             <div class="reference-section">
                 <h3>Entre Trabajos</h3>
                 <ul>
                     <li>El Jefe rota al jugador con menos fichas</li>
                     <li>Sorteo de contratos (Jefe primero, sentido horario)</li>
-                    <li>Comercio en Mercado Negro (60 segundos)</li>
-                    <li>Rellenar Tablero de Contratos</li>
+                    <li>Comercio de Mercado Negro (60 segundos)</li>
+                    <li>Rellenar Tablero de Contratos a 5 cartas</li>
                 </ul>
             </div>
             <div class="reference-section">
                 <h3>El Trabajo</h3>
                 <ul>
-                    <li>Revelar carta de Trabajo</li>
-                    <li>Jefe selecciona Equipo</li>
-                    <li>Equipo escribe Reclamaciones (secreto)</li>
+                    <li>Revelar carta de Trabajo del mazo</li>
+                    <li>Jefe selecciona Equipo (tamaño exacto mostrado en carta)</li>
+                    <li>Equipo escribe Reclamaciones en secreto</li>
                     <li>Los no-equipo hacen Apuestas (Invertir/Contra/Pasar)</li>
-                    <li>Revelar Reclamaciones simultáneamente</li>
-                    <li>Resolución: ÉXITO si Reclamaciones ≤ Bote</li>
-                    <li>Completar Contratos</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="reference-card" style="margin-bottom: 0.25in;">
-            <div class="reference-title">RESOLUCIÓN DEL TRABAJO</div>
-            <div class="reference-section">
-                <h3>Éxito (Reclamaciones Totales ≤ Bote)</h3>
-                <ul>
-                    <li>Equipo recibe sus Reclamaciones</li>
-                    <li>Inversores obtienen retorno 2×</li>
-                    <li>Apostadores contra pierden su apuesta</li>
-                    <li>Dinero no reclamado se acumula</li>
-                </ul>
-            </div>
-            <div class="reference-section">
-                <h3>Fracaso (Reclamaciones Totales > Bote)</h3>
-                <ul>
-                    <li>Equipo no recibe nada</li>
-                    <li>Inversores pierden su apuesta</li>
-                    <li>Apostadores contra obtienen retorno 2×</li>
-                    <li>Todo el bote se acumula</li>
+                    <li>Revelar todas las Reclamaciones simultáneamente</li>
+                    <li>Resolución: ÉXITO si Reclamaciones totales ≤ Bote</li>
+                    <li>Completar y revelar Contratos</li>
                 </ul>
             </div>
         </div>
 
         <div class="reference-card">
-            <div class="reference-title">NIVELES DE CONTRATOS</div>
+            <div class="reference-title">RESOLUCIÓN DEL TRABAJO</div>
             <div class="reference-section">
-                <h3>Penalizaciones por Nivel</h3>
+                <h3>✅ Éxito (Reclamaciones Totales ≤ Bote)</h3>
                 <ul>
-                    <li>Fácil (Verde): -$1,500 si incompleto</li>
-                    <li>Mediano (Morado): -$3,000 si incompleto</li>
-                    <li>Difícil (Rojo): -$5,000 si incompleto</li>
+                    <li>Equipo recibe sus montos reclamados</li>
+                    <li>Inversores obtienen retorno 2× (apuesta + ganancias)</li>
+                    <li>Apostadores contra pierden su apuesta</li>
+                    <li>Dinero no reclamado se acumula al próximo trabajo</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>❌ Fracaso (Reclamaciones Totales > Bote)</h3>
+                <ul>
+                    <li>Equipo no recibe nada</li>
+                    <li>Inversores pierden su apuesta</li>
+                    <li>Apostadores contra obtienen retorno 2× (apuesta + ganancias)</li>
+                    <li>Bote completo se acumula al próximo trabajo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reference-card">
+            <div class="reference-title">CONTRATOS Y BONOS</div>
+            <div class="reference-section">
+                <h3>Penalizaciones por Nivel (si incompleto al final del juego)</h3>
+                <ul>
+                    <li><strong>Fácil (Verde):</strong> -$1,500</li>
+                    <li><strong>Mediano (Morado):</strong> -$3,000</li>
+                    <li><strong>Difícil (Rojo):</strong> -$5,000</li>
                 </ul>
             </div>
             <div class="reference-section">
                 <h3>Costo de Descarte</h3>
-                <p>Pague $1,000 para descartar cualquier contrato de su mano entre trabajos</p>
+                <p>Paga $1,000 entre trabajos para descartar cualquier contrato de tu mano (elimina penalización)</p>
             </div>
         </div>
     </div>
@@ -544,13 +538,15 @@
     <!-- CLAIM SHEETS PAGE -->
     <div class="page">
         <h1 class="page-title">THE TAKE</h1>
-        <p class="page-subtitle">Hojas de Reclamación • Corte y use para reclamaciones secretas</p>
+        <p class="page-subtitle">Hojas de Reclamación • Corta y usa para reclamaciones secretas</p>
 
         <div class="print-info">
-            <h3>✂️ Instrucciones</h3>
-            <p>• Corte las hojas de reclamación individuales</p>
-            <p>• Cada miembro del equipo escribe su reclamación en una hoja</p>
-            <p>• Doble para ocultar, luego revele todas simultáneamente</p>
+            <h3>✂️ Instrucciones de Corte y Uso</h3>
+            <p>• Corta las hojas de reclamación individuales a lo largo de los bordes</p>
+            <p>• Cada miembro del equipo toma una hoja por trabajo</p>
+            <p>• Escribe tu monto de reclamación en secreto</p>
+            <p>• Dobla para ocultar, luego revela todas simultáneamente</p>
+            <p>• Las reclamaciones deben ser en incrementos de $1,000 (mínimo $0)</p>
         </div>
 
         <div class="claim-sheet">
