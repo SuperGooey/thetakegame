@@ -19,11 +19,13 @@ A complete digital implementation that manages:
 **Use this when:** Playing entirely digitally without physical components
 
 ### 📊 Job Tracker Companion App (`tracker.html`)
-A minimalist companion app that **only** tracks:
+A **premium bilingual** companion app that **only** tracks:
 - Job deck progression
 - Success/Failure outcomes
 - Rollover calculations
 - Job history visualization
+- **NEW:** Full English/Spanish language support
+- **NEW:** Built-in rules section
 
 **Use this when:** Playing with physical chips and contract cards, but want digital help tracking the job deck and rollover amounts
 
@@ -35,12 +37,16 @@ The **Job Tracker** is designed to run on a tablet at the center of your game ta
 
 ### Features
 
-✨ **Ultra-minimalist noir aesthetic** - High contrast, table-readable
+✨ **Premium design aesthetic** - Designer fonts (Cinzel, Inter, JetBrains Mono), bold gradients, smooth animations
+🌍 **Bilingual support** - Full English/Spanish translations (toggle top-right)
+📖 **Built-in rules** - Complete game instructions in both languages (sidebar panel)
 🎲 **Auto-shuffled job deck** - Final Job always placed last
 💰 **Automatic rollover calculation** - No mental math required
 📈 **Visual job history** - See success/failure patterns at a glance
 💾 **Auto-save state** - Refresh-safe, survives browser crashes
 📱 **Mobile responsive** - Works on phones, tablets, and desktop
+🎨 **Near-black background** - #0d0d0d with purple/green/red/gold accents
+🔧 **Zero dependencies** - Pure HTML/CSS/JS
 
 ### How to Use
 
@@ -79,13 +85,16 @@ The tracker intentionally does **NOT** manage:
 
 ## 🎨 Design Philosophy
 
-The Job Tracker embraces **extreme minimalism**:
+The Job Tracker embraces **premium minimalism**:
 
-- **Noir color palette** - Black background, gold money, green/red results
-- **Large typography** - Readable from across the table
+- **Premium typography** - Cinzel (display), Inter (body), JetBrains Mono (monospace)
+- **Bold color palette** - Near-black background with vibrant purple/green/red/gold accents
+- **Gradient effects** - Text gradients with glow shadows for visual depth
+- **Smooth animations** - Polished transitions and hover effects
+- **Bilingual by default** - English/Spanish with persistent language preference
+- **Touch-optimized** - Large buttons and intuitive interactions
+- **Accessible learning** - Built-in rules panel with comprehensive game instructions
 - **Zero cognitive load** - One clear action at a time
-- **Touch-optimized** - Big buttons for tablet use
-- **No distractions** - Only essential information
 
 ---
 
