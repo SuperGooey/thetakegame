@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE - Libro de Reglas (Español)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        @page {
+            size: 5.5in 8.5in;
+            margin: 0.4in 0.5in 0.4in 0.5in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: #3d2417;
+            background: white;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        :root {
+            --sky-blue: #a8c5d9;
+            --purple-mauve: #9b6b87;
+            --cream: #e8dfd1;
+            --lime-green: #b4c75f;
+            --dark-brown: #3d2417;
+            --navy-blue: #1a3a52;
+        }
+
+        .page {
+            page-break-after: always;
+            height: 7.7in;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* Cover */
+        .cover {
+            background: var(--navy-blue);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1in;
+            height: 100%;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48pt;
+            font-weight: 900;
+            color: var(--lime-green);
+            margin-bottom: 0.2in;
+            text-shadow: 3pt 3pt 0 rgba(0,0,0,0.3);
+        }
+
+        .cover-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 14pt;
+            color: var(--sky-blue);
+            letter-spacing: 2pt;
+            margin-bottom: 0.5in;
+        }
+
+        .cover-info {
+            font-size: 11pt;
+            color: var(--cream);
+            margin-top: 0.5in;
+        }
+
+        .cover-info div {
+            margin-bottom: 8pt;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+            margin-bottom: 0.15in;
+            border-bottom: 3pt solid var(--purple-mauve);
+            padding-bottom: 0.1in;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-top: 0.2in;
+            margin-bottom: 0.1in;
+        }
+
+        h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-top: 0.15in;
+            margin-bottom: 0.08in;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+        }
+
+        p {
+            margin-bottom: 0.1in;
+        }
+
+        ul, ol {
+            margin-left: 0.25in;
+            margin-bottom: 0.1in;
+        }
+
+        li {
+            margin-bottom: 4pt;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            background: var(--sky-blue);
+            border: 3pt solid var(--navy-blue);
+            border-radius: 4pt;
+            padding: 0.15in;
+            margin: 0.15in 0;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 8pt;
+        }
+
+        .example {
+            background: var(--cream);
+            border-left: 4pt solid var(--purple-mauve);
+            padding: 0.1in;
+            margin: 0.1in 0;
+            font-style: italic;
+        }
+
+        .important {
+            background: rgba(180, 199, 95, 0.3);
+            border: 2pt solid var(--lime-green);
+            border-radius: 4pt;
+            padding: 0.1in;
+            margin: 0.1in 0;
+            font-weight: 600;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.1in 0;
+            font-size: 9pt;
+        }
+
+        th {
+            background: var(--purple-mauve);
+            color: white;
+            padding: 6pt;
+            text-align: left;
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 6pt;
+            border-bottom: 1pt solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: var(--cream);
+        }
+
+        /* Icons */
+        .icon {
+            font-size: 14pt;
+            margin-right: 4pt;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="page cover">
+        <div class="cover-title">THE TAKE</div>
+        <div class="cover-subtitle">LIBRO DE REGLAS OFICIAL</div>
+        <div style="font-size: 12pt; color: var(--cream); line-height: 1.8; max-width: 4in;">
+            Un juego de codicia, traición y riesgo calculado donde los equipos realizan robos,
+            completan contratos secretos y compiten para convertirse en el criminal más rico.
+        </div>
+        <div class="cover-info">
+            <div><strong>Jugadores:</strong> 5-12</div>
+            <div><strong>Tiempo:</strong> 60-90 minutos</div>
+            <div><strong>Edades:</strong> 14+</div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: OVERVIEW & COMPONENTS -->
+    <div class="page">
+        <h1>Descripción General</h1>
+        <p>
+            <strong>THE TAKE</strong> es un juego de deducción social donde los jugadores trabajan
+            juntos en robos mientras persiguen contratos secretos y ganancias personales. Cada
+            trabajo requiere confianza y cooperación, pero la codicia puede destrozar un equipo.
+            El jugador con más dinero al final gana.
+        </p>
+
+        <h2>Qué Te Hace Ganar</h2>
+        <p>Dinero. Puro y simple. Gánalo mediante:</p>
+        <ul>
+            <li>Completar trabajos exitosamente y reclamar tu parte</li>
+            <li>Ganar apuestas sobre resultados de trabajos</li>
+            <li>Completar contratos secretos para grandes bonificaciones</li>
+            <li>Ganar bonos de conjunto de tu Hoja de Antecedentes</li>
+        </ul>
+
+        <h2>Componentes</h2>
+
+        <h3>Cartas de Trabajos (13)</h3>
+        <ul>
+            <li>3 Trabajos Pequeños (Equipo: 3, Bote: $8,000)</li>
+            <li>4 Trabajos Medianos (Equipo: 4, Bote: $12,000)</li>
+            <li>3 Trabajos Grandes (Equipo: 4, Bote: $16,000)</li>
+            <li>2 Trabajos Enormes (Equipo: 5, Bote: $20,000)</li>
+            <li>1 Trabajo Final (Equipo: 4, Bote: $18,000)</li>
+        </ul>
+
+        <h3>Cartas de Contratos (60)</h3>
+        <ul>
+            <li>20 Fáciles (Verde) - Bono: $2,000-$2,500, Penalización: -$1,500</li>
+            <li>25 Medianos (Morado) - Bono: $4,000-$5,000, Penalización: -$3,000</li>
+            <li>15 Difíciles (Rojo) - Bono: $8,000-$10,000, Penalización: -$5,000</li>
+        </ul>
+
+        <h3>Materiales por Jugador</h3>
+        <ul>
+            <li>1 Hoja de Antecedentes (rastrear contratos completados)</li>
+            <li>Fichas iniciales: $10,000</li>
+            <li>1 Tarjeta de referencia rápida</li>
+        </ul>
+
+        <h3>Materiales Adicionales</h3>
+        <ul>
+            <li>Hojas de reclamación (para ofertas secretas)</li>
+            <li>Fichas de póker o tokens para dinero</li>
+        </ul>
+    </div>
+
+    <!-- PAGE 3: SETUP -->
+    <div class="page">
+        <h1>Configuración</h1>
+
+        <ol>
+            <li><strong>Mazo de Trabajos:</strong> Baraja todas las cartas de Trabajos. Coloca el Trabajo Final en la parte inferior. Esto forma el mazo de Trabajos.</li>
+            <li><strong>Tablero de Contratos:</strong> Baraja todas las cartas de Contratos. Reparte 5 boca arriba para formar el Tablero de Contratos.</li>
+            <li><strong>Dinero Inicial:</strong> Cada jugador recibe $10,000 en fichas.</li>
+            <li><strong>Hojas de Antecedentes:</strong> Cada jugador toma una Hoja y escribe su nombre.</li>
+            <li><strong>Primer Jefe:</strong> El jugador que más recientemente cometió un crimen (o el más joven) se convierte en el primer Jefe.</li>
+        </ol>
+
+        <div class="callout">
+            <div class="callout-title">🎯 El Jefe</div>
+            <p>
+                El Jefe es el líder del trabajo actual. Seleccionan el equipo y tienen
+                la última palabra sobre la composición del equipo. El rol de Jefe rota
+                al jugador con menos fichas entre trabajos.
+            </p>
+        </div>
+
+        <h2>Estructura del Juego</h2>
+        <p>El juego alterna entre dos fases:</p>
+
+        <h3>Entre Trabajos</h3>
+        <ol>
+            <li>Rotar Jefe al jugador con menos fichas (empates: sentido horario desde el Jefe actual)</li>
+            <li>Sorteo de Contratos (comenzando con el Jefe, sentido horario)</li>
+            <li>Comercio de Mercado Negro (60 segundos - opcional)</li>
+            <li>Rellenar Tablero de Contratos a 5 cartas</li>
+        </ol>
+
+        <h3>El Trabajo</h3>
+        <ol>
+            <li>Revelar carta superior de Trabajos</li>
+            <li>Jefe selecciona equipo (tamaño que coincide con la carta)</li>
+            <li>Equipo escribe reclamaciones secretas</li>
+            <li>Los no-equipo hacen apuestas (Invertir/Contra/Pasar)</li>
+            <li>Revelar todas las reclamaciones simultáneamente</li>
+            <li>Resolver trabajo (Éxito o Fracaso)</li>
+            <li>Completar contratos</li>
+        </ol>
+
+        <div class="important">
+            <strong>⚠️ Importante:</strong> El juego termina después de que se resuelve el Trabajo Final.
+        </div>
+    </div>
+
+    <!-- PAGE 4: CONTRACT DRAFT -->
+    <div class="page">
+        <h1>Sorteo de Contratos</h1>
+
+        <p>
+            Entre trabajos, los jugadores sortean contratos secretos que definen objetivos
+            personales. Los contratos otorgan bonos cuando se completan pero imponen
+            penalizaciones si quedan incompletos al final del juego.
+        </p>
+
+        <h2>Proceso de Sorteo</h2>
+        <ol>
+            <li>Comenzando con el Jefe y procediendo en sentido horario, cada jugador toma UNA carta del Tablero de Contratos</li>
+            <li>Los jugadores pueden elegir cualquiera de los 5 contratos boca arriba</li>
+            <li>Los contratos van a tu mano (¡mantenlos en secreto!)</li>
+            <li>Después de que todos los jugadores sortean, rellenar el tablero a 5 cartas</li>
+        </ol>
+
+        <h2>Niveles de Contratos</h2>
+
+        <table>
+            <tr>
+                <th>Nivel</th>
+                <th>Color</th>
+                <th>Bono Típico</th>
+                <th>Penalización</th>
+                <th>Dificultad</th>
+            </tr>
+            <tr>
+                <td>Fácil</td>
+                <td>Verde</td>
+                <td>$2,000-$2,500</td>
+                <td>-$1,500</td>
+                <td>Baja</td>
+            </tr>
+            <tr>
+                <td>Mediano</td>
+                <td>Morado</td>
+                <td>$4,000-$5,000</td>
+                <td>-$3,000</td>
+                <td>Moderada</td>
+            </tr>
+            <tr>
+                <td>Difícil</td>
+                <td>Rojo</td>
+                <td>$8,000-$10,000</td>
+                <td>-$5,000</td>
+                <td>Alta</td>
+            </tr>
+        </table>
+
+        <h2>Gestión de Contratos</h2>
+
+        <h3>Descartar Contratos</h3>
+        <p>
+            Entre trabajos, puedes descartar cualquier contrato de tu mano pagando $1,000.
+            Esto elimina la carta del juego (no se aplica penalización).
+        </p>
+
+        <h3>Mercado Negro</h3>
+        <p>
+            Después del sorteo, los jugadores tienen 60 segundos para intercambiar contratos
+            entre sí. ¡Todos los intercambios son legales - dinero, contratos, promesas,
+            amenazas, lo que funcione!
+        </p>
+
+        <div class="example">
+            <strong>Ejemplo:</strong> "Te doy este contrato Fácil y $2,000 por tu contrato
+            Mediano" o "¡Intercámbiame ese contrato o nunca te elegiré para un equipo!"
+        </div>
+    </div>
+
+    <!-- PAGE 5: THE JOB -->
+    <div class="page">
+        <h1>El Trabajo</h1>
+
+        <h2>1. Revelar Carta de Trabajo</h2>
+        <p>
+            Voltea la carta superior del mazo de Trabajos. Esto muestra el <strong>Tamaño
+            del Equipo</strong> (cuántos jugadores trabajan en el trabajo) y el
+            <strong>Bote</strong> (dinero total disponible).
+        </p>
+
+        <h2>2. Jefe Selecciona Equipo</h2>
+        <p>
+            El Jefe selecciona exactamente el número de jugadores mostrado en la carta de
+            Trabajo para formar el equipo. El Jefe puede incluirse a sí mismo o no - su elección.
+        </p>
+
+        <div class="callout">
+            <div class="callout-title">💭 Charla en la Mesa</div>
+            <p>
+                Aquí es donde el juego se vuelve interesante. Los jugadores ruegan, prometen,
+                amenazan y negocian para entrar (¡o salir!) del equipo. El Jefe tiene todo
+                el poder aquí, así que úsalo sabiamente.
+            </p>
+        </div>
+
+        <h2>3. Equipo Escribe Reclamaciones Secretas</h2>
+        <p>
+            Cada miembro del equipo escribe en secreto cuánto dinero está reclamando del
+            bote en una hoja de reclamación. Las reclamaciones deben ser:
+        </p>
+        <ul>
+            <li>En incrementos de $1,000</li>
+            <li>Al menos $0 (¡sí, puedes no reclamar nada!)</li>
+            <li>Sin máximo (la codicia no tiene límites)</li>
+        </ul>
+
+        <div class="important">
+            <strong>🎯 La Tensión Central:</strong> Si el total de todas las reclamaciones
+            excede el bote, el trabajo FALLA y nadie recibe pago. Confía en tu equipo... o no.
+        </div>
+
+        <h2>4. Los No-Equipo Hacen Apuestas</h2>
+        <p>Los jugadores que NO están en el equipo pueden apostar sobre el resultado:</p>
+
+        <h3>Invertir (Apostar al Éxito)</h3>
+        <p>
+            Apuesta cualquier cantidad. Si el trabajo tiene éxito, recupera tu apuesta más
+            una cantidad igual (2× total). Si falla, pierdes tu apuesta.
+        </p>
+
+        <h3>Contra (Apostar al Fracaso)</h3>
+        <p>
+            Apuesta cualquier cantidad. Si el trabajo falla, recupera tu apuesta más una
+            cantidad igual (2× total). Si tiene éxito, pierdes tu apuesta.
+        </p>
+
+        <h3>Pasar</h3>
+        <p>No apuestes nada. Seguro, pero aburrido.</p>
+    </div>
+
+    <!-- PAGE 6: RESOLUTION -->
+    <div class="page">
+        <h1>Resolución del Trabajo</h1>
+
+        <h2>5. Revelar Reclamaciones</h2>
+        <p>
+            Todos los miembros del equipo revelan sus hojas de reclamación simultáneamente.
+            Suma todas las reclamaciones.
+        </p>
+
+        <h2>6. Determinar Éxito o Fracaso</h2>
+
+        <h3>✅ Éxito (Reclamaciones Totales ≤ Bote)</h3>
+        <ul>
+            <li>Cada miembro del equipo recibe su cantidad reclamada</li>
+            <li>Los inversores reciben 2× su apuesta (apuesta + ganancias)</li>
+            <li>Los apostadores contra pierden su apuesta</li>
+            <li>El dinero no reclamado <strong>se acumula</strong> y se agrega al bote del próximo trabajo</li>
+        </ul>
+
+        <div class="example">
+            <strong>Ejemplo:</strong> Un Trabajo Mediano de $12,000 tiene éxito con
+            reclamaciones de $3,000, $4,000 y $2,000 (total: $9,000). Cada miembro del
+            equipo recibe su reclamación. Los $3,000 restantes se acumulan al próximo trabajo.
+        </div>
+
+        <h3>❌ Fracaso (Reclamaciones Totales > Bote)</h3>
+        <ul>
+            <li>Los miembros del equipo no reciben nada</li>
+            <li>Los inversores pierden su apuesta</li>
+            <li>Los apostadores contra reciben 2× su apuesta (apuesta + ganancias)</li>
+            <li>El <strong>bote completo se acumula</strong> al próximo trabajo</li>
+        </ul>
+
+        <div class="example">
+            <strong>Ejemplo:</strong> Un Trabajo Mediano de $12,000 falla con reclamaciones
+            de $5,000, $6,000 y $4,000 (total: $15,000). Nadie en el equipo recibe pago.
+            Los $12,000 completos se acumulan al próximo trabajo.
+        </div>
+
+        <h2>7. Completar Contratos</h2>
+        <p>
+            Verifica si alguno de tus contratos fue completado por el resultado de este trabajo. Si es así:
+        </p>
+        <ol>
+            <li>Revela el contrato completado</li>
+            <li>Recibe el dinero del bono</li>
+            <li>Coloca la carta en la categoría correspondiente en tu Hoja de Antecedentes</li>
+        </ol>
+
+        <div class="callout">
+            <div class="callout-title">🔍 Categorías de Contratos</div>
+            <p>Cada contrato pertenece a una de 5 categorías: Precisión 🎯, Caos 💣,
+            Confianza 🤝, Codicia 💰 o Empuje 🎲. Coloca los contratos completados en
+            la columna correspondiente en tu Hoja de Antecedentes.</p>
+        </div>
+    </div>
+
+    <!-- PAGE 7: RAP SHEET & SET BONUSES -->
+    <div class="page">
+        <h1>Hoja de Antecedentes y Bonos</h1>
+
+        <p>
+            Tu Hoja de Antecedentes rastrea los contratos completados en 5 categorías.
+            Completar ciertos patrones gana bonos de conjunto. Cada bono solo puede
+            reclamarse una vez por juego.
+        </p>
+
+        <h2>Bonos de Conjunto</h2>
+
+        <table>
+            <tr>
+                <th>Nombre del Bono</th>
+                <th>Requisito</th>
+                <th>Recompensa</th>
+            </tr>
+            <tr>
+                <td><strong>Especialista</strong></td>
+                <td>3 contratos en una categoría</td>
+                <td>+$4,000</td>
+            </tr>
+            <tr>
+                <td><strong>Versátil</strong></td>
+                <td>1 contrato en cada una de las 5 categorías</td>
+                <td>+$5,000</td>
+            </tr>
+            <tr>
+                <td><strong>Obsesionado</strong></td>
+                <td>4 contratos en una categoría</td>
+                <td>+$7,000</td>
+            </tr>
+            <tr>
+                <td><strong>Leyenda</strong></td>
+                <td>6 contratos totales (cualquier categoría)</td>
+                <td>+$6,000</td>
+            </tr>
+            <tr>
+                <td><strong>Cerebro</strong></td>
+                <td>3 contratos cada uno en dos categorías diferentes</td>
+                <td>+$10,000</td>
+            </tr>
+        </table>
+
+        <div class="important">
+            <strong>⚠️ Reclama Inmediatamente:</strong> Tan pronto como cumplas un requisito
+            de bono, reclámalo y recoge el dinero. Márcalo en tu Hoja de Antecedentes.
+        </div>
+
+        <h2>Las 5 Categorías</h2>
+
+        <h3>🎯 Precisión</h3>
+        <p>Contratos que requieren reclamaciones exactas o cantidades específicas.</p>
+
+        <h3>💣 Caos</h3>
+        <p>Contratos que recompensan sabotaje, fracaso o resultados impredecibles.</p>
+
+        <h3>🤝 Confianza</h3>
+        <p>Contratos que involucran cooperación y trabajo en equipo exitoso.</p>
+
+        <h3>💰 Codicia</h3>
+        <p>Contratos que recompensan reclamaciones altas y ganancia máxima.</p>
+
+        <h3>🎲 Empuje</h3>
+        <p>Contratos que involucran apuestas, toma de riesgos y apuestas.</p>
+    </div>
+
+    <!-- PAGE 8: GAME END & STRATEGY -->
+    <div class="page">
+        <h1>Final del Juego</h1>
+
+        <p>
+            El juego termina inmediatamente después de que se resuelve el <strong>Trabajo
+            Final</strong> (la última carta del mazo de Trabajos).
+        </p>
+
+        <h2>Puntuación Final</h2>
+        <ol>
+            <li>Cuenta tus fichas</li>
+            <li>Aplica penalizaciones por contratos incompletos aún en tu mano</li>
+            <li>Agrega cualquier bono de conjunto no reclamado de tu Hoja de Antecedentes</li>
+        </ol>
+
+        <p>
+            <strong>¡El jugador con más dinero gana!</strong> Los empates se resuelven por
+            la mayoría de contratos completados, luego por la mayoría de bonos de conjunto ganados.
+        </p>
+
+        <div class="example">
+            <strong>Ejemplo de Puntuación Final:</strong><br>
+            Fichas: $47,000<br>
+            Contrato Fácil incompleto: -$1,500<br>
+            Contrato Mediano incompleto: -$3,000<br>
+            <strong>Total Final: $42,500</strong>
+        </div>
+
+        <h1>Consejos de Estrategia</h1>
+
+        <h2>Para Miembros del Equipo</h2>
+        <ul>
+            <li><strong>Lee la sala:</strong> Presta atención a quién es codicioso y quién es confiable</li>
+            <li><strong>Reclama conservadoramente al principio:</strong> Construye confianza, luego cobra más tarde</li>
+            <li><strong>Usa contratos como cobertura:</strong> "¡Necesito reclamar $5,000 para mi contrato!"</li>
+            <li><strong>Coordina (o finge hacerlo):</strong> Acuerda reclamaciones, luego haz lo que quieras</li>
+        </ul>
+
+        <h2>Para el Jefe</h2>
+        <ul>
+            <li><strong>Excluye alborotadores:</strong> Mantén fuera a jugadores que tienden a reclamar de más</li>
+            <li><strong>Aprovecha tu poder:</strong> Extrae promesas antes de incluir jugadores</li>
+            <li><strong>Varía:</strong> No siempre elijas a las mismas personas</li>
+            <li><strong>Considera quedarte fuera:</strong> A veces apostar es más seguro que unirse</li>
+        </ul>
+
+        <h2>Para Apostadores</h2>
+        <ul>
+            <li><strong>Observa la composición del equipo:</strong> Equipo codicioso = apuesta contra</li>
+            <li><strong>Rastrea el tamaño del bote:</strong> Acumulaciones más grandes = mayor tentación</li>
+            <li><strong>Apuesta fuerte en certeza:</strong> No seas tímido cuando conoces el resultado</li>
+            <li><strong>Apuesta contra estratégicamente:</strong> Gana dinero del caos</li>
+        </ul>
+    </div>
+
+    <!-- PAGE 9: VARIANTS & PLAYER COUNTS -->
+    <div class="page">
+        <h1>Ajustes de Número de Jugadores</h1>
+
+        <h2>5-6 Jugadores</h2>
+        <p>Elimina 3 cartas de Trabajos no-Finales aleatorias. Esto acorta el juego apropiadamente.</p>
+
+        <h2>7-8 Jugadores</h2>
+        <p>Reglas estándar. Balance perfecto.</p>
+
+        <h2>9-12 Jugadores</h2>
+        <p>
+            Agrega $2,000 al bote de cada trabajo para tener en cuenta más jugadores
+            compitiendo por puestos limitados de equipo.
+        </p>
+
+        <h1>Variantes Opcionales</h1>
+
+        <h2>Modo Despiadado</h2>
+        <p>
+            Elimina el Tablero de Contratos por completo. En su lugar, cada jugador recibe
+            3 contratos aleatorios al inicio y debe trabajar con lo que obtiene. Sin sorteos,
+            sin intercambios. Caos puro.
+        </p>
+
+        <h2>Apuestas Altas</h2>
+        <p>
+            Duplica todos los bonos y penalizaciones de contratos. También duplica todos los
+            bonos de conjunto. Cada decisión importa más.
+        </p>
+
+        <h2>Ronda Rápida</h2>
+        <p>
+            Limita toda discusión y escritura de reclamaciones a 90 segundos por trabajo.
+            Rápido y furioso.
+        </p>
+
+        <h2>Hacedor de Reyes</h2>
+        <p>
+            El Jefe rota al jugador con MÁS fichas en lugar del que tiene menos.
+            Los ricos se hacen más ricos.
+        </p>
+
+        <h1>Preguntas Frecuentes</h1>
+
+        <h3>¿Puedo reclamar $0 en un trabajo?</h3>
+        <p>¡Sí! A veces asegurar el éxito vale más que un pago.</p>
+
+        <h3>¿Puedo apostar si estoy en el equipo?</h3>
+        <p>No. Los miembros del equipo no pueden hacer apuestas. ¡Estás muy ocupado trabajando!</p>
+
+        <h3>¿Qué pasa si me quedo sin dinero?</h3>
+        <p>Puedes endeudarte. Rastrea cantidades negativas. ¡Aún puedes ganar si te recuperas!</p>
+
+        <h3>¿Puedo mostrar mis contratos a otros?</h3>
+        <p>Sí, pero ten cuidado. La información es poder.</p>
+    </div>
+
+    <!-- BACK COVER -->
+    <div class="page cover">
+        <div style="padding: 1in; text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 36pt; font-weight: 900; color: var(--lime-green); margin-bottom: 0.5in;">
+                THE TAKE
+            </div>
+            <div style="font-size: 11pt; line-height: 1.8; color: var(--cream); margin-bottom: 0.5in;">
+                "En este juego, todos son criminales. La única pregunta es:
+                ¿eres uno exitoso?"
+            </div>
+            <div style="font-size: 10pt; color: var(--sky-blue);">
+                Para más información, aclaraciones de reglas y contenido de la comunidad, visita:<br>
+                <strong style="color: var(--lime-green);">thetakegame.com</strong>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

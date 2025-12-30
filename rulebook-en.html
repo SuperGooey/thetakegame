@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE - Rulebook (English)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        @page {
+            size: 5.5in 8.5in;
+            margin: 0.4in 0.5in 0.4in 0.5in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: #3d2417;
+            background: white;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        :root {
+            --sky-blue: #a8c5d9;
+            --purple-mauve: #9b6b87;
+            --cream: #e8dfd1;
+            --lime-green: #b4c75f;
+            --dark-brown: #3d2417;
+            --navy-blue: #1a3a52;
+        }
+
+        .page {
+            page-break-after: always;
+            height: 7.7in;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* Cover */
+        .cover {
+            background: var(--navy-blue);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1in;
+            height: 100%;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48pt;
+            font-weight: 900;
+            color: var(--lime-green);
+            margin-bottom: 0.2in;
+            text-shadow: 3pt 3pt 0 rgba(0,0,0,0.3);
+        }
+
+        .cover-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 14pt;
+            color: var(--sky-blue);
+            letter-spacing: 2pt;
+            margin-bottom: 0.5in;
+        }
+
+        .cover-info {
+            font-size: 11pt;
+            color: var(--cream);
+            margin-top: 0.5in;
+        }
+
+        .cover-info div {
+            margin-bottom: 8pt;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+            margin-bottom: 0.15in;
+            border-bottom: 3pt solid var(--purple-mauve);
+            padding-bottom: 0.1in;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-top: 0.2in;
+            margin-bottom: 0.1in;
+        }
+
+        h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-top: 0.15in;
+            margin-bottom: 0.08in;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+        }
+
+        p {
+            margin-bottom: 0.1in;
+        }
+
+        ul, ol {
+            margin-left: 0.25in;
+            margin-bottom: 0.1in;
+        }
+
+        li {
+            margin-bottom: 4pt;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            background: var(--sky-blue);
+            border: 3pt solid var(--navy-blue);
+            border-radius: 4pt;
+            padding: 0.15in;
+            margin: 0.15in 0;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 8pt;
+        }
+
+        .example {
+            background: var(--cream);
+            border-left: 4pt solid var(--purple-mauve);
+            padding: 0.1in;
+            margin: 0.1in 0;
+            font-style: italic;
+        }
+
+        .important {
+            background: rgba(180, 199, 95, 0.3);
+            border: 2pt solid var(--lime-green);
+            border-radius: 4pt;
+            padding: 0.1in;
+            margin: 0.1in 0;
+            font-weight: 600;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.1in 0;
+            font-size: 9pt;
+        }
+
+        th {
+            background: var(--purple-mauve);
+            color: white;
+            padding: 6pt;
+            text-align: left;
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 6pt;
+            border-bottom: 1pt solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: var(--cream);
+        }
+
+        /* Icons */
+        .icon {
+            font-size: 14pt;
+            margin-right: 4pt;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="page cover">
+        <div class="cover-title">THE TAKE</div>
+        <div class="cover-subtitle">OFFICIAL RULEBOOK</div>
+        <div style="font-size: 12pt; color: var(--cream); line-height: 1.8; max-width: 4in;">
+            A game of greed, betrayal, and calculated risk where crews pull off heists,
+            complete secret contracts, and compete to become the wealthiest criminal mastermind.
+        </div>
+        <div class="cover-info">
+            <div><strong>Players:</strong> 5-12</div>
+            <div><strong>Time:</strong> 60-90 minutes</div>
+            <div><strong>Ages:</strong> 14+</div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: OVERVIEW & COMPONENTS -->
+    <div class="page">
+        <h1>Overview</h1>
+        <p>
+            <strong>THE TAKE</strong> is a social deduction game where players work together on heists
+            while pursuing secret contracts and personal gain. Each job requires trust and cooperation,
+            but greed can tear a crew apart. The player with the most money at the end wins.
+        </p>
+
+        <h2>What Makes You Win</h2>
+        <p>Money. Plain and simple. Earn it by:</p>
+        <ul>
+            <li>Successfully completing jobs and claiming your share</li>
+            <li>Winning bets on job outcomes</li>
+            <li>Completing secret contracts for big bonuses</li>
+            <li>Earning set bonuses from your Rap Sheet</li>
+        </ul>
+
+        <h2>Components</h2>
+
+        <h3>Job Cards (13)</h3>
+        <ul>
+            <li>3 Small Jobs (Crew: 3, Pot: $8,000)</li>
+            <li>4 Medium Jobs (Crew: 4, Pot: $12,000)</li>
+            <li>3 Large Jobs (Crew: 4, Pot: $16,000)</li>
+            <li>2 Huge Jobs (Crew: 5, Pot: $20,000)</li>
+            <li>1 Final Job (Crew: 4, Pot: $18,000)</li>
+        </ul>
+
+        <h3>Contract Cards (60)</h3>
+        <ul>
+            <li>20 Easy (Green) - Bonus: $2,000-$2,500, Penalty: -$1,500</li>
+            <li>25 Medium (Purple) - Bonus: $4,000-$5,000, Penalty: -$3,000</li>
+            <li>15 Hard (Red) - Bonus: $8,000-$10,000, Penalty: -$5,000</li>
+        </ul>
+
+        <h3>Player Materials (Per Player)</h3>
+        <ul>
+            <li>1 Rap Sheet (track completed contracts)</li>
+            <li>Starting chips: $10,000</li>
+            <li>1 Quick Reference card</li>
+        </ul>
+
+        <h3>Additional Materials</h3>
+        <ul>
+            <li>Claim sheets (for secret bidding)</li>
+            <li>Poker chips or tokens for money</li>
+        </ul>
+    </div>
+
+    <!-- PAGE 3: SETUP -->
+    <div class="page">
+        <h1>Setup</h1>
+
+        <ol>
+            <li><strong>Job Deck:</strong> Shuffle all Job cards. Place the Final Job at the bottom. This forms the Job deck.</li>
+            <li><strong>Contract Board:</strong> Shuffle all Contract cards. Deal 5 face-up to form the Contract Board.</li>
+            <li><strong>Starting Money:</strong> Each player receives $10,000 in chips.</li>
+            <li><strong>Rap Sheets:</strong> Each player takes a Rap Sheet and writes their name.</li>
+            <li><strong>First Chair:</strong> The player who most recently committed a crime (or the youngest) becomes the first Chair.</li>
+        </ol>
+
+        <div class="callout">
+            <div class="callout-title">🎯 The Chair</div>
+            <p>
+                The Chair is the leader for the current job. They select the crew and have
+                final say on crew composition. The Chair role rotates to the player with
+                the lowest chips between jobs.
+            </p>
+        </div>
+
+        <h2>Game Structure</h2>
+        <p>The game alternates between two phases:</p>
+
+        <h3>Between Jobs</h3>
+        <ol>
+            <li>Rotate Chair to player with lowest chips (ties: clockwise from current Chair)</li>
+            <li>Contract Draft (starting with Chair, clockwise)</li>
+            <li>Black Market trading (60 seconds - optional)</li>
+            <li>Refill Contract Board to 5 cards</li>
+        </ol>
+
+        <h3>The Job</h3>
+        <ol>
+            <li>Reveal top Job card</li>
+            <li>Chair selects crew (matching crew size on card)</li>
+            <li>Crew writes secret claims</li>
+            <li>Non-crew places bets (Invest/Short/Pass)</li>
+            <li>Reveal all claims simultaneously</li>
+            <li>Resolve job (Success or Failure)</li>
+            <li>Complete contracts</li>
+        </ol>
+
+        <div class="important">
+            <strong>⚠️ Important:</strong> The game ends after the Final Job is resolved.
+        </div>
+    </div>
+
+    <!-- PAGE 4: CONTRACT DRAFT -->
+    <div class="page">
+        <h1>Contract Draft</h1>
+
+        <p>
+            Between jobs, players draft secret contracts that define personal objectives.
+            Contracts award bonuses when completed but impose penalties if left incomplete
+            at game end.
+        </p>
+
+        <h2>Draft Process</h2>
+        <ol>
+            <li>Starting with the Chair and proceeding clockwise, each player takes ONE card from the Contract Board</li>
+            <li>Players can choose from any of the 5 face-up contracts</li>
+            <li>Contracts go into your hand (keep them secret!)</li>
+            <li>After all players draft, refill the board to 5 cards</li>
+        </ol>
+
+        <h2>Contract Tiers</h2>
+
+        <table>
+            <tr>
+                <th>Tier</th>
+                <th>Color</th>
+                <th>Typical Bonus</th>
+                <th>Penalty</th>
+                <th>Difficulty</th>
+            </tr>
+            <tr>
+                <td>Easy</td>
+                <td>Green</td>
+                <td>$2,000-$2,500</td>
+                <td>-$1,500</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td>Purple</td>
+                <td>$4,000-$5,000</td>
+                <td>-$3,000</td>
+                <td>Moderate</td>
+            </tr>
+            <tr>
+                <td>Hard</td>
+                <td>Red</td>
+                <td>$8,000-$10,000</td>
+                <td>-$5,000</td>
+                <td>High</td>
+            </tr>
+        </table>
+
+        <h2>Managing Contracts</h2>
+
+        <h3>Discarding Contracts</h3>
+        <p>
+            Between jobs, you may discard any contract from your hand by paying $1,000.
+            This removes the card from the game (no penalty applies).
+        </p>
+
+        <h3>Black Market</h3>
+        <p>
+            After the draft, players have 60 seconds to trade contracts with each other.
+            All trades are legal - money, contracts, promises, threats, whatever works!
+        </p>
+
+        <div class="example">
+            <strong>Example:</strong> "I'll give you this Easy contract and $2,000 for
+            your Medium contract" or "Trade me that contract or I'll never pick you for
+            a crew again!"
+        </div>
+    </div>
+
+    <!-- PAGE 5: THE JOB -->
+    <div class="page">
+        <h1>The Job</h1>
+
+        <h2>1. Reveal Job Card</h2>
+        <p>
+            Flip the top card of the Job deck. This shows the <strong>Crew Size</strong>
+            (how many players work the job) and the <strong>Pot</strong> (total money available).
+        </p>
+
+        <h2>2. Chair Selects Crew</h2>
+        <p>
+            The Chair selects exactly the number of players shown on the Job card to form
+            the crew. The Chair may include themselves or not - their choice.
+        </p>
+
+        <div class="callout">
+            <div class="callout-title">💭 Table Talk</div>
+            <p>
+                This is where the game gets interesting. Players beg, promise, threaten,
+                and negotiate to get on (or off!) the crew. The Chair has all the power
+                here, so use it wisely.
+            </p>
+        </div>
+
+        <h2>3. Crew Writes Secret Claims</h2>
+        <p>
+            Each crew member secretly writes down how much money they're claiming from the
+            pot on a claim sheet. Claims must be:
+        </p>
+        <ul>
+            <li>In $1,000 increments</li>
+            <li>At least $0 (yes, you can claim nothing!)</li>
+            <li>No maximum (greed has no limits)</li>
+        </ul>
+
+        <div class="important">
+            <strong>🎯 The Core Tension:</strong> If the total of all claims exceeds the
+            pot, the job FAILS and nobody gets paid. Trust your crew... or don't.
+        </div>
+
+        <h2>4. Non-Crew Places Bets</h2>
+        <p>Players NOT on the crew can bet on the outcome:</p>
+
+        <h3>Invest (Bet on Success)</h3>
+        <p>
+            Bet any amount. If the job succeeds, get your bet back plus an equal amount
+            (2× total). If it fails, lose your bet.
+        </p>
+
+        <h3>Short (Bet on Failure)</h3>
+        <p>
+            Bet any amount. If the job fails, get your bet back plus an equal amount
+            (2× total). If it succeeds, lose your bet.
+        </p>
+
+        <h3>Pass</h3>
+        <p>Don't bet anything. Safe, but boring.</p>
+    </div>
+
+    <!-- PAGE 6: RESOLUTION -->
+    <div class="page">
+        <h1>Job Resolution</h1>
+
+        <h2>5. Reveal Claims</h2>
+        <p>
+            All crew members reveal their claim sheets simultaneously. Add up all the claims.
+        </p>
+
+        <h2>6. Determine Success or Failure</h2>
+
+        <h3>✅ Success (Total Claims ≤ Pot)</h3>
+        <ul>
+            <li>Each crew member receives their claimed amount</li>
+            <li>Investors receive 2× their bet (bet + winnings)</li>
+            <li>Shorters lose their bet</li>
+            <li>Unclaimed money <strong>rolls over</strong> and is added to the next job's pot</li>
+        </ul>
+
+        <div class="example">
+            <strong>Example:</strong> A $12,000 Medium Job succeeds with claims of $3,000,
+            $4,000, and $2,000 (total: $9,000). Each crew member gets their claim. The
+            remaining $3,000 rolls over to the next job.
+        </div>
+
+        <h3>❌ Failure (Total Claims > Pot)</h3>
+        <ul>
+            <li>Crew members receive nothing</li>
+            <li>Investors lose their bet</li>
+            <li>Shorters receive 2× their bet (bet + winnings)</li>
+            <li>The <strong>entire pot rolls over</strong> to the next job</li>
+        </ul>
+
+        <div class="example">
+            <strong>Example:</strong> A $12,000 Medium Job fails with claims of $5,000,
+            $6,000, and $4,000 (total: $15,000). Nobody on the crew gets paid. The full
+            $12,000 rolls over to the next job.
+        </div>
+
+        <h2>7. Complete Contracts</h2>
+        <p>
+            Check if any of your contracts were completed by this job's outcome. If so:
+        </p>
+        <ol>
+            <li>Reveal the completed contract</li>
+            <li>Receive the bonus money</li>
+            <li>Place the card in the matching category on your Rap Sheet</li>
+        </ol>
+
+        <div class="callout">
+            <div class="callout-title">🔍 Contract Categories</div>
+            <p>Each contract belongs to one of 5 categories: Precision 🎯, Chaos 💣,
+            Trust 🤝, Greed 💰, or Hustle 🎲. Place completed contracts in the matching
+            column on your Rap Sheet.</p>
+        </div>
+    </div>
+
+    <!-- PAGE 7: RAP SHEET & SET BONUSES -->
+    <div class="page">
+        <h1>Rap Sheet & Set Bonuses</h1>
+
+        <p>
+            Your Rap Sheet tracks completed contracts in 5 categories. Completing certain
+            patterns earns set bonuses. Each bonus can only be claimed once per game.
+        </p>
+
+        <h2>Set Bonuses</h2>
+
+        <table>
+            <tr>
+                <th>Bonus Name</th>
+                <th>Requirement</th>
+                <th>Reward</th>
+            </tr>
+            <tr>
+                <td><strong>Specialist</strong></td>
+                <td>3 contracts in one category</td>
+                <td>+$4,000</td>
+            </tr>
+            <tr>
+                <td><strong>Versatile</strong></td>
+                <td>1 contract in each of the 5 categories</td>
+                <td>+$5,000</td>
+            </tr>
+            <tr>
+                <td><strong>Obsessed</strong></td>
+                <td>4 contracts in one category</td>
+                <td>+$7,000</td>
+            </tr>
+            <tr>
+                <td><strong>Legend</strong></td>
+                <td>6 contracts total (any categories)</td>
+                <td>+$6,000</td>
+            </tr>
+            <tr>
+                <td><strong>Mastermind</strong></td>
+                <td>3 contracts each in two different categories</td>
+                <td>+$10,000</td>
+            </tr>
+        </table>
+
+        <div class="important">
+            <strong>⚠️ Claim Immediately:</strong> As soon as you meet a bonus requirement,
+            claim it and collect the money. Mark it on your Rap Sheet.
+        </div>
+
+        <h2>The 5 Categories</h2>
+
+        <h3>🎯 Precision</h3>
+        <p>Contracts requiring exact claims or specific amounts.</p>
+
+        <h3>💣 Chaos</h3>
+        <p>Contracts rewarding sabotage, failure, or unpredictable outcomes.</p>
+
+        <h3>🤝 Trust</h3>
+        <p>Contracts involving cooperation and successful teamwork.</p>
+
+        <h3>💰 Greed</h3>
+        <p>Contracts rewarding high claims and maximum profit.</p>
+
+        <h3>🎲 Hustle</h3>
+        <p>Contracts involving betting, risk-taking, and wagering.</p>
+    </div>
+
+    <!-- PAGE 8: GAME END & STRATEGY -->
+    <div class="page">
+        <h1>Game End</h1>
+
+        <p>
+            The game ends immediately after the <strong>Final Job</strong> is resolved
+            (the last card in the Job deck).
+        </p>
+
+        <h2>Final Scoring</h2>
+        <ol>
+            <li>Count your chips</li>
+            <li>Apply penalties for incomplete contracts still in your hand</li>
+            <li>Add any unclaimed set bonuses from your Rap Sheet</li>
+        </ol>
+
+        <p>
+            <strong>The player with the most money wins!</strong> Ties are broken by most
+            contracts completed, then most set bonuses earned.
+        </p>
+
+        <div class="example">
+            <strong>Example Final Score:</strong><br>
+            Chips: $47,000<br>
+            Incomplete Easy contract: -$1,500<br>
+            Incomplete Medium contract: -$3,000<br>
+            <strong>Final Total: $42,500</strong>
+        </div>
+
+        <h1>Strategy Tips</h1>
+
+        <h2>For Crew Members</h2>
+        <ul>
+            <li><strong>Read the room:</strong> Pay attention to who's greedy and who's trustworthy</li>
+            <li><strong>Claim conservatively early:</strong> Build trust, then cash in later</li>
+            <li><strong>Use contracts as cover:</strong> "I need to claim $5,000 for my contract!"</li>
+            <li><strong>Coordinate (or pretend to):</strong> Agree on claims, then do what you want</li>
+        </ul>
+
+        <h2>For The Chair</h2>
+        <ul>
+            <li><strong>Exclude troublemakers:</strong> Keep out players who tend to overclaim</li>
+            <li><strong>Leverage your power:</strong> Extract promises before including players</li>
+            <li><strong>Mix it up:</strong> Don't always pick the same people</li>
+            <li><strong>Consider sitting out:</strong> Sometimes betting is safer than joining</li>
+        </ul>
+
+        <h2>For Bettors</h2>
+        <ul>
+            <li><strong>Watch the crew composition:</strong> Greedy crew = short it</li>
+            <li><strong>Track the pot size:</strong> Bigger rollovers = bigger temptation</li>
+            <li><strong>Bet big on certainty:</strong> Don't be timid when you know the outcome</li>
+            <li><strong>Short strategically:</strong> Make money from chaos</li>
+        </ul>
+    </div>
+
+    <!-- PAGE 9: VARIANTS & PLAYER COUNTS -->
+    <div class="page">
+        <h1>Player Count Adjustments</h1>
+
+        <h2>5-6 Players</h2>
+        <p>Remove 3 random non-Final Job cards. This shortens the game appropriately.</p>
+
+        <h2>7-8 Players</h2>
+        <p>Standard rules. Perfect balance.</p>
+
+        <h2>9-12 Players</h2>
+        <p>
+            Add $2,000 to each job's pot to account for more players competing for
+            limited crew spots.
+        </p>
+
+        <h1>Optional Variants</h1>
+
+        <h2>Cutthroat Mode</h2>
+        <p>
+            Remove the Contract Board entirely. Instead, each player receives 3 random
+            contracts at the start and must work with what they get. No drafting, no
+            trading. Pure chaos.
+        </p>
+
+        <h2>High Stakes</h2>
+        <p>
+            Double all contract bonuses and penalties. Also double all set bonuses.
+            Every decision matters more.
+        </p>
+
+        <h2>Speed Round</h2>
+        <p>
+            Limit all discussion and claim writing to 90 seconds per job. Fast and furious.
+        </p>
+
+        <h2>Kingmaker</h2>
+        <p>
+            The Chair rotates to the player with the MOST chips instead of the least.
+            Rich get richer.
+        </p>
+
+        <h1>FAQ</h1>
+
+        <h3>Can I claim $0 on a job?</h3>
+        <p>Yes! Sometimes ensuring success is worth more than a payout.</p>
+
+        <h3>Can I bet if I'm on the crew?</h3>
+        <p>No. Crew members cannot place bets. You're too busy working!</p>
+
+        <h3>What if I run out of money?</h3>
+        <p>You can go into debt. Track negative amounts. You can still win if you recover!</p>
+
+        <h3>Can I show my contracts to others?</h3>
+        <p>Yes, but be careful. Information is power.</p>
+    </div>
+
+    <!-- BACK COVER -->
+    <div class="page cover">
+        <div style="padding: 1in; text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 36pt; font-weight: 900; color: var(--lime-green); margin-bottom: 0.5in;">
+                THE TAKE
+            </div>
+            <div style="font-size: 11pt; line-height: 1.8; color: var(--cream); margin-bottom: 0.5in;">
+                "In this game, everyone's a criminal. The only question is:
+                are you a successful one?"
+            </div>
+            <div style="font-size: 10pt; color: var(--sky-blue);">
+                For more information, rules clarifications, and community content, visit:<br>
+                <strong style="color: var(--lime-green);">thetakegame.com</strong>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
