@@ -1,0 +1,667 @@
+/* ========================================
+   THE TAKE - Job Tracker Stylesheet
+   Extreme Minimalism • Noir Aesthetic
+   ======================================== */
+
+:root {
+    /* Colors */
+    --bg: #0a0a0a;
+    --fg: #fafafa;
+    --gold: #d4af37;
+    --success: #00ff00;
+    --failure: #ff0000;
+    --muted: #666666;
+    --border: #333333;
+    --accent: #00ff00;
+
+    /* Typography */
+    --font-mono: 'SF Mono', 'Monaco', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Spacing */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+}
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   Layout
+   ======================================== */
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: var(--space-md);
+}
+
+.screen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+
+.logo {
+    font-family: var(--font-mono);
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: var(--space-sm);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.subtitle {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: var(--space-2xl);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
+button {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: var(--space-sm) var(--space-lg);
+    border: 3px solid;
+    background: transparent;
+    color: var(--fg);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: currentColor;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+button:hover::before {
+    left: 0;
+}
+
+.btn-large {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    font-size: 1.25rem;
+}
+
+.btn-primary {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-primary:hover {
+    color: var(--bg);
+}
+
+.btn-success {
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.btn-success:hover {
+    color: var(--bg);
+}
+
+.btn-failure {
+    border-color: var(--failure);
+    color: var(--failure);
+}
+
+.btn-failure:hover {
+    color: var(--bg);
+}
+
+/* ========================================
+   Progress Section
+   ======================================== */
+
+.progress-section {
+    margin-bottom: var(--space-xl);
+}
+
+.job-counter {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.history {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-height: 24px;
+}
+
+.history-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid;
+    transition: all 0.2s;
+}
+
+.history-dot.success {
+    border-color: var(--success);
+    background: var(--success);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+}
+
+.history-dot.failure {
+    border-color: var(--failure);
+    background: var(--failure);
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
+/* ========================================
+   Job Card
+   ======================================== */
+
+.job-card {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    border: 3px solid var(--gold);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+}
+
+.job-type {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: var(--space-lg);
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.job-crew {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-mono);
+}
+
+.job-crew .label {
+    color: var(--muted);
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.job-crew .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--fg);
+}
+
+/* ========================================
+   Pot Breakdown
+   ======================================== */
+
+.pot-breakdown {
+    font-family: var(--font-mono);
+}
+
+.pot-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+}
+
+.pot-label {
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.pot-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--fg);
+}
+
+.pot-value.base {
+    color: var(--gold);
+}
+
+.pot-value.roll {
+    color: var(--failure);
+}
+
+.pot-line.total .pot-value {
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+}
+
+.pot-divider {
+    height: 2px;
+    background: var(--border);
+    margin: var(--space-md) 0;
+}
+
+.pot-line.rollover {
+    display: none;
+}
+
+/* ========================================
+   Final Job Badge
+   ======================================== */
+
+.final-job-badge {
+    display: none;
+    position: absolute;
+    top: -16px;
+    right: var(--space-md);
+    background: var(--bg);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: var(--space-xs) var(--space-sm);
+    border: 2px solid var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+}
+
+/* ========================================
+   Action Area
+   ======================================== */
+
+.action-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+/* ========================================
+   Resolution Screen
+   ======================================== */
+
+.resolution-card {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    border: 3px solid;
+    padding: var(--space-xl);
+}
+
+.resolution-card {
+    border-color: var(--accent);
+}
+
+.result-status {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 20px currentColor;
+}
+
+.result-status.success {
+    color: var(--success);
+}
+
+.result-status.failure {
+    color: var(--failure);
+}
+
+.pot-info {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-mono);
+}
+
+.pot-info .pot-label {
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xs);
+}
+
+.pot-info .pot-total {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+}
+
+/* ========================================
+   Input Section
+   ======================================== */
+
+.input-section {
+    margin-bottom: var(--space-xl);
+}
+
+.input-section label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+
+.input-section input {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    padding: var(--space-md);
+    background: var(--bg);
+    color: var(--gold);
+    border: 3px solid var(--border);
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-section input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 16px rgba(0, 255, 0, 0.2);
+}
+
+.rollover-preview {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    text-align: center;
+    color: var(--muted);
+    margin-top: var(--space-md);
+}
+
+.rollover-preview span {
+    color: var(--failure);
+    font-weight: 700;
+}
+
+.failure-message {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    text-align: center;
+    color: var(--failure);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    border: 2px solid var(--failure);
+    background: rgba(255, 0, 0, 0.05);
+}
+
+/* ========================================
+   Game Over Screen
+   ======================================== */
+
+.game-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.summary-stat {
+    text-align: center;
+    padding: var(--space-lg);
+    border: 2px solid var(--border);
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+.stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xs);
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--fg);
+}
+
+.stat-value.success {
+    color: var(--success);
+}
+
+.stat-value.failure {
+    color: var(--failure);
+}
+
+/* ========================================
+   Final History
+   ======================================== */
+
+.history-final {
+    margin-bottom: var(--space-xl);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-left: 4px solid;
+    margin-bottom: var(--space-sm);
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    font-family: var(--font-mono);
+}
+
+.history-item.success {
+    border-color: var(--success);
+}
+
+.history-item.failure {
+    border-color: var(--failure);
+}
+
+.history-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--muted);
+    min-width: 40px;
+    text-align: center;
+}
+
+.history-details {
+    flex: 1;
+}
+
+.history-job {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fg);
+}
+
+.history-result {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.history-pot {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 3rem;
+    }
+
+    .job-type {
+        font-size: 2rem;
+    }
+
+    .pot-value.total {
+        font-size: 2rem;
+    }
+
+    .result-status {
+        font-size: 2.5rem;
+    }
+
+    .game-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .action-area {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        font-size: 16px;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    .job-type {
+        font-size: 1.75rem;
+    }
+
+    .job-card {
+        padding: var(--space-md);
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.screen.active .container {
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.history-dot {
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   Scrollbar
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+}
