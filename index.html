@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE • A Game of Heists, Greed, and Betrayal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">THE TAKE</h1>
+            <div class="game-status">
+                <span id="phase-indicator"></span>
+                <span id="pot-display"></span>
+            </div>
+        </header>
+
+        <!-- Setup Screen -->
+        <section id="setup-screen" class="screen active">
+            <div class="container">
+                <h2>Game Setup</h2>
+                <div class="setup-content">
+                    <div class="player-setup">
+                        <h3>Players (5-12)</h3>
+                        <div id="player-inputs"></div>
+                        <button class="btn-add" onclick="game.addPlayerInput()">+ Add Player</button>
+                    </div>
+                    <button class="btn-primary" onclick="game.startGame()">Start Game</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Game Screen -->
+        <section id="game-screen" class="screen">
+            <div class="container">
+                <!-- Player Status Bar -->
+                <div id="player-status" class="player-status"></div>
+
+                <!-- Contract Board -->
+                <div id="contract-board-section" class="game-section">
+                    <h2>Contract Board</h2>
+                    <div class="contract-board">
+                        <div class="tier-row">
+                            <div class="tier-label easy">Easy</div>
+                            <div id="easy-contracts" class="contract-row"></div>
+                        </div>
+                        <div class="tier-row">
+                            <div class="tier-label medium">Medium</div>
+                            <div id="medium-contracts" class="contract-row"></div>
+                        </div>
+                        <div class="tier-row">
+                            <div class="tier-label hard">Hard</div>
+                            <div id="hard-contracts" class="contract-row"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Dashboard -->
+                <div id="player-dashboard" class="game-section">
+                    <div class="dashboard-header">
+                        <h2 id="current-player-name"></h2>
+                        <div class="player-chips" id="player-chips"></div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="hand-section">
+                            <h3>Your Hand</h3>
+                            <div id="player-hand" class="contract-hand"></div>
+                        </div>
+                        <div class="rapsheet-section">
+                            <h3>Rap Sheet</h3>
+                            <div id="rap-sheet" class="rap-sheet"></div>
+                            <div id="set-bonuses" class="set-bonuses"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Phase -->
+                <div id="job-section" class="game-section">
+                    <div id="job-card" class="job-card"></div>
+                    <div id="crew-selection" class="crew-selection"></div>
+                    <div id="claim-input" class="claim-input"></div>
+                    <div id="betting-area" class="betting-area"></div>
+                    <div id="resolution" class="resolution"></div>
+                </div>
+
+                <!-- Action Area -->
+                <div id="action-area" class="action-area"></div>
+            </div>
+        </section>
+
+        <!-- Scoring Screen -->
+        <section id="scoring-screen" class="screen">
+            <div class="container">
+                <h2>Final Scores</h2>
+                <div id="final-scores" class="final-scores"></div>
+                <button class="btn-primary" onclick="game.reset()">New Game</button>
+            </div>
+        </section>
+
+        <!-- Modal for passing device -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h3 id="modal-title"></h3>
+                <p id="modal-message"></p>
+                <button class="btn-primary" id="modal-btn">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+</html>
