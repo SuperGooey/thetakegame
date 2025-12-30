@@ -8,49 +8,43 @@
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="tracker.css">
 </head>
 <body>
     <div id="app">
-        <!-- Language Selector (Fixed) -->
-        <div class="language-selector">
-            <button class="lang-btn" data-lang="en" onclick="tracker.setLanguage('en')">EN</button>
+        <!-- Language Selector -->
+        <div class="lang-selector">
+            <button class="lang-btn active" data-lang="en" onclick="tracker.setLanguage('en')">EN</button>
+            <span class="lang-divider">|</span>
             <button class="lang-btn" data-lang="es" onclick="tracker.setLanguage('es')">ES</button>
         </div>
 
-        <!-- Rules Button (Fixed) -->
-        <button class="rules-toggle" onclick="tracker.toggleRules()" data-i18n="rules_button">
-            Rules
+        <!-- Rules Button -->
+        <button class="rules-btn" onclick="tracker.toggleRules()">
+            <span data-i18n="rules_button">Rules</span>
         </button>
 
-        <!-- Rules Panel (Sliding) -->
+        <!-- Rules Panel -->
         <div id="rules-panel" class="rules-panel">
+            <div class="rules-overlay" onclick="tracker.toggleRules()"></div>
             <div class="rules-content">
-                <button class="rules-close" onclick="tracker.toggleRules()">✕</button>
+                <button class="rules-close" onclick="tracker.toggleRules()">×</button>
 
-                <h2 class="rules-title" data-i18n="rules_title">How to Play</h2>
+                <h2 data-i18n="rules_title">How to Play</h2>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_overview_title">Game Overview</h3>
-                    <p data-i18n="rules_overview_text">
-                        THE TAKE is a game of heists, greed, and betrayal for 5–12 players.
-                        You're freelance criminals working jobs together, but everyone has
-                        their own agenda through secret contracts.
-                    </p>
+                    <p data-i18n="rules_overview_text">THE TAKE is a game of heists, greed, and betrayal for 5–12 players. You're freelance criminals working jobs together, but everyone has their own agenda through secret contracts.</p>
                 </div>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_objective_title">Objective</h3>
-                    <p data-i18n="rules_objective_text">
-                        Earn the most money by the end of the game through successful heists,
-                        completing contracts, and strategic betting. The player with the most
-                        money (minus penalties for incomplete contracts) wins.
-                    </p>
+                    <p data-i18n="rules_objective_text">Earn the most money by the end of the game through successful heists, completing contracts, and strategic betting. The player with the most money (minus penalties for incomplete contracts) wins.</p>
                 </div>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_howjobs_title">How Jobs Work</h3>
                     <ol>
                         <li data-i18n="rules_howjobs_1">The Chair selects a crew for the job</li>
@@ -62,38 +56,24 @@
                     </ol>
                 </div>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_success_title">Job Success</h3>
-                    <p data-i18n="rules_success_text">
-                        Each crew member receives their claimed amount. Investors get 2× their bet.
-                        Unclaimed money rolls over to the next job.
-                    </p>
+                    <p data-i18n="rules_success_text">Each crew member receives their claimed amount. Investors get 2× their bet. Unclaimed money rolls over to the next job.</p>
                 </div>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_failure_title">Job Failure</h3>
-                    <p data-i18n="rules_failure_text">
-                        Crew receives nothing. Shorters get 2× their bet. The entire pot
-                        rolls over to the next job, making it more tempting and dangerous.
-                    </p>
+                    <p data-i18n="rules_failure_text">Crew receives nothing. Shorters get 2× their bet. The entire pot rolls over to the next job, making it more tempting and dangerous.</p>
                 </div>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_contracts_title">Contracts</h3>
-                    <p data-i18n="rules_contracts_text">
-                        Players have secret contracts with specific objectives (e.g., "Be on a
-                        successful crew" or "Claim exactly $2,000"). Complete them for bonuses.
-                        Incomplete contracts cost you money at game end.
-                    </p>
+                    <p data-i18n="rules_contracts_text">Players have secret contracts with specific objectives. Complete them for bonuses. Incomplete contracts cost you money at game end.</p>
                 </div>
 
-                <div class="rules-section">
+                <div class="rule-block">
                     <h3 data-i18n="rules_tracker_title">Using This Tracker</h3>
-                    <p data-i18n="rules_tracker_text">
-                        This app tracks the job deck and calculates rollovers automatically.
-                        Players manage their own chips, contracts, and betting using physical
-                        components. After each job, mark it as SUCCESS or FAILURE in the tracker.
-                    </p>
+                    <p data-i18n="rules_tracker_text">This app tracks the job deck and calculates rollovers automatically. Players manage their own chips, contracts, and betting using physical components. After each job, mark it as SUCCESS or FAILURE in the tracker.</p>
                 </div>
             </div>
         </div>
@@ -102,61 +82,63 @@
         <section id="start-screen" class="screen active">
             <div class="container">
                 <h1 class="logo">THE TAKE</h1>
-                <p class="subtitle" data-i18n="subtitle">Job Tracker</p>
-                <button class="btn-large btn-primary" onclick="tracker.startGame()" data-i18n="start_game">
-                    Start New Game
-                </button>
-                <button class="btn-secondary" onclick="tracker.toggleRules()" data-i18n="view_rules">
-                    View Rules
-                </button>
+                <p class="tagline" data-i18n="subtitle">Job Tracker</p>
+
+                <div class="start-actions">
+                    <button class="btn btn-primary" onclick="tracker.startGame()">
+                        <span data-i18n="start_game">Start New Game</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="tracker.toggleRules()">
+                        <span data-i18n="view_rules">View Rules</span>
+                    </button>
+                </div>
             </div>
         </section>
 
         <!-- Job Screen -->
         <section id="job-screen" class="screen">
             <div class="container">
-                <!-- Progress -->
-                <div class="progress-section">
-                    <div class="job-counter" id="job-counter">Job 1 of 13</div>
-                    <div class="history" id="history"></div>
+                <div class="job-progress">
+                    <div class="job-number" id="job-counter">Job 1 of 13</div>
+                    <div class="job-history" id="history"></div>
                 </div>
 
-                <!-- Current Job Card -->
-                <div class="job-card" id="job-card">
-                    <div class="job-type" id="job-type">SMALL JOB</div>
-                    <div class="job-crew">
-                        <span class="label" data-i18n="crew_label">CREW</span>
-                        <span class="value" id="crew-size">3</span>
+                <div class="job-card">
+                    <div class="job-header">
+                        <h2 class="job-title" id="job-type">SMALL JOB</h2>
+                        <div class="final-badge" id="final-badge">
+                            <span data-i18n="final_job">FINAL JOB</span>
+                        </div>
                     </div>
 
-                    <div class="pot-breakdown">
-                        <div class="pot-line">
+                    <div class="job-crew">
+                        <span class="crew-label" data-i18n="crew_label">CREW</span>
+                        <span class="crew-count" id="crew-size">3</span>
+                    </div>
+
+                    <div class="pot-details">
+                        <div class="pot-row">
                             <span class="pot-label" data-i18n="base_pot_label">Base Pot</span>
-                            <span class="pot-value base" id="base-pot">$8,000</span>
+                            <span class="pot-value" id="base-pot">$8,000</span>
                         </div>
-                        <div class="pot-line rollover" id="rollover-line">
+                        <div class="pot-row rollover-row" id="rollover-line">
                             <span class="pot-label" data-i18n="rollover_label">Rollover</span>
-                            <span class="pot-value roll" id="rollover-amount">+$0</span>
+                            <span class="pot-value rollover-value" id="rollover-amount">+$0</span>
                         </div>
                         <div class="pot-divider"></div>
-                        <div class="pot-line total">
+                        <div class="pot-row pot-total">
                             <span class="pot-label" data-i18n="total_pot_label">Total Pot</span>
-                            <span class="pot-value" id="total-pot">$8,000</span>
+                            <span class="pot-value total-value" id="total-pot">$8,000</span>
                         </div>
-                    </div>
-
-                    <div class="final-job-badge" id="final-badge">
-                        🎯 <span data-i18n="final_job">FINAL JOB</span>
                     </div>
                 </div>
 
-                <!-- Action Area -->
-                <div class="action-area" id="action-area">
-                    <button class="btn-large btn-success" onclick="tracker.resolveSuccess()" data-i18n="success_btn">
-                        SUCCESS
+                <div class="job-actions">
+                    <button class="btn btn-success" onclick="tracker.resolveSuccess()">
+                        <span data-i18n="success_btn">SUCCESS</span>
                     </button>
-                    <button class="btn-large btn-failure" onclick="tracker.resolveFailure()" data-i18n="failure_btn">
-                        FAILURE
+                    <button class="btn btn-failure" onclick="tracker.resolveFailure()">
+                        <span data-i18n="failure_btn">FAILURE</span>
                     </button>
                 </div>
             </div>
@@ -166,14 +148,14 @@
         <section id="resolution-screen" class="screen">
             <div class="container">
                 <div class="resolution-card">
-                    <div class="result-status" id="result-status">SUCCESS</div>
+                    <h2 class="result-title" id="result-status">SUCCESS</h2>
 
-                    <div class="pot-info">
-                        <div class="pot-label" data-i18n="pot_was_label">Total Pot Was</div>
-                        <div class="pot-total" id="pot-was">$20,000</div>
+                    <div class="result-pot">
+                        <p class="result-label" data-i18n="pot_was_label">Total Pot Was</p>
+                        <p class="result-amount" id="pot-was">$20,000</p>
                     </div>
 
-                    <div id="success-input" class="input-section">
+                    <div id="success-input" class="claim-input">
                         <label for="claimed-amount" data-i18n="claimed_amount_label">Amount Claimed by Crew</label>
                         <input
                             type="number"
@@ -182,16 +164,17 @@
                             min="0"
                             step="1000"
                         />
-                        <div class="rollover-preview" id="rollover-preview">
-                            <span data-i18n="rollover_preview">Rollover:</span> <span id="preview-amount">$0</span>
-                        </div>
+                        <p class="rollover-hint">
+                            <span data-i18n="rollover_preview">Rollover:</span>
+                            <span id="preview-amount">$0</span>
+                        </p>
                     </div>
 
-                    <div id="failure-message" class="failure-message" data-i18n="failure_message">
+                    <div id="failure-message" class="failure-note" data-i18n="failure_message">
                         Entire pot rolls over to next job
                     </div>
 
-                    <button class="btn-large btn-primary" onclick="tracker.confirmResolution()">
+                    <button class="btn btn-primary" onclick="tracker.confirmResolution()">
                         <span id="next-btn-text" data-i18n="next_job">Next Job</span>
                     </button>
                 </div>
@@ -203,25 +186,25 @@
             <div class="container">
                 <h1 class="logo" data-i18n="game_complete">GAME COMPLETE</h1>
 
-                <div class="game-summary">
-                    <div class="summary-stat">
-                        <div class="stat-label" data-i18n="total_jobs">Total Jobs</div>
+                <div class="game-stats">
+                    <div class="stat-card">
                         <div class="stat-value" id="total-jobs">13</div>
+                        <div class="stat-label" data-i18n="total_jobs">Total Jobs</div>
                     </div>
-                    <div class="summary-stat">
+                    <div class="stat-card stat-success">
+                        <div class="stat-value" id="success-count">8</div>
                         <div class="stat-label" data-i18n="successful">Successful</div>
-                        <div class="stat-value success" id="success-count">8</div>
                     </div>
-                    <div class="summary-stat">
+                    <div class="stat-card stat-failure">
+                        <div class="stat-value" id="failure-count">5</div>
                         <div class="stat-label" data-i18n="failed">Failed</div>
-                        <div class="stat-value failure" id="failure-count">5</div>
                     </div>
                 </div>
 
-                <div class="history-final" id="history-final"></div>
+                <div class="final-history" id="history-final"></div>
 
-                <button class="btn-large btn-primary" onclick="tracker.reset()" data-i18n="new_game">
-                    New Game
+                <button class="btn btn-primary" onclick="tracker.reset()">
+                    <span data-i18n="new_game">New Game</span>
                 </button>
             </div>
         </section>

@@ -441,8 +441,8 @@ class JobTracker {
 
         // Set result status
         const resultStatus = document.getElementById('result-status');
-        resultStatus.textContent = isSuccess ? 'SUCCESS' : 'FAILURE';
-        resultStatus.className = 'result-status ' + (isSuccess ? 'success' : 'failure');
+        resultStatus.textContent = isSuccess ? this.t('success_btn') : this.t('failure_btn');
+        resultStatus.className = 'result-title ' + (isSuccess ? 'success' : 'failure');
 
         // Show pot amount
         document.getElementById('pot-was').textContent = this.formatMoney(totalPot);
