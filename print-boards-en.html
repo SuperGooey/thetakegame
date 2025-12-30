@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE - Rap Sheets & Player Materials (English)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        @page {
+            size: letter;
+            margin: 0.25in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #3d2417;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        :root {
+            --sky-blue: #a8c5d9;
+            --purple-mauve: #9b6b87;
+            --cream: #e8dfd1;
+            --lime-green: #b4c75f;
+            --dark-brown: #3d2417;
+            --navy-blue: #1a3a52;
+        }
+
+        .page {
+            page-break-after: always;
+            padding: 0.25in;
+            height: 10.5in;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+        }
+
+        .page-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            color: var(--navy-blue);
+            text-align: center;
+            margin-bottom: 0.25in;
+        }
+
+        /* Rap Sheet */
+        .rap-sheet {
+            background: var(--cream);
+            border: 6pt solid var(--purple-mauve);
+            border-radius: 8pt;
+            padding: 0.3in;
+            height: 9.5in;
+            position: relative;
+        }
+
+        .rap-sheet-header {
+            text-align: center;
+            margin-bottom: 0.25in;
+            padding-bottom: 0.15in;
+            border-bottom: 3pt solid var(--purple-mauve);
+        }
+
+        .rap-sheet-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+            margin-bottom: 8pt;
+        }
+
+        .player-name-field {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            color: var(--navy-blue);
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+        }
+
+        .player-name-line {
+            display: inline-block;
+            width: 3in;
+            border-bottom: 2pt solid var(--dark-brown);
+            margin-left: 8pt;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.1in;
+            margin-bottom: 0.25in;
+        }
+
+        .category-column {
+            background: white;
+            border: 3pt solid var(--navy-blue);
+            border-radius: 4pt;
+            padding: 0.1in;
+            min-height: 4in;
+        }
+
+        .category-header {
+            text-align: center;
+            padding-bottom: 0.08in;
+            margin-bottom: 0.08in;
+            border-bottom: 2pt solid var(--navy-blue);
+        }
+
+        .category-icon {
+            font-size: 20pt;
+            display: block;
+            margin-bottom: 4pt;
+        }
+
+        .category-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            text-transform: uppercase;
+        }
+
+        .category-column.precision { border-top: 5pt solid #4a90e2; }
+        .category-column.chaos { border-top: 5pt solid #e24a4a; }
+        .category-column.trust { border-top: 5pt solid #4ae290; }
+        .category-column.greed { border-top: 5pt solid #e2d44a; }
+        .category-column.hustle { border-top: 5pt solid #9b4ae2; }
+
+        .contract-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 4pt;
+        }
+
+        .contract-slot {
+            height: 0.25in;
+            border: 1pt dashed var(--navy-blue);
+            border-radius: 2pt;
+        }
+
+        .set-bonuses {
+            background: rgba(180, 199, 95, 0.2);
+            border: 3pt solid var(--lime-green);
+            border-radius: 4pt;
+            padding: 0.15in;
+        }
+
+        .set-bonuses-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 0.1in;
+        }
+
+        .bonus-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6pt;
+            font-size: 9pt;
+        }
+
+        .bonus-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4pt;
+            background: white;
+            border-radius: 2pt;
+        }
+
+        .bonus-name {
+            font-weight: 600;
+        }
+
+        .bonus-amount {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: #7ba865;
+        }
+
+        /* Chips Tracker */
+        .chips-tracker {
+            background: var(--cream);
+            border: 4pt solid var(--purple-mauve);
+            border-radius: 6pt;
+            padding: 0.2in;
+            margin-bottom: 0.15in;
+        }
+
+        .chips-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.1in;
+        }
+
+        .chips-boxes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.1in;
+        }
+
+        .chip-box {
+            background: white;
+            border: 2pt solid var(--navy-blue);
+            border-radius: 4pt;
+            padding: 0.1in;
+            text-align: center;
+        }
+
+        .chip-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            color: var(--navy-blue);
+            margin-bottom: 4pt;
+        }
+
+        .chip-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 20pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+        }
+
+        /* Claim Sheets */
+        .claim-sheet {
+            background: var(--cream);
+            border: 4pt solid var(--navy-blue);
+            border-radius: 6pt;
+            padding: 0.25in;
+            margin-bottom: 0.15in;
+            height: 1.5in;
+        }
+
+        .claim-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.1in;
+        }
+
+        .claim-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8pt;
+        }
+
+        .claim-line-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            width: 1.5in;
+        }
+
+        .claim-line-field {
+            flex: 1;
+            height: 0.3in;
+            border-bottom: 2pt solid var(--dark-brown);
+        }
+
+        /* Reference Cards */
+        .reference-card {
+            background: var(--sky-blue);
+            border: 4pt solid var(--navy-blue);
+            border-radius: 6pt;
+            padding: 0.25in;
+            page-break-inside: avoid;
+        }
+
+        .reference-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+        }
+
+        .reference-section {
+            margin-bottom: 0.15in;
+        }
+
+        .reference-section h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 6pt;
+        }
+
+        .reference-section p,
+        .reference-section li {
+            font-size: 10pt;
+            line-height: 1.4;
+            margin-bottom: 4pt;
+        }
+
+        .reference-section ul {
+            margin-left: 0.2in;
+        }
+
+        @media print {
+            .print-info {
+                display: none;
+            }
+        }
+
+        .print-info {
+            background: var(--lime-green);
+            padding: 0.15in;
+            margin-bottom: 0.25in;
+            border-radius: 4pt;
+            border: 2pt solid var(--dark-brown);
+        }
+
+        .print-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            color: var(--dark-brown);
+            margin-bottom: 8pt;
+        }
+
+        .print-info p {
+            font-size: 9pt;
+            margin-bottom: 4pt;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- RAP SHEET PAGE -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Rap Sheet • Print 1 per Player</p>
+
+        <div class="print-info">
+            <h3>📋 Usage</h3>
+            <p>• Print one Rap Sheet per player (recommend 6-12 copies)</p>
+            <p>• Write player name at top</p>
+            <p>• Place completed contracts in matching category columns</p>
+            <p>• Check off set bonuses as earned</p>
+        </div>
+
+        <div class="rap-sheet">
+            <div class="rap-sheet-header">
+                <div class="rap-sheet-title">RAP SHEET</div>
+                <div class="player-name-field">
+                    PLAYER: <span class="player-name-line"></span>
+                </div>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-column precision">
+                    <div class="category-header">
+                        <div class="category-icon">🎯</div>
+                        <div class="category-name">Precision</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column chaos">
+                    <div class="category-header">
+                        <div class="category-icon">💣</div>
+                        <div class="category-name">Chaos</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column trust">
+                    <div class="category-header">
+                        <div class="category-icon">🤝</div>
+                        <div class="category-name">Trust</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column greed">
+                    <div class="category-header">
+                        <div class="category-icon">💰</div>
+                        <div class="category-name">Greed</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column hustle">
+                    <div class="category-header">
+                        <div class="category-icon">🎲</div>
+                        <div class="category-name">Hustle</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="set-bonuses">
+                <div class="set-bonuses-title">SET BONUSES EARNED</div>
+                <div class="bonus-list">
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Specialist (3 in one)</span>
+                        <span class="bonus-amount">+$4,000</span>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Versatile (1 in each)</span>
+                        <span class="bonus-amount">+$5,000</span>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Obsessed (4 in one)</span>
+                        <span class="bonus-amount">+$7,000</span>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Legend (6 total)</span>
+                        <span class="bonus-amount">+$6,000</span>
+                    </div>
+                    <div class="bonus-item" style="grid-column: 1 / -1;">
+                        <span class="bonus-name">☐ Mastermind (3+3 in two categories)</span>
+                        <span class="bonus-amount">+$10,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER REFERENCE CARD PAGE -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Quick Reference • Print 1 per Player</p>
+
+        <div class="reference-card" style="margin-bottom: 0.25in;">
+            <div class="reference-title">TURN ORDER</div>
+            <div class="reference-section">
+                <h3>Between Jobs</h3>
+                <ul>
+                    <li>Chair rotates to player with lowest chips</li>
+                    <li>Contract draft (Chair first, clockwise)</li>
+                    <li>Black Market trading (60 seconds)</li>
+                    <li>Refill Contract Board</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>The Job</h3>
+                <ul>
+                    <li>Reveal Job card</li>
+                    <li>Chair selects Crew</li>
+                    <li>Crew writes Claims (secret)</li>
+                    <li>Non-crew places Bets (Invest/Short/Pass)</li>
+                    <li>Reveal Claims simultaneously</li>
+                    <li>Resolve: SUCCESS if Claims ≤ Pot</li>
+                    <li>Complete Contracts</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reference-card" style="margin-bottom: 0.25in;">
+            <div class="reference-title">JOB RESOLUTION</div>
+            <div class="reference-section">
+                <h3>Success (Total Claims ≤ Pot)</h3>
+                <ul>
+                    <li>Crew receives their Claims</li>
+                    <li>Investors get 2× return</li>
+                    <li>Shorters lose stake</li>
+                    <li>Unclaimed money rolls over</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>Failure (Total Claims > Pot)</h3>
+                <ul>
+                    <li>Crew receives nothing</li>
+                    <li>Investors lose stake</li>
+                    <li>Shorters get 2× return</li>
+                    <li>Entire pot rolls over</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reference-card">
+            <div class="reference-title">CONTRACT TIERS</div>
+            <div class="reference-section">
+                <h3>Tier Penalties</h3>
+                <ul>
+                    <li>Easy (Green): -$1,500 if incomplete</li>
+                    <li>Medium (Purple): -$3,000 if incomplete</li>
+                    <li>Hard (Red): -$5,000 if incomplete</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>Discard Cost</h3>
+                <p>Pay $1,000 to discard any contract from your hand between jobs</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLAIM SHEETS PAGE -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Claim Sheets • Cut and use for secret claims</p>
+
+        <div class="print-info">
+            <h3>✂️ Instructions</h3>
+            <p>• Cut out individual claim sheets</p>
+            <p>• Each crew member writes their claim on one sheet</p>
+            <p>• Fold to conceal, then reveal all simultaneously</p>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">SECRET CLAIM</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Player:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Claim Amount: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">SECRET CLAIM</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Player:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Claim Amount: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">SECRET CLAIM</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Player:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Claim Amount: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">SECRET CLAIM</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Player:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Claim Amount: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">SECRET CLAIM</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Player:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Claim Amount: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

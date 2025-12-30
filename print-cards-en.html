@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE - Printable Cards (English)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Print Styles */
+        @page {
+            size: letter;
+            margin: 0.25in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #3d2417;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* Color Palette */
+        :root {
+            --sky-blue: #a8c5d9;
+            --purple-mauve: #9b6b87;
+            --cream: #e8dfd1;
+            --lime-green: #b4c75f;
+            --dark-brown: #3d2417;
+            --navy-blue: #1a3a52;
+        }
+
+        /* Page Breaks */
+        .page {
+            page-break-after: always;
+            padding: 0.25in;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.25in;
+            padding-bottom: 0.15in;
+            border-bottom: 3pt solid var(--purple-mauve);
+        }
+
+        .page-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            color: var(--navy-blue);
+            text-align: center;
+            margin-bottom: 0.25in;
+        }
+
+        /* Card Grid - Poker Size (2.5" × 3.5") */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 2.5in);
+            grid-auto-rows: 3.5in;
+            gap: 0.125in;
+            justify-content: center;
+        }
+
+        /* Job Cards */
+        .job-card {
+            width: 2.5in;
+            height: 3.5in;
+            background: var(--cream);
+            border: 4pt solid var(--purple-mauve);
+            border-radius: 8pt;
+            padding: 0.2in;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 2pt 4pt rgba(61, 36, 23, 0.2);
+        }
+
+        .job-card.final {
+            border-color: var(--lime-green);
+            border-width: 6pt;
+        }
+
+        .job-type {
+            font-family: 'Playfair Display', serif;
+            font-size: 22pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+            line-height: 1.1;
+        }
+
+        .job-type.final {
+            color: var(--lime-green);
+        }
+
+        .job-detail {
+            background: rgba(180, 199, 95, 0.2);
+            border-radius: 4pt;
+            padding: 0.1in;
+            margin-bottom: 0.1in;
+            text-align: center;
+        }
+
+        .job-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            color: var(--navy-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+        }
+
+        .job-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 32pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            line-height: 1;
+        }
+
+        .job-pot {
+            margin-top: auto;
+            text-align: center;
+            padding-top: 0.1in;
+            border-top: 2pt solid var(--navy-blue);
+        }
+
+        .pot-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            color: var(--navy-blue);
+            margin-bottom: 4pt;
+        }
+
+        .pot-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 28pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+        }
+
+        /* Contract Cards */
+        .contract-card {
+            width: 2.5in;
+            height: 3.5in;
+            background: var(--cream);
+            border: 4pt solid;
+            border-radius: 6pt;
+            padding: 0.15in;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .contract-card.easy {
+            border-color: #7ba865;
+        }
+
+        .contract-card.medium {
+            border-color: var(--purple-mauve);
+        }
+
+        .contract-card.hard {
+            border-color: #b85d5d;
+        }
+
+        .contract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.1in;
+        }
+
+        .contract-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            flex: 1;
+            line-height: 1.2;
+        }
+
+        .contract-icon {
+            font-size: 20pt;
+            margin-left: 8pt;
+        }
+
+        .contract-tier {
+            font-family: 'Space Mono', monospace;
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+            margin-bottom: 0.1in;
+            padding: 4pt 8pt;
+            border-radius: 3pt;
+            display: inline-block;
+        }
+
+        .contract-card.easy .contract-tier {
+            background: #7ba865;
+            color: white;
+        }
+
+        .contract-card.medium .contract-tier {
+            background: var(--purple-mauve);
+            color: white;
+        }
+
+        .contract-card.hard .contract-tier {
+            background: #b85d5d;
+            color: white;
+        }
+
+        .contract-objective {
+            font-size: 10pt;
+            line-height: 1.4;
+            color: var(--dark-brown);
+            flex: 1;
+            margin-bottom: 0.1in;
+        }
+
+        .contract-footer {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 0.1in;
+            border-top: 2pt solid rgba(61, 36, 23, 0.2);
+        }
+
+        .contract-bonus,
+        .contract-penalty {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+
+        .contract-bonus {
+            color: #7ba865;
+            font-size: 14pt;
+        }
+
+        .contract-penalty {
+            color: #b85d5d;
+            font-size: 10pt;
+        }
+
+        /* Print Instructions */
+        .print-info {
+            background: var(--sky-blue);
+            padding: 0.15in;
+            margin-bottom: 0.25in;
+            border-radius: 4pt;
+            border: 2pt solid var(--navy-blue);
+        }
+
+        .print-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            color: var(--dark-brown);
+            margin-bottom: 8pt;
+        }
+
+        .print-info p {
+            font-size: 9pt;
+            color: var(--dark-brown);
+            margin-bottom: 4pt;
+        }
+
+        @media print {
+            .print-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- JOB CARDS PAGE 1 -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Job Cards • Page 1 of 5</p>
+
+        <div class="print-info">
+            <h3>📄 Printing Instructions</h3>
+            <p>• Print on cardstock (110lb recommended)</p>
+            <p>• Cut along card borders (2.5" × 3.5" poker size)</p>
+            <p>• Optional: Use card sleeves for durability</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Small Jobs (3 total) -->
+            <div class="job-card">
+                <div class="job-type">SMALL JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">3</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$8,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">SMALL JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">3</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$8,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">SMALL JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">3</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$8,000</div>
+                </div>
+            </div>
+
+            <!-- Medium Jobs (4 total) -->
+            <div class="job-card">
+                <div class="job-type">MEDIUM JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">MEDIUM JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">MEDIUM JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JOB CARDS PAGE 2 -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Job Cards • Page 2 of 5</p>
+
+        <div class="card-grid">
+            <!-- Medium Job (last one) -->
+            <div class="job-card">
+                <div class="job-type">MEDIUM JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+
+            <!-- Large Jobs (3 total) -->
+            <div class="job-card">
+                <div class="job-type">LARGE JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$16,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">LARGE JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$16,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">LARGE JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$16,000</div>
+                </div>
+            </div>
+
+            <!-- Huge Jobs (2 total) -->
+            <div class="job-card">
+                <div class="job-type">HUGE JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">5</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$20,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">HUGE JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">5</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$20,000</div>
+                </div>
+            </div>
+
+            <!-- Final Job -->
+            <div class="job-card final">
+                <div class="job-type final">FINAL JOB</div>
+                <div class="job-detail">
+                    <div class="job-label">Crew Size</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">POT</div>
+                    <div class="pot-amount">$18,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 3) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Easy Contract Cards • Page 3 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Quick Score</div>
+                    <div class="contract-icon">💰</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≥$3,000 on a successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Team Player</div>
+                    <div class="contract-icon">🤝</div>
+                </div>
+                <div class="contract-objective">
+                    Be on a successful crew
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Bet Winner</div>
+                    <div class="contract-icon">🎲</div>
+                </div>
+                <div class="contract-objective">
+                    Profit from a bet
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Small Fry</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Claim exactly $2,000 on a job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Troublemaker</div>
+                    <div class="contract-icon">💣</div>
+                </div>
+                <div class="contract-objective">
+                    Be on a crew that fails
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Benchwarmer</div>
+                    <div class="contract-icon">🎲</div>
+                </div>
+                <div class="contract-objective">
+                    Be excluded from a crew on a job with pot ≥$14,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 4) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Easy Contract Cards • Page 4 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Conservative</div>
+                    <div class="contract-icon">🛡️</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≤$4,000 on a successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Lucky Streak</div>
+                    <div class="contract-icon">🍀</div>
+                </div>
+                <div class="contract-objective">
+                    Participate in any job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Risk Taker</div>
+                    <div class="contract-icon">⚡</div>
+                </div>
+                <div class="contract-objective">
+                    Place any bet on a job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Modest Take</div>
+                    <div class="contract-icon">💵</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≤$3,000 on a successful Small or Medium Job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Investor</div>
+                    <div class="contract-icon">📈</div>
+                </div>
+                <div class="contract-objective">
+                    Bet ≥$2,000 as an investor on any job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Shorter</div>
+                    <div class="contract-icon">📉</div>
+                </div>
+                <div class="contract-objective">
+                    Bet ≥$2,000 as a shorter on any job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 5) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Easy Contract Cards • Page 5 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Steady Hand</div>
+                    <div class="contract-icon">✋</div>
+                </div>
+                <div class="contract-objective">
+                    Complete any job without claiming $0
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Greedy Gut</div>
+                    <div class="contract-icon">🐷</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≥$5,000 on any job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Sidelines</div>
+                    <div class="contract-icon">👀</div>
+                </div>
+                <div class="contract-objective">
+                    Skip a job by not being selected for the crew
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Minimum Wage</div>
+                    <div class="contract-icon">⏰</div>
+                </div>
+                <div class="contract-objective">
+                    Claim exactly $1,000 on a successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Small Crew</div>
+                    <div class="contract-icon">👥</div>
+                </div>
+                <div class="contract-objective">
+                    Be on a successful Small Job crew
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Medium Crew</div>
+                    <div class="contract-icon">👥👥</div>
+                </div>
+                <div class="contract-objective">
+                    Be on a successful Medium Job crew
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 6) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Easy Contract Cards • Page 6 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Large Crew</div>
+                    <div class="contract-icon">👥👥👥</div>
+                </div>
+                <div class="contract-objective">
+                    Be on a successful Large Job crew
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Easy</div>
+                <div class="contract-header">
+                    <div class="contract-name">Safe Bet</div>
+                    <div class="contract-icon">🎰</div>
+                </div>
+                <div class="contract-objective">
+                    Win any bet as an investor
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 7) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Medium Contract Cards • Page 7 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Power Player</div>
+                    <div class="contract-icon">⚔️</div>
+                </div>
+                <div class="contract-objective">
+                    Complete 2 successful jobs claiming ≥$4,000 each
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Saboteur</div>
+                    <div class="contract-icon">💥</div>
+                </div>
+                <div class="contract-objective">
+                    Be on a crew that fails twice
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Perfect Split</div>
+                    <div class="contract-icon">⚖️</div>
+                </div>
+                <div class="contract-objective">
+                    Succeed on a job where leftover pot is ≤$2,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Majority Rules</div>
+                    <div class="contract-icon">👑</div>
+                </div>
+                <div class="contract-objective">
+                    Claim the highest amount on a successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Underdog</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Claim the lowest non-zero amount on a successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Big Roller</div>
+                    <div class="contract-icon">🎲</div>
+                </div>
+                <div class="contract-objective">
+                    Win a bet of ≥$4,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 8) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Medium Contract Cards • Page 8 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Contrarian</div>
+                    <div class="contract-icon">🔄</div>
+                </div>
+                <div class="contract-objective">
+                    Win a shorter bet on a job with pot ≥$15,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Perfectionist</div>
+                    <div class="contract-icon">✨</div>
+                </div>
+                <div class="contract-objective">
+                    Succeed on a job where total claims exactly equal the pot
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Precision</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Claim exactly $5,000 on a successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Rollover King</div>
+                    <div class="contract-icon">🔁</div>
+                </div>
+                <div class="contract-objective">
+                    Complete a job with rollover ≥$10,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Serial Winner</div>
+                    <div class="contract-icon">🏆</div>
+                </div>
+                <div class="contract-objective">
+                    Win 2 bets in a row
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Chair Picker</div>
+                    <div class="contract-icon">🪑</div>
+                </div>
+                <div class="contract-objective">
+                    Be selected by 3 different Chairs for successful jobs
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 9) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Medium Contract Cards • Page 9 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">All-In</div>
+                    <div class="contract-icon">💸</div>
+                </div>
+                <div class="contract-objective">
+                    Place a bet of ≥$5,000 and win
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Huge Score</div>
+                    <div class="contract-icon">💎</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≥$7,000 on a successful Huge Job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Consistency</div>
+                    <div class="contract-icon">📊</div>
+                </div>
+                <div class="contract-objective">
+                    Complete 3 successful jobs in a row
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Diverse Portfolio</div>
+                    <div class="contract-icon">📈</div>
+                </div>
+                <div class="contract-objective">
+                    Complete successful Small, Medium, and Large Jobs
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Near Miss</div>
+                    <div class="contract-icon">😰</div>
+                </div>
+                <div class="contract-objective">
+                    Succeed on a job where crew claimed within $1,000 of pot
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Balanced Approach</div>
+                    <div class="contract-icon">⚖️</div>
+                </div>
+                <div class="contract-objective">
+                    Earn money from both crew work and betting
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 10) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Medium Contract Cards • Page 10 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Goldilocks</div>
+                    <div class="contract-icon">🐻</div>
+                </div>
+                <div class="contract-objective">
+                    Claim exactly $3,000 on a Medium Job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Conservative Roller</div>
+                    <div class="contract-icon">🛡️</div>
+                </div>
+                <div class="contract-objective">
+                    Complete 2 jobs claiming ≤$3,000 on each successful one
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Risk Manager</div>
+                    <div class="contract-icon">📉</div>
+                </div>
+                <div class="contract-objective">
+                    Participate in 4 jobs without being on a failed crew
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Opportunist</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≥50% of a Large or Huge Job pot
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Bet Both Sides</div>
+                    <div class="contract-icon">🔀</div>
+                </div>
+                <div class="contract-objective">
+                    Win both an investor bet and a shorter bet
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Big Fish</div>
+                    <div class="contract-icon">🐟</div>
+                </div>
+                <div class="contract-objective">
+                    Earn ≥$8,000 from a single successful job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 11) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Medium Contract Cards • Page 11 of 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Medium</div>
+                <div class="contract-header">
+                    <div class="contract-name">Comeback Kid</div>
+                    <div class="contract-icon">🔙</div>
+                </div>
+                <div class="contract-objective">
+                    Succeed on a job immediately after failing one
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - HARD (Page 12) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Hard Contract Cards • Page 12 of 14</p>
+
+        <div class="card-grid">
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Master Heister</div>
+                    <div class="contract-icon">👑</div>
+                </div>
+                <div class="contract-objective">
+                    Complete 4 successful jobs claiming ≥$5,000 each
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Chaos Agent</div>
+                    <div class="contract-icon">💣</div>
+                </div>
+                <div class="contract-objective">
+                    Be on 3 failed crews
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Whale</div>
+                    <div class="contract-icon">🐋</div>
+                </div>
+                <div class="contract-objective">
+                    Win 3 bets of ≥$5,000 each
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Precision Master</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Claim exactly $7,000 on a Huge or Final Job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Final Jackpot</div>
+                    <div class="contract-icon">🎰</div>
+                </div>
+                <div class="contract-objective">
+                    Claim ≥$10,000 on the Final Job
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Perfect Game</div>
+                    <div class="contract-icon">✨</div>
+                </div>
+                <div class="contract-objective">
+                    Never be on a failed crew (minimum 6 jobs on crew)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - HARD (Page 13) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Hard Contract Cards • Page 13 of 14</p>
+
+        <div class="card-grid">
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Betting Baron</div>
+                    <div class="contract-icon">💰</div>
+                </div>
+                <div class="contract-objective">
+                    Win 4 bets total (any amount)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Maximizer</div>
+                    <div class="contract-icon">📊</div>
+                </div>
+                <div class="contract-objective">
+                    Claim the highest amount on 3 different successful jobs
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,500</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Marathon Runner</div>
+                    <div class="contract-icon">🏃</div>
+                </div>
+                <div class="contract-objective">
+                    Be on the crew for 10 jobs total
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Triple Threat</div>
+                    <div class="contract-icon">⚡</div>
+                </div>
+                <div class="contract-objective">
+                    Complete successful Small, Medium, Large, and Huge Jobs
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Roller Coaster</div>
+                    <div class="contract-icon">🎢</div>
+                </div>
+                <div class="contract-objective">
+                    Complete 2 jobs with rollover ≥$15,000 each
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Double Agent</div>
+                    <div class="contract-icon">🕵️</div>
+                </div>
+                <div class="contract-objective">
+                    Succeed on a job after betting against it as a shorter
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - HARD (Page 14) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Hard Contract Cards • Page 14 of 14</p>
+
+        <div class="card-grid">
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">High Stakes</div>
+                    <div class="contract-icon">💎</div>
+                </div>
+                <div class="contract-objective">
+                    Win a single bet of ≥$8,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Untouchable</div>
+                    <div class="contract-icon">🛡️</div>
+                </div>
+                <div class="contract-objective">
+                    Never lose money on any job (crew or bet)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Hard</div>
+                <div class="contract-header">
+                    <div class="contract-name">Mega Score</div>
+                    <div class="contract-icon">💸</div>
+                </div>
+                <div class="contract-objective">
+                    Earn ≥$15,000 from a single job (crew + bet combined)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

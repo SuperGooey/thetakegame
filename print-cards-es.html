@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE - Cartas Imprimibles (Español)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Print Styles */
+        @page {
+            size: letter;
+            margin: 0.25in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #3d2417;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* Color Palette */
+        :root {
+            --sky-blue: #a8c5d9;
+            --purple-mauve: #9b6b87;
+            --cream: #e8dfd1;
+            --lime-green: #b4c75f;
+            --dark-brown: #3d2417;
+            --navy-blue: #1a3a52;
+        }
+
+        /* Page Breaks */
+        .page {
+            page-break-after: always;
+            padding: 0.25in;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.25in;
+            padding-bottom: 0.15in;
+            border-bottom: 3pt solid var(--purple-mauve);
+        }
+
+        .page-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            color: var(--navy-blue);
+            text-align: center;
+            margin-bottom: 0.25in;
+        }
+
+        /* Card Grid - Poker Size (2.5" × 3.5") */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 2.5in);
+            grid-auto-rows: 3.5in;
+            gap: 0.125in;
+            justify-content: center;
+        }
+
+        /* Job Cards */
+        .job-card {
+            width: 2.5in;
+            height: 3.5in;
+            background: var(--cream);
+            border: 4pt solid var(--purple-mauve);
+            border-radius: 8pt;
+            padding: 0.2in;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 2pt 4pt rgba(61, 36, 23, 0.2);
+        }
+
+        .job-card.final {
+            border-color: var(--lime-green);
+            border-width: 6pt;
+        }
+
+        .job-type {
+            font-family: 'Playfair Display', serif;
+            font-size: 20pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+            line-height: 1.1;
+        }
+
+        .job-type.final {
+            color: var(--lime-green);
+        }
+
+        .job-detail {
+            background: rgba(180, 199, 95, 0.2);
+            border-radius: 4pt;
+            padding: 0.1in;
+            margin-bottom: 0.1in;
+            text-align: center;
+        }
+
+        .job-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            color: var(--navy-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+        }
+
+        .job-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 32pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            line-height: 1;
+        }
+
+        .job-pot {
+            margin-top: auto;
+            text-align: center;
+            padding-top: 0.1in;
+            border-top: 2pt solid var(--navy-blue);
+        }
+
+        .pot-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            color: var(--navy-blue);
+            margin-bottom: 4pt;
+        }
+
+        .pot-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 28pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+        }
+
+        /* Contract Cards */
+        .contract-card {
+            width: 2.5in;
+            height: 3.5in;
+            background: var(--cream);
+            border: 4pt solid;
+            border-radius: 6pt;
+            padding: 0.15in;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .contract-card.easy {
+            border-color: #7ba865;
+        }
+
+        .contract-card.medium {
+            border-color: var(--purple-mauve);
+        }
+
+        .contract-card.hard {
+            border-color: #b85d5d;
+        }
+
+        .contract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.1in;
+        }
+
+        .contract-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            flex: 1;
+            line-height: 1.2;
+        }
+
+        .contract-icon {
+            font-size: 20pt;
+            margin-left: 8pt;
+        }
+
+        .contract-tier {
+            font-family: 'Space Mono', monospace;
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+            margin-bottom: 0.1in;
+            padding: 4pt 8pt;
+            border-radius: 3pt;
+            display: inline-block;
+        }
+
+        .contract-card.easy .contract-tier {
+            background: #7ba865;
+            color: white;
+        }
+
+        .contract-card.medium .contract-tier {
+            background: var(--purple-mauve);
+            color: white;
+        }
+
+        .contract-card.hard .contract-tier {
+            background: #b85d5d;
+            color: white;
+        }
+
+        .contract-objective {
+            font-size: 9.5pt;
+            line-height: 1.35;
+            color: var(--dark-brown);
+            flex: 1;
+            margin-bottom: 0.1in;
+        }
+
+        .contract-footer {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 0.1in;
+            border-top: 2pt solid rgba(61, 36, 23, 0.2);
+        }
+
+        .contract-bonus,
+        .contract-penalty {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+
+        .contract-bonus {
+            color: #7ba865;
+            font-size: 14pt;
+        }
+
+        .contract-penalty {
+            color: #b85d5d;
+            font-size: 10pt;
+        }
+
+        /* Print Instructions */
+        .print-info {
+            background: var(--sky-blue);
+            padding: 0.15in;
+            margin-bottom: 0.25in;
+            border-radius: 4pt;
+            border: 2pt solid var(--navy-blue);
+        }
+
+        .print-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            color: var(--dark-brown);
+            margin-bottom: 8pt;
+        }
+
+        .print-info p {
+            font-size: 9pt;
+            color: var(--dark-brown);
+            margin-bottom: 4pt;
+        }
+
+        @media print {
+            .print-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- JOB CARDS PAGE 1 -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Cartas de Trabajos • Página 1 de 2</p>
+
+        <div class="print-info">
+            <h3>📄 Instrucciones de Impresión</h3>
+            <p>• Imprima en cartulina (110lb recomendado)</p>
+            <p>• Corte a lo largo de los bordes (2.5" × 3.5" tamaño póker)</p>
+            <p>• Opcional: Use fundas de cartas para mayor durabilidad</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Small Jobs (3 total) -->
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>PEQUEÑO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">3</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$8,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>PEQUEÑO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">3</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$8,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>PEQUEÑO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">3</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$8,000</div>
+                </div>
+            </div>
+
+            <!-- Medium Jobs (4 total) -->
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>MEDIANO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>MEDIANO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>MEDIANO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JOB CARDS PAGE 2 -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Cartas de Trabajos • Página 2 de 2</p>
+
+        <div class="card-grid">
+            <!-- Medium Job (last one) -->
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>MEDIANO</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$12,000</div>
+                </div>
+            </div>
+
+            <!-- Large Jobs (3 total) -->
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>GRANDE</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$16,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>GRANDE</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$16,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>GRANDE</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$16,000</div>
+                </div>
+            </div>
+
+            <!-- Huge Jobs (2 total) -->
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>ENORME</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">5</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$20,000</div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-type">TRABAJO<br>ENORME</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">5</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$20,000</div>
+                </div>
+            </div>
+
+            <!-- Final Job -->
+            <div class="job-card final">
+                <div class="job-type final">TRABAJO<br>FINAL</div>
+                <div class="job-detail">
+                    <div class="job-label">Equipo</div>
+                    <div class="job-value">4</div>
+                </div>
+                <div class="job-pot">
+                    <div class="pot-label">BOTE</div>
+                    <div class="pot-amount">$18,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 3) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Fáciles • Página 3 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Golpe Rápido</div>
+                    <div class="contract-icon">💰</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≥$3,000 en un trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Jugador de Equipo</div>
+                    <div class="contract-icon">🤝</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de un equipo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Ganador de Apuestas</div>
+                    <div class="contract-icon">🎲</div>
+                </div>
+                <div class="contract-objective">
+                    Gana con una apuesta
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Pez Pequeño</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama exactamente $2,000 en un trabajo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Problemático</div>
+                    <div class="contract-icon">💣</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de un equipo que falla
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Suplente</div>
+                    <div class="contract-icon">🎲</div>
+                </div>
+                <div class="contract-objective">
+                    Queda excluido de un equipo en un trabajo con bote ≥$14,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 4) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Fáciles • Página 4 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Conservador</div>
+                    <div class="contract-icon">🛡️</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≤$4,000 en un trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Racha de Suerte</div>
+                    <div class="contract-icon">🍀</div>
+                </div>
+                <div class="contract-objective">
+                    Participa en cualquier trabajo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Arriesgado</div>
+                    <div class="contract-icon">⚡</div>
+                </div>
+                <div class="contract-objective">
+                    Haz cualquier apuesta en un trabajo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Ganancia Modesta</div>
+                    <div class="contract-icon">💵</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≤$3,000 en un Trabajo Pequeño o Mediano exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Inversor</div>
+                    <div class="contract-icon">📈</div>
+                </div>
+                <div class="contract-objective">
+                    Apuesta ≥$2,000 como inversor en cualquier trabajo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Apostador en Contra</div>
+                    <div class="contract-icon">📉</div>
+                </div>
+                <div class="contract-objective">
+                    Apuesta ≥$2,000 contra el éxito en cualquier trabajo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 5) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Fáciles • Página 5 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Mano Firme</div>
+                    <div class="contract-icon">✋</div>
+                </div>
+                <div class="contract-objective">
+                    Completa cualquier trabajo sin reclamar $0
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Codicioso</div>
+                    <div class="contract-icon">🐷</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≥$5,000 en cualquier trabajo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Línea Lateral</div>
+                    <div class="contract-icon">👀</div>
+                </div>
+                <div class="contract-objective">
+                    Omite un trabajo al no ser seleccionado para el equipo
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Salario Mínimo</div>
+                    <div class="contract-icon">⏰</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama exactamente $1,000 en un trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,500</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Equipo Pequeño</div>
+                    <div class="contract-icon">👥</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de un equipo exitoso de Trabajo Pequeño
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Equipo Mediano</div>
+                    <div class="contract-icon">👥👥</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de un equipo exitoso de Trabajo Mediano
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - EASY (Page 6) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Fáciles • Página 6 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Equipo Grande</div>
+                    <div class="contract-icon">👥👥👥</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de un equipo exitoso de Trabajo Grande
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+
+            <div class="contract-card easy">
+                <div class="contract-tier">Fácil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Apuesta Segura</div>
+                    <div class="contract-icon">🎰</div>
+                </div>
+                <div class="contract-objective">
+                    Gana cualquier apuesta como inversor
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$2,000</div>
+                    <div class="contract-penalty">-$1,500</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 7) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Medianos • Página 7 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Jugador Poderoso</div>
+                    <div class="contract-icon">⚔️</div>
+                </div>
+                <div class="contract-objective">
+                    Completa 2 trabajos exitosos reclamando ≥$4,000 en cada uno
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Saboteador</div>
+                    <div class="contract-icon">💥</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de un equipo que falla dos veces
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">División Perfecta</div>
+                    <div class="contract-icon">⚖️</div>
+                </div>
+                <div class="contract-objective">
+                    Ten éxito en un trabajo donde el bote sobrante sea ≤$2,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Manda la Mayoría</div>
+                    <div class="contract-icon">👑</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama la cantidad más alta en un trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Desfavorecido</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama la cantidad más baja (no cero) en un trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Gran Apostador</div>
+                    <div class="contract-icon">🎲</div>
+                </div>
+                <div class="contract-objective">
+                    Gana una apuesta de ≥$4,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 8) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Medianos • Página 8 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Contrario</div>
+                    <div class="contract-icon">🔄</div>
+                </div>
+                <div class="contract-objective">
+                    Gana una apuesta contra el éxito en un trabajo con bote ≥$15,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Perfeccionista</div>
+                    <div class="contract-icon">✨</div>
+                </div>
+                <div class="contract-objective">
+                    Ten éxito en un trabajo donde las reclamaciones totales igualen exactamente el bote
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Precisión</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama exactamente $5,000 en un trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Rey del Remanente</div>
+                    <div class="contract-icon">🔁</div>
+                </div>
+                <div class="contract-objective">
+                    Completa un trabajo con remanente ≥$10,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Ganador en Serie</div>
+                    <div class="contract-icon">🏆</div>
+                </div>
+                <div class="contract-objective">
+                    Gana 2 apuestas consecutivas
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Favorito del Jefe</div>
+                    <div class="contract-icon">🪑</div>
+                </div>
+                <div class="contract-objective">
+                    Ser seleccionado por 3 Jefes diferentes para trabajos exitosos
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 9) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Medianos • Página 9 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Todo o Nada</div>
+                    <div class="contract-icon">💸</div>
+                </div>
+                <div class="contract-objective">
+                    Haz una apuesta de ≥$5,000 y gana
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Botín Enorme</div>
+                    <div class="contract-icon">💎</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≥$7,000 en un Trabajo Enorme exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Consistencia</div>
+                    <div class="contract-icon">📊</div>
+                </div>
+                <div class="contract-objective">
+                    Completa 3 trabajos exitosos consecutivos
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Portafolio Diverso</div>
+                    <div class="contract-icon">📈</div>
+                </div>
+                <div class="contract-objective">
+                    Completa Trabajos Pequeños, Medianos y Grandes exitosos
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Por Poco</div>
+                    <div class="contract-icon">😰</div>
+                </div>
+                <div class="contract-objective">
+                    Ten éxito en un trabajo donde el equipo reclamó dentro de $1,000 del bote
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Enfoque Equilibrado</div>
+                    <div class="contract-icon">⚖️</div>
+                </div>
+                <div class="contract-objective">
+                    Gana dinero tanto del trabajo en equipo como de las apuestas
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 10) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Medianos • Página 10 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Ricitos de Oro</div>
+                    <div class="contract-icon">🐻</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama exactamente $3,000 en un Trabajo Mediano
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Conservador Constante</div>
+                    <div class="contract-icon">🛡️</div>
+                </div>
+                <div class="contract-objective">
+                    Completa 2 trabajos reclamando ≤$3,000 en cada uno exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Gestor de Riesgos</div>
+                    <div class="contract-icon">📉</div>
+                </div>
+                <div class="contract-objective">
+                    Participa en 4 trabajos sin estar en un equipo fallido
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Oportunista</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≥50% del bote de un Trabajo Grande o Enorme
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Apuesta Ambos Lados</div>
+                    <div class="contract-icon">🔀</div>
+                </div>
+                <div class="contract-objective">
+                    Gana tanto una apuesta de inversor como una apuesta contra el éxito
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,500</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Pez Gordo</div>
+                    <div class="contract-icon">🐟</div>
+                </div>
+                <div class="contract-objective">
+                    Gana ≥$8,000 de un solo trabajo exitoso
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$5,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - MEDIUM (Page 11) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Medianos • Página 11 de 11</p>
+
+        <div class="card-grid">
+            <div class="contract-card medium">
+                <div class="contract-tier">Mediano</div>
+                <div class="contract-header">
+                    <div class="contract-name">Niño del Regreso</div>
+                    <div class="contract-icon">🔙</div>
+                </div>
+                <div class="contract-objective">
+                    Ten éxito en un trabajo inmediatamente después de fallar uno
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$4,000</div>
+                    <div class="contract-penalty">-$3,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - HARD (Page 12) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Difíciles • Página 12 de 14</p>
+
+        <div class="card-grid">
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Maestro del Golpe</div>
+                    <div class="contract-icon">👑</div>
+                </div>
+                <div class="contract-objective">
+                    Completa 4 trabajos exitosos reclamando ≥$5,000 en cada uno
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Agente del Caos</div>
+                    <div class="contract-icon">💣</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte de 3 equipos fallidos
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Ballena</div>
+                    <div class="contract-icon">🐋</div>
+                </div>
+                <div class="contract-objective">
+                    Gana 3 apuestas de ≥$5,000 cada una
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Maestro de Precisión</div>
+                    <div class="contract-icon">🎯</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama exactamente $7,000 en un Trabajo Enorme o Final
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Premio Mayor Final</div>
+                    <div class="contract-icon">🎰</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama ≥$10,000 en el Trabajo Final
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Juego Perfecto</div>
+                    <div class="contract-icon">✨</div>
+                </div>
+                <div class="contract-objective">
+                    Nunca formes parte de un equipo fallido (mínimo 6 trabajos en equipo)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - HARD (Page 13) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Difíciles • Página 13 de 14</p>
+
+        <div class="card-grid">
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Barón de Apuestas</div>
+                    <div class="contract-icon">💰</div>
+                </div>
+                <div class="contract-objective">
+                    Gana 4 apuestas en total (cualquier cantidad)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Maximizador</div>
+                    <div class="contract-icon">📊</div>
+                </div>
+                <div class="contract-objective">
+                    Reclama la cantidad más alta en 3 trabajos exitosos diferentes
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,500</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Maratonista</div>
+                    <div class="contract-icon">🏃</div>
+                </div>
+                <div class="contract-objective">
+                    Forma parte del equipo en 10 trabajos totales
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Triple Amenaza</div>
+                    <div class="contract-icon">⚡</div>
+                </div>
+                <div class="contract-objective">
+                    Completa Trabajos Pequeños, Medianos, Grandes y Enormes exitosos
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$8,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Montaña Rusa</div>
+                    <div class="contract-icon">🎢</div>
+                </div>
+                <div class="contract-objective">
+                    Completa 2 trabajos con remanente ≥$15,000 cada uno
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Agente Doble</div>
+                    <div class="contract-icon">🕵️</div>
+                </div>
+                <div class="contract-objective">
+                    Ten éxito en un trabajo después de apostar contra él
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$9,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRACT CARDS - HARD (Page 14) -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Contratos Difíciles • Página 14 de 14</p>
+
+        <div class="card-grid">
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Altas Apuestas</div>
+                    <div class="contract-icon">💎</div>
+                </div>
+                <div class="contract-objective">
+                    Gana una sola apuesta de ≥$8,000
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Intocable</div>
+                    <div class="contract-icon">🛡️</div>
+                </div>
+                <div class="contract-objective">
+                    Nunca pierdas dinero en ningún trabajo (equipo o apuesta)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+
+            <div class="contract-card hard">
+                <div class="contract-tier">Difícil</div>
+                <div class="contract-header">
+                    <div class="contract-name">Mega Botín</div>
+                    <div class="contract-icon">💸</div>
+                </div>
+                <div class="contract-objective">
+                    Gana ≥$15,000 de un solo trabajo (equipo + apuesta combinados)
+                </div>
+                <div class="contract-footer">
+                    <div class="contract-bonus">+$10,000</div>
+                    <div class="contract-penalty">-$5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TAKE - Hojas de Antecedentes y Materiales (Español)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        @page {
+            size: letter;
+            margin: 0.25in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #3d2417;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        :root {
+            --sky-blue: #a8c5d9;
+            --purple-mauve: #9b6b87;
+            --cream: #e8dfd1;
+            --lime-green: #b4c75f;
+            --dark-brown: #3d2417;
+            --navy-blue: #1a3a52;
+        }
+
+        .page {
+            page-break-after: always;
+            padding: 0.25in;
+            height: 10.5in;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+        }
+
+        .page-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            color: var(--navy-blue);
+            text-align: center;
+            margin-bottom: 0.25in;
+        }
+
+        /* Rap Sheet */
+        .rap-sheet {
+            background: var(--cream);
+            border: 6pt solid var(--purple-mauve);
+            border-radius: 8pt;
+            padding: 0.3in;
+            height: 9.5in;
+            position: relative;
+        }
+
+        .rap-sheet-header {
+            text-align: center;
+            margin-bottom: 0.25in;
+            padding-bottom: 0.15in;
+            border-bottom: 3pt solid var(--purple-mauve);
+        }
+
+        .rap-sheet-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+            margin-bottom: 8pt;
+        }
+
+        .player-name-field {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            color: var(--navy-blue);
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+        }
+
+        .player-name-line {
+            display: inline-block;
+            width: 3in;
+            border-bottom: 2pt solid var(--dark-brown);
+            margin-left: 8pt;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.1in;
+            margin-bottom: 0.25in;
+        }
+
+        .category-column {
+            background: white;
+            border: 3pt solid var(--navy-blue);
+            border-radius: 4pt;
+            padding: 0.1in;
+            min-height: 4in;
+        }
+
+        .category-header {
+            text-align: center;
+            padding-bottom: 0.08in;
+            margin-bottom: 0.08in;
+            border-bottom: 2pt solid var(--navy-blue);
+        }
+
+        .category-icon {
+            font-size: 20pt;
+            display: block;
+            margin-bottom: 4pt;
+        }
+
+        .category-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            text-transform: uppercase;
+        }
+
+        .category-column.precision { border-top: 5pt solid #4a90e2; }
+        .category-column.chaos { border-top: 5pt solid #e24a4a; }
+        .category-column.trust { border-top: 5pt solid #4ae290; }
+        .category-column.greed { border-top: 5pt solid #e2d44a; }
+        .category-column.hustle { border-top: 5pt solid #9b4ae2; }
+
+        .contract-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 4pt;
+        }
+
+        .contract-slot {
+            height: 0.25in;
+            border: 1pt dashed var(--navy-blue);
+            border-radius: 2pt;
+        }
+
+        .set-bonuses {
+            background: rgba(180, 199, 95, 0.2);
+            border: 3pt solid var(--lime-green);
+            border-radius: 4pt;
+            padding: 0.15in;
+        }
+
+        .set-bonuses-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 0.1in;
+        }
+
+        .bonus-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6pt;
+            font-size: 9pt;
+        }
+
+        .bonus-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4pt;
+            background: white;
+            border-radius: 2pt;
+        }
+
+        .bonus-name {
+            font-weight: 600;
+        }
+
+        .bonus-amount {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: #7ba865;
+        }
+
+        /* Chips Tracker */
+        .chips-tracker {
+            background: var(--cream);
+            border: 4pt solid var(--purple-mauve);
+            border-radius: 6pt;
+            padding: 0.2in;
+            margin-bottom: 0.15in;
+        }
+
+        .chips-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.1in;
+        }
+
+        .chips-boxes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.1in;
+        }
+
+        .chip-box {
+            background: white;
+            border: 2pt solid var(--navy-blue);
+            border-radius: 4pt;
+            padding: 0.1in;
+            text-align: center;
+        }
+
+        .chip-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 8pt;
+            color: var(--navy-blue);
+            margin-bottom: 4pt;
+        }
+
+        .chip-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 20pt;
+            font-weight: 900;
+            color: var(--purple-mauve);
+        }
+
+        /* Claim Sheets */
+        .claim-sheet {
+            background: var(--cream);
+            border: 4pt solid var(--navy-blue);
+            border-radius: 6pt;
+            padding: 0.25in;
+            margin-bottom: 0.15in;
+            height: 1.5in;
+        }
+
+        .claim-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.1in;
+        }
+
+        .claim-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8pt;
+        }
+
+        .claim-line-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10pt;
+            width: 1.5in;
+        }
+
+        .claim-line-field {
+            flex: 1;
+            height: 0.3in;
+            border-bottom: 2pt solid var(--dark-brown);
+        }
+
+        /* Reference Cards */
+        .reference-card {
+            background: var(--sky-blue);
+            border: 4pt solid var(--navy-blue);
+            border-radius: 6pt;
+            padding: 0.25in;
+            page-break-inside: avoid;
+        }
+
+        .reference-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18pt;
+            font-weight: 900;
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.15in;
+        }
+
+        .reference-section {
+            margin-bottom: 0.15in;
+        }
+
+        .reference-section h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 6pt;
+        }
+
+        .reference-section p,
+        .reference-section li {
+            font-size: 10pt;
+            line-height: 1.4;
+            margin-bottom: 4pt;
+        }
+
+        .reference-section ul {
+            margin-left: 0.2in;
+        }
+
+        @media print {
+            .print-info {
+                display: none;
+            }
+        }
+
+        .print-info {
+            background: var(--lime-green);
+            padding: 0.15in;
+            margin-bottom: 0.25in;
+            border-radius: 4pt;
+            border: 2pt solid var(--dark-brown);
+        }
+
+        .print-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            color: var(--dark-brown);
+            margin-bottom: 8pt;
+        }
+
+        .print-info p {
+            font-size: 9pt;
+            margin-bottom: 4pt;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- RAP SHEET PAGE -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Hoja de Antecedentes • Imprima 1 por Jugador</p>
+
+        <div class="print-info">
+            <h3>📋 Uso</h3>
+            <p>• Imprima una Hoja por jugador (recomendado 6-12 copias)</p>
+            <p>• Escriba el nombre del jugador en la parte superior</p>
+            <p>• Coloque contratos completados en las columnas de categoría correspondientes</p>
+            <p>• Marque los bonos de conjunto a medida que se ganen</p>
+        </div>
+
+        <div class="rap-sheet">
+            <div class="rap-sheet-header">
+                <div class="rap-sheet-title">ANTECEDENTES</div>
+                <div class="player-name-field">
+                    JUGADOR: <span class="player-name-line"></span>
+                </div>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-column precision">
+                    <div class="category-header">
+                        <div class="category-icon">🎯</div>
+                        <div class="category-name">Precisión</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column chaos">
+                    <div class="category-header">
+                        <div class="category-icon">💣</div>
+                        <div class="category-name">Caos</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column trust">
+                    <div class="category-header">
+                        <div class="category-icon">🤝</div>
+                        <div class="category-name">Confianza</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column greed">
+                    <div class="category-header">
+                        <div class="category-icon">💰</div>
+                        <div class="category-name">Codicia</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+
+                <div class="category-column hustle">
+                    <div class="category-header">
+                        <div class="category-icon">🎲</div>
+                        <div class="category-name">Empuje</div>
+                    </div>
+                    <div class="contract-slots">
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                        <div class="contract-slot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="set-bonuses">
+                <div class="set-bonuses-title">BONOS DE CONJUNTO GANADOS</div>
+                <div class="bonus-list">
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Especialista (3 en uno)</span>
+                        <span class="bonus-amount">+$4,000</span>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Versátil (1 en cada)</span>
+                        <span class="bonus-amount">+$5,000</span>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Obsesionado (4 en uno)</span>
+                        <span class="bonus-amount">+$7,000</span>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-name">☐ Leyenda (6 total)</span>
+                        <span class="bonus-amount">+$6,000</span>
+                    </div>
+                    <div class="bonus-item" style="grid-column: 1 / -1;">
+                        <span class="bonus-name">☐ Cerebro (3+3 en dos categorías)</span>
+                        <span class="bonus-amount">+$10,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER REFERENCE CARD PAGE -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Referencia Rápida • Imprima 1 por Jugador</p>
+
+        <div class="reference-card" style="margin-bottom: 0.25in;">
+            <div class="reference-title">ORDEN DE TURNOS</div>
+            <div class="reference-section">
+                <h3>Entre Trabajos</h3>
+                <ul>
+                    <li>El Jefe rota al jugador con menos fichas</li>
+                    <li>Sorteo de contratos (Jefe primero, sentido horario)</li>
+                    <li>Comercio en Mercado Negro (60 segundos)</li>
+                    <li>Rellenar Tablero de Contratos</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>El Trabajo</h3>
+                <ul>
+                    <li>Revelar carta de Trabajo</li>
+                    <li>Jefe selecciona Equipo</li>
+                    <li>Equipo escribe Reclamaciones (secreto)</li>
+                    <li>Los no-equipo hacen Apuestas (Invertir/Contra/Pasar)</li>
+                    <li>Revelar Reclamaciones simultáneamente</li>
+                    <li>Resolución: ÉXITO si Reclamaciones ≤ Bote</li>
+                    <li>Completar Contratos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reference-card" style="margin-bottom: 0.25in;">
+            <div class="reference-title">RESOLUCIÓN DEL TRABAJO</div>
+            <div class="reference-section">
+                <h3>Éxito (Reclamaciones Totales ≤ Bote)</h3>
+                <ul>
+                    <li>Equipo recibe sus Reclamaciones</li>
+                    <li>Inversores obtienen retorno 2×</li>
+                    <li>Apostadores contra pierden su apuesta</li>
+                    <li>Dinero no reclamado se acumula</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>Fracaso (Reclamaciones Totales > Bote)</h3>
+                <ul>
+                    <li>Equipo no recibe nada</li>
+                    <li>Inversores pierden su apuesta</li>
+                    <li>Apostadores contra obtienen retorno 2×</li>
+                    <li>Todo el bote se acumula</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reference-card">
+            <div class="reference-title">NIVELES DE CONTRATOS</div>
+            <div class="reference-section">
+                <h3>Penalizaciones por Nivel</h3>
+                <ul>
+                    <li>Fácil (Verde): -$1,500 si incompleto</li>
+                    <li>Mediano (Morado): -$3,000 si incompleto</li>
+                    <li>Difícil (Rojo): -$5,000 si incompleto</li>
+                </ul>
+            </div>
+            <div class="reference-section">
+                <h3>Costo de Descarte</h3>
+                <p>Pague $1,000 para descartar cualquier contrato de su mano entre trabajos</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLAIM SHEETS PAGE -->
+    <div class="page">
+        <h1 class="page-title">THE TAKE</h1>
+        <p class="page-subtitle">Hojas de Reclamación • Corte y use para reclamaciones secretas</p>
+
+        <div class="print-info">
+            <h3>✂️ Instrucciones</h3>
+            <p>• Corte las hojas de reclamación individuales</p>
+            <p>• Cada miembro del equipo escribe su reclamación en una hoja</p>
+            <p>• Doble para ocultar, luego revele todas simultáneamente</p>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">RECLAMACIÓN SECRETA</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Jugador:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Monto: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">RECLAMACIÓN SECRETA</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Jugador:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Monto: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">RECLAMACIÓN SECRETA</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Jugador:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Monto: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">RECLAMACIÓN SECRETA</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Jugador:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Monto: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+
+        <div class="claim-sheet">
+            <div class="claim-title">RECLAMACIÓN SECRETA</div>
+            <div class="claim-line">
+                <span class="claim-line-label">Jugador:</span>
+                <div class="claim-line-field"></div>
+            </div>
+            <div class="claim-line">
+                <span class="claim-line-label">Monto: $</span>
+                <div class="claim-line-field"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
