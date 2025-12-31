@@ -1,9 +1,307 @@
 // ========================================
-// THE TAKE - Game Logic
+// THE TAKE - Digital Game Engine
+// Mobile-First • Pass-and-Play Optimized
 // ========================================
 
 // ========================================
-// DATA: Contracts
+// TRANSLATIONS
+// ========================================
+
+const TRANSLATIONS = {
+    en: {
+        // UI Elements
+        subtitle: "A Game of Heists, Greed & Betrayal",
+        rules_button: "Rules",
+        setup_title: "Game Setup",
+        setup_hint: "Enter player names (5-12 players)",
+        add_player: "+ Add Player",
+        start_game: "Start Game",
+        view_rules: "View Rules",
+        continue: "Continue",
+        new_game: "New Game",
+        game_over: "Game Over",
+        final_standings: "Final Standings",
+
+        // Game phases
+        phase_label: "Phase",
+        phase_initial_draft: "Initial Draft",
+        phase_draft: "Contract Draft",
+        phase_trading: "Black Market",
+        phase_job_reveal: "Job Reveal",
+        phase_crew_select: "Crew Selection",
+        phase_claiming: "Write Claims",
+        phase_betting: "Place Bets",
+        phase_reveal: "Resolution",
+        phase_complete: "Complete Contracts",
+
+        // Contract board
+        contract_board: "Contract Board",
+        tier_easy: "Easy",
+        tier_medium: "Medium",
+        tier_hard: "Hard",
+
+        // Dashboard
+        current_player: "Current Player",
+        your_hand: "Your Hand",
+        rap_sheet: "Rap Sheet",
+        chips: "Chips",
+        in_hand: "in hand",
+        completed: "completed",
+
+        // Job
+        job_small: "Small Job",
+        job_medium: "Medium Job",
+        job_large: "Large Job",
+        job_huge: "Huge Job",
+        job_final: "Final Job",
+        pot: "Pot",
+        crew_size: "Crew",
+        rollover: "Rollover",
+        final_job_badge: "FINAL JOB",
+
+        // Actions
+        select_contract: "Select a contract or pass",
+        pass: "Pass",
+        draft_turn: "'s turn to draft",
+        end_trading: "End Trading & Start Job",
+        trading_hint: "Players may trade contracts and chips freely",
+        start_crew_selection: "Chair: Select Crew",
+        select_crew: "Select crew members",
+        selected: "Selected",
+        confirm_crew: "Confirm Crew",
+        enter_claim: "Enter your claim",
+        submit_claim: "Submit Claim",
+        all_claims_in: "All Claims Submitted",
+        start_betting: "Proceed to Betting",
+        place_bet: "Place your bet",
+        max_bet: "Max bet: $6,000",
+        invest: "Invest",
+        short: "Short",
+        reveal_claims: "Reveal & Resolve",
+
+        // Resolution
+        success: "SUCCESS",
+        failure: "FAILURE",
+        total_claims: "Total Claims",
+        total_pot: "Total Pot",
+        margin: "Margin",
+        claims: "Claims",
+        bets: "Bets",
+        no_bets: "No bets placed",
+        complete_contracts_hint: "Review your contracts and complete any fulfilled this round",
+        next_job: "Next Job",
+        finish_game: "Finish Game",
+
+        // Modal
+        pass_device: "Pass Device",
+        pass_to: "Pass the device to",
+        ready_message: "Make sure no one else can see the screen",
+
+        // Scoring
+        chips_label: "Chips",
+        completed_label: "Completed",
+        penalties_label: "Penalties",
+        winner: "Winner",
+
+        // Categories
+        precision: "Precision",
+        chaos: "Chaos",
+        trust: "Trust",
+        greed: "Greed",
+        hustle: "Hustle",
+
+        // Set bonuses
+        specialist: "Specialist",
+        versatile: "Versatile",
+        obsessed: "Obsessed",
+        legend: "Legend",
+        mastermind: "Mastermind",
+
+        // Rules
+        rules_title: "How to Play",
+        rules_overview_title: "Game Overview",
+        rules_overview_text: "THE TAKE is a game of heists, greed, and betrayal for 5-12 players. You're freelance criminals working jobs together, but everyone has their own agenda through secret contracts.",
+        rules_objective_title: "Objective",
+        rules_objective_text: "Earn the most money by the end of the game through successful heists, completing contracts, and strategic betting. The player with the most money (minus penalties for incomplete contracts) wins.",
+        rules_setup_title: "Setup",
+        rules_setup_text: "Each player starts with $10,000. The contract deck is shuffled and 5 cards are dealt face-up to form the contract board. The first Chair is chosen randomly.",
+        rules_phases_title: "Game Phases",
+        rules_phase_1: "Contract Draft - Starting with the Chair, players take turns drafting contracts",
+        rules_phase_2: "Black Market - 60 seconds for free trading of contracts and chips",
+        rules_phase_3: "Job Reveal - A new job card is revealed",
+        rules_phase_4: "Crew Selection - The Chair selects crew members for the job",
+        rules_phase_5: "Secret Claims - Crew members secretly write how much they want from the pot",
+        rules_phase_6: "Betting - Non-crew players bet on success or failure",
+        rules_phase_7: "Resolution - Claims are revealed and job succeeds or fails",
+        rules_success_title: "Job Success",
+        rules_success_text: "If total claims are equal to or less than the pot, the job succeeds! Each crew member receives their claimed amount. Investors get 2x their bet. Unclaimed money rolls over to the next job.",
+        rules_failure_title: "Job Failure",
+        rules_failure_text: "If total claims exceed the pot, the job fails! Crew receives nothing. Shorters get 2x their bet. The entire pot rolls over to the next job.",
+        rules_contracts_title: "Contracts",
+        rules_contracts_text: "Contracts have secret objectives. Complete them during gameplay to earn bonuses. Incomplete contracts at game end result in penalties. Contracts belong to 5 categories: Precision, Chaos, Trust, Greed, and Hustle.",
+        rules_setbonus_title: "Set Bonuses",
+        rules_set_1: "Specialist: 3 contracts in one category = +$4,000",
+        rules_set_2: "Versatile: 1 contract in each category = +$5,000",
+        rules_set_3: "Obsessed: 4 contracts in one category = +$7,000",
+        rules_set_4: "Legend: 6 total contracts = +$6,000",
+        rules_set_5: "Mastermind: 3 contracts in two categories = +$10,000",
+        rules_chair_title: "The Chair",
+        rules_chair_text: "The Chair rotates to the player with the lowest chips after each job. In case of a tie, it goes clockwise from the current Chair. The Chair drafts first and selects the crew.",
+
+        // Errors
+        error_players: "Please enter 5-12 player names",
+        error_chips: "Not enough chips!",
+        error_max_bet: "Maximum bet is $6,000"
+    },
+    es: {
+        // UI Elements
+        subtitle: "Un Juego de Atracos, Codicia y Traición",
+        rules_button: "Reglas",
+        setup_title: "Configuración",
+        setup_hint: "Ingresa los nombres (5-12 jugadores)",
+        add_player: "+ Agregar Jugador",
+        start_game: "Comenzar Juego",
+        view_rules: "Ver Reglas",
+        continue: "Continuar",
+        new_game: "Nuevo Juego",
+        game_over: "Fin del Juego",
+        final_standings: "Resultados Finales",
+
+        // Game phases
+        phase_label: "Fase",
+        phase_initial_draft: "Selección Inicial",
+        phase_draft: "Selección de Contratos",
+        phase_trading: "Mercado Negro",
+        phase_job_reveal: "Revelar Trabajo",
+        phase_crew_select: "Selección de Equipo",
+        phase_claiming: "Escribir Reclamos",
+        phase_betting: "Realizar Apuestas",
+        phase_reveal: "Resolución",
+        phase_complete: "Completar Contratos",
+
+        // Contract board
+        contract_board: "Tablero de Contratos",
+        tier_easy: "Fácil",
+        tier_medium: "Medio",
+        tier_hard: "Difícil",
+
+        // Dashboard
+        current_player: "Jugador Actual",
+        your_hand: "Tu Mano",
+        rap_sheet: "Hoja de Antecedentes",
+        chips: "Fichas",
+        in_hand: "en mano",
+        completed: "completados",
+
+        // Job
+        job_small: "Trabajo Pequeño",
+        job_medium: "Trabajo Mediano",
+        job_large: "Trabajo Grande",
+        job_huge: "Trabajo Enorme",
+        job_final: "Trabajo Final",
+        pot: "Bote",
+        crew_size: "Equipo",
+        rollover: "Acumulado",
+        final_job_badge: "TRABAJO FINAL",
+
+        // Actions
+        select_contract: "Selecciona un contrato o pasa",
+        pass: "Pasar",
+        draft_turn: " - turno de seleccionar",
+        end_trading: "Terminar Intercambio e Iniciar Trabajo",
+        trading_hint: "Los jugadores pueden intercambiar contratos y fichas libremente",
+        start_crew_selection: "Jefe: Selecciona Equipo",
+        select_crew: "Selecciona miembros del equipo",
+        selected: "Seleccionados",
+        confirm_crew: "Confirmar Equipo",
+        enter_claim: "Ingresa tu reclamo",
+        submit_claim: "Enviar Reclamo",
+        all_claims_in: "Todos los Reclamos Enviados",
+        start_betting: "Proceder a Apuestas",
+        place_bet: "Realiza tu apuesta",
+        max_bet: "Apuesta máx: $6,000",
+        invest: "Invertir",
+        short: "Apostar Contra",
+        reveal_claims: "Revelar y Resolver",
+
+        // Resolution
+        success: "ÉXITO",
+        failure: "FRACASO",
+        total_claims: "Reclamos Totales",
+        total_pot: "Bote Total",
+        margin: "Margen",
+        claims: "Reclamos",
+        bets: "Apuestas",
+        no_bets: "Sin apuestas",
+        complete_contracts_hint: "Revisa tus contratos y completa los cumplidos esta ronda",
+        next_job: "Próximo Trabajo",
+        finish_game: "Terminar Juego",
+
+        // Modal
+        pass_device: "Pasar Dispositivo",
+        pass_to: "Pasa el dispositivo a",
+        ready_message: "Asegúrate de que nadie más pueda ver la pantalla",
+
+        // Scoring
+        chips_label: "Fichas",
+        completed_label: "Completados",
+        penalties_label: "Penalizaciones",
+        winner: "Ganador",
+
+        // Categories
+        precision: "Precisión",
+        chaos: "Caos",
+        trust: "Confianza",
+        greed: "Codicia",
+        hustle: "Astucia",
+
+        // Set bonuses
+        specialist: "Especialista",
+        versatile: "Versátil",
+        obsessed: "Obsesionado",
+        legend: "Leyenda",
+        mastermind: "Cerebro",
+
+        // Rules
+        rules_title: "Cómo Jugar",
+        rules_overview_title: "Resumen del Juego",
+        rules_overview_text: "THE TAKE es un juego de atracos, codicia y traición para 5-12 jugadores. Eres un criminal independiente trabajando en golpes junto con otros, pero todos tienen su propia agenda a través de contratos secretos.",
+        rules_objective_title: "Objetivo",
+        rules_objective_text: "Gana la mayor cantidad de dinero al final del juego a través de atracos exitosos, completando contratos y apostando estratégicamente. El jugador con más dinero (menos penalizaciones por contratos incompletos) gana.",
+        rules_setup_title: "Configuración",
+        rules_setup_text: "Cada jugador comienza con $10,000. El mazo de contratos se baraja y 5 cartas se colocan boca arriba para formar el tablero de contratos. El primer Jefe se elige al azar.",
+        rules_phases_title: "Fases del Juego",
+        rules_phase_1: "Selección de Contratos - Comenzando con el Jefe, los jugadores toman turnos seleccionando contratos",
+        rules_phase_2: "Mercado Negro - 60 segundos para intercambiar contratos y fichas libremente",
+        rules_phase_3: "Revelar Trabajo - Se revela una nueva carta de trabajo",
+        rules_phase_4: "Selección de Equipo - El Jefe selecciona miembros del equipo para el trabajo",
+        rules_phase_5: "Reclamos Secretos - Los miembros del equipo escriben en secreto cuánto dinero quieren del bote",
+        rules_phase_6: "Apuestas - Los jugadores que no están en el equipo apuestan por éxito o fracaso",
+        rules_phase_7: "Resolución - Los reclamos se revelan y el trabajo tiene éxito o fracasa",
+        rules_success_title: "Trabajo Exitoso",
+        rules_success_text: "Si los reclamos totales son iguales o menores que el bote, ¡el trabajo tiene éxito! Cada miembro del equipo recibe la cantidad reclamada. Los inversores obtienen 2x su apuesta. El dinero no reclamado se acumula para el próximo trabajo.",
+        rules_failure_title: "Trabajo Fracasado",
+        rules_failure_text: "Si los reclamos totales exceden el bote, ¡el trabajo fracasa! El equipo no recibe nada. Los que apostaron contra obtienen 2x su apuesta. Todo el bote se acumula para el próximo trabajo.",
+        rules_contracts_title: "Contratos",
+        rules_contracts_text: "Los contratos tienen objetivos secretos. Complételos durante el juego para obtener bonificaciones. Los contratos incompletos al final del juego resultan en penalizaciones. Los contratos pertenecen a 5 categorías: Precisión, Caos, Confianza, Codicia y Astucia.",
+        rules_setbonus_title: "Bonificaciones de Conjunto",
+        rules_set_1: "Especialista: 3 contratos en una categoría = +$4,000",
+        rules_set_2: "Versátil: 1 contrato en cada categoría = +$5,000",
+        rules_set_3: "Obsesionado: 4 contratos en una categoría = +$7,000",
+        rules_set_4: "Leyenda: 6 contratos totales = +$6,000",
+        rules_set_5: "Cerebro: 3 contratos en dos categorías = +$10,000",
+        rules_chair_title: "El Jefe",
+        rules_chair_text: "El Jefe rota al jugador con menos fichas después de cada trabajo. En caso de empate, va en sentido horario desde el Jefe actual. El Jefe selecciona primero y elige el equipo.",
+
+        // Errors
+        error_players: "Por favor ingresa 5-12 nombres de jugadores",
+        error_chips: "¡No tienes suficientes fichas!",
+        error_max_bet: "La apuesta máxima es $6,000"
+    }
+};
+
+// ========================================
+// DATA: Contracts (matching rulebook)
 // ========================================
 
 const CONTRACTS = {
@@ -25,7 +323,7 @@ const CONTRACTS = {
         { name: "Modesty", category: "precision", objective: "Claim the smallest share on a successful crew (no ties)", bonus: 2500, penalty: 1500, icon: "🎯" },
         { name: "Spoiler", category: "chaos", objective: "Be on a crew that fails when the previous job succeeded", bonus: 2500, penalty: 1500, icon: "💣" },
         { name: "Table Scraps", category: "greed", objective: "Claim ≤$1,000 on a job with pot ≥$15,000 that succeeds", bonus: 2500, penalty: 1500, icon: "💰" },
-        { name: "Against the Grain", category: "hustle", objective: "Profit from a bet when at least one other player bet the opposite direction", bonus: 2500, penalty: 1500, icon: "🎲" },
+        { name: "Against the Grain", category: "hustle", objective: "Profit from a bet when at least one other player bet opposite", bonus: 2500, penalty: 1500, icon: "🎲" },
         { name: "Second Fiddle", category: "precision", objective: "Claim the second-smallest share on a successful crew of 4+", bonus: 2500, penalty: 1500, icon: "🎯" },
         { name: "Cleanup Crew", category: "trust", objective: "Be on a successful crew when the previous job failed", bonus: 3000, penalty: 1500, icon: "🤝" }
     ],
@@ -39,14 +337,14 @@ const CONTRACTS = {
         { name: "Nest Egg", category: "greed", objective: "Have ≥$22,000 total chips when completing this contract", bonus: 4000, penalty: 3000, icon: "💰" },
         { name: "Calculated Risk", category: "hustle", objective: "Short a job and it fails", bonus: 4000, penalty: 3000, icon: "🎲" },
         { name: "Surgical Strike", category: "chaos", objective: "Be on a crew that fails by ≤$3,000", bonus: 4000, penalty: 3000, icon: "💣" },
-        { name: "Tight Crew", category: "precision", objective: "Be on a crew that claims within $1,000 of the pot (success or failure)", bonus: 4500, penalty: 3000, icon: "🎯" },
+        { name: "Tight Crew", category: "precision", objective: "Be on a crew that claims within $1,000 of the pot", bonus: 4500, penalty: 3000, icon: "🎯" },
         { name: "Anchor", category: "trust", objective: "Be on a successful crew where you also claimed ≥$3,000", bonus: 4000, penalty: 3000, icon: "🤝" },
         { name: "Fat Cat", category: "greed", objective: "Have more chips than every other player when completing this contract", bonus: 3500, penalty: 3000, icon: "💰" },
         { name: "Double Down", category: "hustle", objective: "Invest ≥$4,000 on a single job and win", bonus: 4000, penalty: 3000, icon: "🎲" },
         { name: "Repeat Offender", category: "chaos", objective: "Be on a failed crew when the previous job also failed", bonus: 4000, penalty: 3000, icon: "💣" },
         { name: "Razor's Edge", category: "precision", objective: "Be on a crew where total claims equal exactly the pot", bonus: 4500, penalty: 3000, icon: "🎯" },
         { name: "Kingmaker", category: "trust", objective: "Be Chair for a successful job you're not on", bonus: 4000, penalty: 3000, icon: "🤝" },
-        { name: "Contrarian", category: "hustle", objective: "Profit from a bet when at least two other players bet the opposite direction and lost", bonus: 4000, penalty: 3000, icon: "🎲" },
+        { name: "Contrarian", category: "hustle", objective: "Profit from a bet when at least two others bet opposite and lost", bonus: 4000, penalty: 3000, icon: "🎲" },
         { name: "Restraint", category: "precision", objective: "Claim $0 on a job that succeeds", bonus: 4500, penalty: 3000, icon: "🎯" },
         { name: "Controlled Burn", category: "chaos", objective: "A job fails by ≤$2,000", bonus: 4500, penalty: 3000, icon: "💣" },
         { name: "Lion's Share", category: "greed", objective: "Claim the largest share on a successful crew (no ties)", bonus: 4000, penalty: 3000, icon: "💰" },
@@ -63,11 +361,11 @@ const CONTRACTS = {
         { name: "Market Maker", category: "hustle", objective: "Profit ≥$5,000 from betting on a single job", bonus: 5500, penalty: 5000, icon: "🎲" },
         { name: "Untouchable", category: "trust", objective: "Be on a successful crew on the Final Job", bonus: 6000, penalty: 5000, icon: "🤝" },
         { name: "Scorched Earth", category: "chaos", objective: "A job with pot ≥$18,000 (including rollover) fails", bonus: 5500, penalty: 5000, icon: "💣" },
-        { name: "Last Laugh", category: "precision", objective: "You claimed the second-highest cut on the crew on The Final Job", bonus: 7000, penalty: 5000, icon: "🎯" },
+        { name: "Last Laugh", category: "precision", objective: "Claim the second-highest cut on the crew on The Final Job", bonus: 7000, penalty: 5000, icon: "🎯" },
         { name: "Ironclad", category: "trust", objective: "Be on a successful crew where every crew member claimed ≥$2,000", bonus: 6500, penalty: 5000, icon: "🤝" },
         { name: "All In", category: "hustle", objective: "Bet $6,000 on a single job and win", bonus: 5000, penalty: 5000, icon: "🎲" },
         { name: "Greed is Good", category: "greed", objective: "Claim ≥$6,000 on a successful job", bonus: 5000, penalty: 5000, icon: "💰" },
-        { name: "Mirror Match", category: "precision", objective: "Claim an amount that exactly two other crew members also claimed, on any job", bonus: 5500, penalty: 5000, icon: "🎯" },
+        { name: "Mirror Match", category: "precision", objective: "Claim an amount that exactly two other crew members also claimed", bonus: 5500, penalty: 5000, icon: "🎯" },
         { name: "Puppet Master", category: "trust", objective: "Be Chair for a job that succeeds by ≤$2,000 margin", bonus: 6000, penalty: 5000, icon: "🤝" },
         { name: "Oracle", category: "hustle", objective: "Be the only player to bet a direction (all others bet opposite or pass) and win", bonus: 6000, penalty: 5000, icon: "🎲" },
         { name: "Sole Survivor", category: "chaos", objective: "Be the only crew member to claim ≤(Pot ÷ Crew Size) on a failed job", bonus: 5500, penalty: 5000, icon: "💣" },
@@ -76,7 +374,7 @@ const CONTRACTS = {
 };
 
 // ========================================
-// DATA: Jobs
+// DATA: Jobs (matching rulebook - 13 jobs)
 // ========================================
 
 const JOBS = [
@@ -110,7 +408,7 @@ class GameState {
         this.chairIndex = 0;
         this.rollover = 0;
         this.jobHistory = [];
-        this.phase = 'setup'; // setup, draft, trading, crew-select, claiming, betting, reveal, complete-contracts
+        this.phase = 'setup';
         this.currentPlayerIndex = 0;
         this.draftRound = 0;
         this.crew = [];
@@ -119,12 +417,10 @@ class GameState {
     }
 
     initializeDecks() {
-        // Shuffle and create contract decks
         this.contractDecks.easy = this.shuffle([...CONTRACTS.easy]);
         this.contractDecks.medium = this.shuffle([...CONTRACTS.medium]);
         this.contractDecks.hard = this.shuffle([...CONTRACTS.hard]);
 
-        // Shuffle job deck
         const regularJobs = JOBS.filter(j => !j.isFinal);
         const finalJob = JOBS.find(j => j.isFinal);
         this.jobDeck = [...this.shuffle(regularJobs), finalJob];
@@ -173,13 +469,11 @@ class GameState {
     }
 
     rotateChair() {
-        // Chair goes to player with lowest chips
         let minChips = Math.min(...this.players.map(p => p.chips));
         let candidates = this.players
             .map((p, i) => ({ player: p, index: i }))
             .filter(({ player }) => player.chips === minChips);
 
-        // If tie, first player clockwise from current chair
         if (candidates.length > 1) {
             for (let i = 1; i <= this.players.length; i++) {
                 const index = (this.chairIndex + i) % this.players.length;
@@ -205,7 +499,6 @@ class GameState {
         const bonuses = [];
         const rapSheet = player.rapSheet;
 
-        // Count contracts per category
         const counts = {
             precision: rapSheet.precision.length,
             chaos: rapSheet.chaos.length,
@@ -216,7 +509,6 @@ class GameState {
 
         const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
-        // Specialist (3 in one category)
         if (!player.setBonuses.includes('Specialist')) {
             for (const [cat, count] of Object.entries(counts)) {
                 if (count >= 3) {
@@ -226,7 +518,6 @@ class GameState {
             }
         }
 
-        // Obsessed (4 in one category)
         if (!player.setBonuses.includes('Obsessed')) {
             for (const [cat, count] of Object.entries(counts)) {
                 if (count >= 4) {
@@ -236,19 +527,16 @@ class GameState {
             }
         }
 
-        // Versatile (1 in each category)
         if (!player.setBonuses.includes('Versatile')) {
             if (Object.values(counts).every(c => c >= 1)) {
                 bonuses.push({ name: 'Versatile', bonus: 5000 });
             }
         }
 
-        // Legend (6 total)
         if (!player.setBonuses.includes('Legend') && total >= 6) {
             bonuses.push({ name: 'Legend', bonus: 6000 });
         }
 
-        // Mastermind (3+3 in two different categories)
         if (!player.setBonuses.includes('Mastermind')) {
             const threeOrMore = Object.values(counts).filter(c => c >= 3).length;
             if (threeOrMore >= 2) {
@@ -267,19 +555,74 @@ class GameState {
 class Game {
     constructor() {
         this.state = new GameState();
+        this.language = localStorage.getItem('thetake-language') || 'en';
         this.loadState();
+        this.updateLanguageUI();
     }
 
+    // ========================================
+    // Language Management
+    // ========================================
+
+    t(key) {
+        return TRANSLATIONS[this.language][key] || key;
+    }
+
+    setLanguage(lang) {
+        this.language = lang;
+        localStorage.setItem('thetake-language', lang);
+        this.updateLanguageUI();
+        this.render();
+    }
+
+    updateLanguageUI() {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.dataset.lang === this.language) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            const translation = this.t(key);
+            if (translation && translation !== key) {
+                el.textContent = translation;
+            }
+        });
+    }
+
+    // ========================================
+    // Rules Panel
+    // ========================================
+
+    toggleRules() {
+        const panel = document.getElementById('rules-panel');
+        panel.classList.toggle('open');
+    }
+
+    // ========================================
     // State Management
+    // ========================================
+
     saveState() {
-        localStorage.setItem('thetake-save', JSON.stringify(this.state));
+        const saveData = {
+            state: this.state,
+            language: this.language
+        };
+        localStorage.setItem('thetake-save', JSON.stringify(saveData));
     }
 
     loadState() {
         const saved = localStorage.getItem('thetake-save');
         if (saved) {
             try {
-                this.state = Object.assign(new GameState(), JSON.parse(saved));
+                const data = JSON.parse(saved);
+                this.state = Object.assign(new GameState(), data.state);
+                if (data.language) {
+                    this.language = data.language;
+                }
             } catch (e) {
                 console.error('Failed to load state:', e);
             }
@@ -291,14 +634,21 @@ class Game {
         window.location.reload();
     }
 
+    // ========================================
     // Setup
+    // ========================================
+
     addPlayerInput() {
         const container = document.getElementById('player-inputs');
+        const count = container.children.length + 1;
         const input = document.createElement('input');
         input.type = 'text';
-        input.placeholder = `Player ${container.children.length + 1} Name`;
+        input.placeholder = `${this.language === 'es' ? 'Jugador' : 'Player'} ${count}`;
         input.required = true;
+        input.autocomplete = 'off';
+        input.enterKeyHint = 'next';
         container.appendChild(input);
+        input.focus();
     }
 
     startGame() {
@@ -306,11 +656,10 @@ class Game {
         const names = Array.from(inputs).map(i => i.value.trim()).filter(n => n);
 
         if (names.length < 5 || names.length > 12) {
-            alert('Please enter 5-12 player names');
+            alert(this.t('error_players'));
             return;
         }
 
-        // Initialize players
         this.state.players = names.map((name, i) => ({
             id: i,
             name,
@@ -327,11 +676,9 @@ class Game {
             jobHistory: []
         }));
 
-        // Initialize decks
         this.state.initializeDecks();
         this.state.refillBoard();
 
-        // Initial draft
         this.state.chairIndex = Math.floor(Math.random() * this.state.players.length);
         this.state.currentPlayerIndex = this.state.chairIndex;
         this.state.phase = 'initial-draft';
@@ -341,10 +688,14 @@ class Game {
         this.render();
     }
 
+    // ========================================
     // UI Management
+    // ========================================
+
     showScreen(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(screenId).classList.add('active');
+        window.scrollTo(0, 0);
     }
 
     showModal(title, message, callback) {
@@ -358,11 +709,24 @@ class Game {
         modal.classList.add('active');
     }
 
+    formatMoney(amount) {
+        return '$' + amount.toLocaleString();
+    }
+
+    // ========================================
     // Rendering
+    // ========================================
+
     render() {
+        if (this.state.phase === 'setup') {
+            return;
+        }
+
         this.renderPlayerStatus();
         this.renderContractBoard();
+        this.renderDashboard();
         this.renderPhase();
+        this.updateLanguageUI();
         this.saveState();
     }
 
@@ -371,8 +735,8 @@ class Game {
         container.innerHTML = this.state.players.map((p, i) => `
             <div class="player-card ${i === this.state.chairIndex ? 'chair' : ''} ${i === this.state.currentPlayerIndex ? 'active' : ''}">
                 <div class="name">${p.name}${i === this.state.chairIndex ? ' 👑' : ''}</div>
-                <div class="chips">$${p.chips.toLocaleString()}</div>
-                <div class="contracts">${p.hand.length} in hand • ${Object.values(p.rapSheet).flat().length} completed</div>
+                <div class="chips">${this.formatMoney(p.chips)}</div>
+                <div class="contracts">${p.hand.length} ${this.t('in_hand')} • ${Object.values(p.rapSheet).flat().length} ${this.t('completed')}</div>
             </div>
         `).join('');
     }
@@ -401,62 +765,118 @@ class Game {
                 </div>
                 <div class="contract-objective">${contract.objective}</div>
                 <div class="contract-footer">
-                    <div class="contract-bonus">+$${contract.bonus.toLocaleString()}</div>
-                    <div class="contract-penalty">-$${contract.penalty.toLocaleString()}</div>
+                    <div class="contract-bonus">+${this.formatMoney(contract.bonus)}</div>
+                    <div class="contract-penalty">-${this.formatMoney(contract.penalty)}</div>
                 </div>
             </div>
         `;
+    }
+
+    renderDashboard() {
+        const currentPlayer = this.state.getCurrentPlayer();
+        if (!currentPlayer) return;
+
+        document.getElementById('current-player-name').textContent = currentPlayer.name;
+        document.getElementById('player-chips').textContent = this.formatMoney(currentPlayer.chips);
+
+        // Render hand
+        const handContainer = document.getElementById('player-hand');
+        if (currentPlayer.hand.length === 0) {
+            handContainer.innerHTML = `<p class="text-muted" style="font-size: 0.875rem; text-align: center; padding: 1rem;">No contracts in hand</p>`;
+        } else {
+            handContainer.innerHTML = currentPlayer.hand.map((contract, i) =>
+                this.renderContractCard(contract, contract.tier, i, { disabled: true, onClick: '' })
+            ).join('');
+        }
+
+        // Render rap sheet
+        this.renderRapSheet(currentPlayer);
+    }
+
+    renderRapSheet(player) {
+        const categories = ['precision', 'chaos', 'trust', 'greed', 'hustle'];
+        const icons = { precision: '🎯', chaos: '💣', trust: '🤝', greed: '💰', hustle: '🎲' };
+
+        const rapSheetContainer = document.getElementById('rap-sheet');
+        rapSheetContainer.innerHTML = categories.map(cat => `
+            <div class="category-column" data-category="${cat}">
+                <div class="category-header">
+                    <span class="category-icon">${icons[cat]}</span>
+                    ${this.t(cat)}
+                </div>
+                ${player.rapSheet[cat].map(c => `
+                    <div class="completed-contract">${c.name}</div>
+                `).join('')}
+            </div>
+        `).join('');
+
+        // Render set bonuses
+        const setBonusContainer = document.getElementById('set-bonuses');
+        if (player.setBonuses.length > 0) {
+            setBonusContainer.innerHTML = player.setBonuses.map(bonus => `
+                <div class="set-bonus">
+                    <span class="name">${this.t(bonus.toLowerCase())}</span>
+                    <span class="value">+${this.formatMoney(bonus === 'Specialist' ? 4000 : bonus === 'Versatile' ? 5000 : bonus === 'Obsessed' ? 7000 : bonus === 'Legend' ? 6000 : 10000)}</span>
+                </div>
+            `).join('');
+        } else {
+            setBonusContainer.innerHTML = '';
+        }
     }
 
     renderPhase() {
         const phaseIndicator = document.getElementById('phase-indicator');
         const potDisplay = document.getElementById('pot-display');
         const actionArea = document.getElementById('action-area');
+        const jobSection = document.getElementById('job-section');
 
         // Update pot display
         if (this.state.currentJob) {
             const totalPot = this.state.currentJob.pot + this.state.rollover;
-            potDisplay.textContent = `POT: $${totalPot.toLocaleString()}`;
+            potDisplay.textContent = `${this.t('pot')}: ${this.formatMoney(totalPot)}`;
         } else {
             potDisplay.textContent = '';
         }
 
+        // Hide job section by default
+        jobSection.innerHTML = '';
+
         // Phase-specific rendering
         switch (this.state.phase) {
             case 'initial-draft':
-                phaseIndicator.textContent = 'INITIAL DRAFT';
+                phaseIndicator.textContent = this.t('phase_initial_draft');
                 this.renderDraftPhase(true);
                 break;
             case 'draft':
-                phaseIndicator.textContent = 'CONTRACT DRAFT';
+                phaseIndicator.textContent = this.t('phase_draft');
                 this.renderDraftPhase(false);
                 break;
             case 'trading':
-                phaseIndicator.textContent = 'BLACK MARKET (60s)';
+                phaseIndicator.textContent = this.t('phase_trading');
                 this.renderTradingPhase();
                 break;
             case 'job-reveal':
-                phaseIndicator.textContent = 'JOB REVEAL';
+                phaseIndicator.textContent = this.t('phase_job_reveal');
                 this.renderJobReveal();
                 break;
             case 'crew-select':
-                phaseIndicator.textContent = 'CREW SELECTION';
+                phaseIndicator.textContent = this.t('phase_crew_select');
                 this.renderCrewSelection();
                 break;
             case 'claiming':
-                phaseIndicator.textContent = 'WRITE CLAIMS';
+                phaseIndicator.textContent = this.t('phase_claiming');
                 this.renderClaimingPhase();
                 break;
             case 'betting':
-                phaseIndicator.textContent = 'PLACE BETS';
+                phaseIndicator.textContent = this.t('phase_betting');
                 this.renderBettingPhase();
                 break;
             case 'reveal':
-                phaseIndicator.textContent = 'RESOLUTION';
+                phaseIndicator.textContent = this.t('phase_reveal');
                 this.renderRevealPhase();
                 break;
             case 'complete-contracts':
-                phaseIndicator.textContent = 'COMPLETE CONTRACTS';
+                phaseIndicator.textContent = this.t('phase_complete');
                 this.renderCompleteContractsPhase();
                 break;
         }
@@ -467,11 +887,11 @@ class Game {
         const currentPlayer = this.state.getCurrentPlayer();
 
         actionArea.innerHTML = `
-            <div style="text-align: center;">
-                <p style="margin-bottom: 1rem; font-family: var(--font-mono);">
-                    ${currentPlayer.name}'s turn to draft
-                </p>
-                <button class="btn-primary" onclick="game.passDraft()">Pass</button>
+            <div class="action-content">
+                <p class="action-text">${currentPlayer.name}${this.t('draft_turn')}</p>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="game.passDraft()">${this.t('pass')}</button>
+                </div>
             </div>
         `;
     }
@@ -480,30 +900,17 @@ class Game {
         const currentPlayer = this.state.getCurrentPlayer();
         const contract = this.state.contractBoard[tier][index];
 
-        // Add to player's hand
         currentPlayer.hand.push({ ...contract, tier });
-
-        // Remove from board
         this.state.contractBoard[tier].splice(index, 1);
 
-        // Next player or end draft
-        this.state.nextPlayer();
-
-        if (this.state.currentPlayerIndex === this.state.chairIndex) {
-            // Round complete
-            if (this.state.phase === 'initial-draft') {
-                // Initial draft done, start first job
-                this.startBetweenJobs();
-            } else {
-                // Regular draft done
-                this.state.phase = 'trading';
-            }
-        }
-
-        this.render();
+        this.advanceDraft();
     }
 
     passDraft() {
+        this.advanceDraft();
+    }
+
+    advanceDraft() {
         this.state.nextPlayer();
 
         if (this.state.currentPlayerIndex === this.state.chairIndex) {
@@ -523,26 +930,16 @@ class Game {
         this.state.phase = 'draft';
         this.state.refillBoard();
         this.render();
-
-        // After one draft round, go to trading then job
-        setTimeout(() => {
-            this.showModal(
-                'Contract Draft',
-                'Starting contract draft. Chair goes first, then clockwise. Select a contract or pass.',
-                null
-            );
-        }, 500);
     }
 
     renderTradingPhase() {
         const actionArea = document.getElementById('action-area');
         actionArea.innerHTML = `
-            <div style="text-align: center;">
-                <p style="margin-bottom: 1rem;">Black Market: Players may trade contracts and chips</p>
-                <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.875rem;">
-                    (This is handled manually - negotiate freely!)
-                </p>
-                <button class="btn-primary" onclick="game.endTrading()">End Trading & Start Job</button>
+            <div class="action-content">
+                <p class="action-text">${this.t('trading_hint')}</p>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="game.endTrading()">${this.t('end_trading')}</button>
+                </div>
             </div>
         `;
     }
@@ -559,22 +956,27 @@ class Game {
         const totalPot = job.pot + this.state.rollover;
         const jobSection = document.getElementById('job-section');
 
+        const jobTypeKey = `job_${job.type.toLowerCase().replace(' ', '_')}`;
+
         jobSection.innerHTML = `
             <div class="job-card">
-                <div class="job-title">${job.type}${job.isFinal ? ' 🎯' : ''}</div>
+                <div class="job-title">${this.t(jobTypeKey)}</div>
                 <div class="job-details">
-                    <div class="job-pot">POT: $${totalPot.toLocaleString()}</div>
-                    <div class="job-crew">CREW: ${job.crewSize}</div>
+                    <div class="job-pot">${this.t('pot')}: ${this.formatMoney(totalPot)}</div>
+                    <div class="job-crew">${this.t('crew_size')}: ${job.crewSize}</div>
                 </div>
-                ${this.state.rollover > 0 ? `<div style="color: var(--danger); margin-top: 1rem;">+$${this.state.rollover.toLocaleString()} ROLLOVER</div>` : ''}
+                ${this.state.rollover > 0 ? `<div class="job-rollover">+${this.formatMoney(this.state.rollover)} ${this.t('rollover')}</div>` : ''}
+                ${job.isFinal ? `<div class="final-badge">${this.t('final_job_badge')}</div>` : ''}
             </div>
         `;
 
         const actionArea = document.getElementById('action-area');
         actionArea.innerHTML = `
-            <button class="btn-primary" onclick="game.startCrewSelection()">
-                Chair: Select Crew
-            </button>
+            <div class="action-content">
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="game.startCrewSelection()">${this.t('start_crew_selection')}</button>
+                </div>
+            </div>
         `;
     }
 
@@ -588,27 +990,31 @@ class Game {
         const jobSection = document.getElementById('job-section');
         const job = this.state.currentJob;
         const chair = this.state.getChair();
+        const totalPot = job.pot + this.state.rollover;
+        const jobTypeKey = `job_${job.type.toLowerCase().replace(' ', '_')}`;
 
         const playerButtons = this.state.players.map((p, i) => {
             const isSelected = this.state.crew.includes(i);
             return `
-                <button
-                    class="btn-primary ${isSelected ? 'selected' : ''}"
-                    onclick="game.toggleCrew(${i})"
-                    style="${isSelected ? 'background: var(--accent); color: var(--bg);' : ''}"
-                >
+                <button class="crew-btn ${isSelected ? 'selected' : ''}" onclick="game.toggleCrew(${i})">
                     ${p.name}
                 </button>
             `;
         }).join('');
 
-        jobSection.innerHTML += `
+        jobSection.innerHTML = `
+            <div class="job-card">
+                <div class="job-title">${this.t(jobTypeKey)}</div>
+                <div class="job-details">
+                    <div class="job-pot">${this.t('pot')}: ${this.formatMoney(totalPot)}</div>
+                    <div class="job-crew">${this.t('crew_size')}: ${job.crewSize}</div>
+                </div>
+                ${job.isFinal ? `<div class="final-badge">${this.t('final_job_badge')}</div>` : ''}
+            </div>
             <div class="crew-selection">
-                <h3>Chair (${chair.name}): Select ${job.crewSize} crew members</h3>
-                <p style="margin-bottom: 1rem; color: var(--muted);">
-                    Selected: ${this.state.crew.length} / ${job.crewSize}
-                </p>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                <h3>${chair.name}: ${this.t('select_crew')}</h3>
+                <p class="crew-count">${this.t('selected')}: ${this.state.crew.length} / ${job.crewSize}</p>
+                <div class="crew-buttons">
                     ${playerButtons}
                 </div>
             </div>
@@ -616,13 +1022,13 @@ class Game {
 
         const actionArea = document.getElementById('action-area');
         actionArea.innerHTML = `
-            <button
-                class="btn-primary"
-                ${this.state.crew.length !== job.crewSize ? 'disabled' : ''}
-                onclick="game.confirmCrew()"
-            >
-                Confirm Crew
-            </button>
+            <div class="action-content">
+                <div class="action-buttons">
+                    <button class="btn btn-primary" ${this.state.crew.length !== job.crewSize ? 'disabled' : ''} onclick="game.confirmCrew()">
+                        ${this.t('confirm_crew')}
+                    </button>
+                </div>
+            </div>
         `;
     }
 
@@ -642,43 +1048,49 @@ class Game {
         this.state.phase = 'claiming';
         this.state.currentPlayerIndex = this.state.crew[0];
         this.state.claims = {};
-        this.render();
+
+        // Show pass device modal for first crew member
+        const firstCrewMember = this.state.players[this.state.crew[0]];
+        this.showModal(
+            this.t('pass_device'),
+            `${this.t('pass_to')} ${firstCrewMember.name}. ${this.t('ready_message')}`,
+            () => this.render()
+        );
     }
 
     renderClaimingPhase() {
-        const actionArea = document.getElementById('action-area');
-        const crew = this.state.crew.map(i => this.state.players[i]);
         const totalPot = this.state.currentJob.pot + this.state.rollover;
-
-        // Check if all claims are in
         const allClaimed = this.state.crew.every(i => this.state.claims[i] !== undefined);
+        const actionArea = document.getElementById('action-area');
 
         if (allClaimed) {
             actionArea.innerHTML = `
-                <button class="btn-primary" onclick="game.startBetting()">
-                    All Claims Submitted → Betting Phase
-                </button>
+                <div class="action-content">
+                    <p class="action-text">${this.t('all_claims_in')}</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="game.startBetting()">${this.t('start_betting')}</button>
+                    </div>
+                </div>
             `;
         } else {
             const unclaimedCrew = this.state.crew.filter(i => this.state.claims[i] === undefined);
             const nextPlayer = this.state.players[unclaimedCrew[0]];
 
             actionArea.innerHTML = `
-                <div style="text-align: center;">
-                    <p style="margin-bottom: 1rem; font-family: var(--font-mono);">
-                        ${nextPlayer.name}: Enter your claim (Pot: $${totalPot.toLocaleString()})
-                    </p>
-                    <input
-                        type="number"
-                        id="claim-input"
-                        min="0"
-                        max="${totalPot}"
-                        step="1000"
-                        placeholder="0"
-                    />
-                    <button class="btn-primary" onclick="game.submitClaim()">Submit Claim</button>
+                <div class="action-content">
+                    <p class="action-text">${nextPlayer.name}: ${this.t('enter_claim')} (${this.t('pot')}: ${this.formatMoney(totalPot)})</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                        <input type="number" id="claim-input" min="0" max="${totalPot}" step="1000" placeholder="0" inputmode="numeric" style="max-width: 150px; text-align: center;">
+                        <button class="btn btn-primary" onclick="game.submitClaim()" style="max-width: 200px;">${this.t('submit_claim')}</button>
+                    </div>
                 </div>
             `;
+
+            // Focus the input
+            setTimeout(() => {
+                const input = document.getElementById('claim-input');
+                if (input) input.focus();
+            }, 100);
         }
     }
 
@@ -689,7 +1101,19 @@ class Game {
         const playerIndex = unclaimedCrew[0];
 
         this.state.claims[playerIndex] = claim;
-        this.render();
+
+        // Check if there are more crew members to claim
+        const nextUnclaimed = this.state.crew.filter(i => this.state.claims[i] === undefined);
+        if (nextUnclaimed.length > 0) {
+            const nextPlayer = this.state.players[nextUnclaimed[0]];
+            this.showModal(
+                this.t('pass_device'),
+                `${this.t('pass_to')} ${nextPlayer.name}. ${this.t('ready_message')}`,
+                () => this.render()
+            );
+        } else {
+            this.render();
+        }
     }
 
     startBetting() {
@@ -708,9 +1132,11 @@ class Game {
 
         if (allBet || nonCrew.length === 0) {
             actionArea.innerHTML = `
-                <button class="btn-primary" onclick="game.revealClaims()">
-                    Reveal Claims & Resolve
-                </button>
+                <div class="action-content">
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="game.revealClaims()">${this.t('reveal_claims')}</button>
+                    </div>
+                </div>
             `;
         } else {
             const unbetPlayers = nonCrew.filter(({ index }) => this.state.bets[index] === undefined);
@@ -718,23 +1144,17 @@ class Game {
             const nextIndex = unbetPlayers[0].index;
 
             actionArea.innerHTML = `
-                <div style="text-align: center;">
-                    <p style="margin-bottom: 1rem; font-family: var(--font-mono);">
-                        ${nextPlayer.name}: Place your bet (Chips: $${nextPlayer.chips.toLocaleString()})
-                    </p>
+                <div class="action-content">
+                    <p class="action-text">${nextPlayer.name}: ${this.t('place_bet')} (${this.t('chips')}: ${this.formatMoney(nextPlayer.chips)})</p>
+                    <p style="font-size: 0.75rem; color: var(--navy-blue); margin-bottom: 1rem;">${this.t('max_bet')}</p>
                     <div style="margin-bottom: 1rem;">
-                        <input
-                            type="number"
-                            id="bet-amount"
-                            min="0"
-                            max="6000"
-                            step="1000"
-                            placeholder="0"
-                        />
+                        <input type="number" id="bet-amount" min="0" max="6000" step="1000" placeholder="0" inputmode="numeric" style="max-width: 150px; text-align: center; margin: 0 auto; display: block;">
                     </div>
-                    <button class="btn-primary" onclick="game.placeBet(${nextIndex}, 'invest')">Invest (Success)</button>
-                    <button class="btn-danger" onclick="game.placeBet(${nextIndex}, 'short')">Short (Failure)</button>
-                    <button onclick="game.placeBet(${nextIndex}, 'pass')">Pass</button>
+                    <div class="betting-buttons">
+                        <button class="btn btn-success" onclick="game.placeBet(${nextIndex}, 'invest')">${this.t('invest')}</button>
+                        <button class="btn btn-danger" onclick="game.placeBet(${nextIndex}, 'short')">${this.t('short')}</button>
+                        <button class="btn btn-secondary" onclick="game.placeBet(${nextIndex}, 'pass')">${this.t('pass')}</button>
+                    </div>
                 </div>
             `;
         }
@@ -748,12 +1168,12 @@ class Game {
             const player = this.state.players[playerIndex];
 
             if (amount > player.chips) {
-                alert('Not enough chips!');
+                alert(this.t('error_chips'));
                 return;
             }
 
             if (amount > 6000) {
-                alert('Maximum bet is $6,000');
+                alert(this.t('error_max_bet'));
                 return;
             }
 
@@ -761,13 +1181,27 @@ class Game {
             player.chips -= amount;
         }
 
-        this.render();
+        // Check if there are more players to bet
+        const nonCrew = this.state.players
+            .map((p, i) => ({ player: p, index: i }))
+            .filter(({ index }) => !this.state.crew.includes(index));
+        const unbetPlayers = nonCrew.filter(({ index }) => this.state.bets[index] === undefined);
+
+        if (unbetPlayers.length > 0) {
+            const nextPlayer = unbetPlayers[0].player;
+            this.showModal(
+                this.t('pass_device'),
+                `${this.t('pass_to')} ${nextPlayer.name}. ${this.t('ready_message')}`,
+                () => this.render()
+            );
+        } else {
+            this.render();
+        }
     }
 
     revealClaims() {
         this.state.phase = 'reveal';
 
-        // Calculate result
         const totalClaims = this.state.crew.reduce((sum, i) => sum + this.state.claims[i], 0);
         const totalPot = this.state.currentJob.pot + this.state.rollover;
         const success = totalClaims <= totalPot;
@@ -783,39 +1217,30 @@ class Game {
             bets: { ...this.state.bets }
         };
 
-        // Apply results
         if (success) {
-            // Pay crew
             this.state.crew.forEach(i => {
                 this.state.players[i].chips += this.state.claims[i];
             });
 
-            // Pay investors
             Object.entries(this.state.bets).forEach(([i, bet]) => {
                 if (bet.type === 'invest') {
                     this.state.players[i].chips += bet.amount * 2;
                 }
             });
 
-            // Rollover unclaimed
             this.state.rollover = margin;
         } else {
-            // Crew gets nothing, pay shorters
             Object.entries(this.state.bets).forEach(([i, bet]) => {
                 if (bet.type === 'short') {
                     this.state.players[i].chips += bet.amount * 2;
                 }
             });
 
-            // Rollover entire pot
             this.state.rollover += totalPot;
         }
 
-        // Record history
         this.state.jobHistory.push(this.state.currentJobResult);
-
         this.render();
-        this.renderRevealPhase();
     }
 
     renderRevealPhase() {
@@ -825,7 +1250,7 @@ class Game {
         const claimsHtml = this.state.crew.map(i => {
             const player = this.state.players[i];
             const claim = this.state.claims[i];
-            return `<div>${player.name}: $${claim.toLocaleString()}</div>`;
+            return `<div>${player.name}: ${this.formatMoney(claim)}</div>`;
         }).join('');
 
         const betsHtml = Object.entries(this.state.bets)
@@ -833,27 +1258,27 @@ class Game {
             .map(([i, bet]) => {
                 const player = this.state.players[i];
                 const won = (bet.type === 'invest' && result.success) || (bet.type === 'short' && !result.success);
-                return `<div>${player.name}: ${bet.type} $${bet.amount.toLocaleString()} ${won ? '✓' : '✗'}</div>`;
+                return `<div>${player.name}: ${bet.type} ${this.formatMoney(bet.amount)} ${won ? '✓' : '✗'}</div>`;
             }).join('');
 
-        jobSection.innerHTML += `
+        jobSection.innerHTML = `
             <div class="resolution">
-                <h2 style="color: ${result.success ? 'var(--accent)' : 'var(--danger)'};">
-                    ${result.success ? 'SUCCESS' : 'FAILURE'}
-                </h2>
-                <div style="font-family: var(--font-mono); margin: 2rem 0;">
-                    <div>Total Claims: $${result.totalClaims.toLocaleString()}</div>
-                    <div>Total Pot: $${result.totalPot.toLocaleString()}</div>
-                    <div>Margin: ${result.success ? `+$${result.margin.toLocaleString()}` : `-$${Math.abs(result.margin).toLocaleString()}`}</div>
+                <div class="resolution-result ${result.success ? 'success' : 'failure'}">
+                    <h2>${result.success ? this.t('success') : this.t('failure')}</h2>
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="resolution-stats">
+                    <div>${this.t('total_claims')}: ${this.formatMoney(result.totalClaims)}</div>
+                    <div>${this.t('total_pot')}: ${this.formatMoney(result.totalPot)}</div>
+                    <div>${this.t('margin')}: ${result.success ? '+' : ''}${this.formatMoney(result.margin)}</div>
+                </div>
+                <div class="resolution-details">
                     <div>
-                        <h3>Claims</h3>
-                        ${claimsHtml}
+                        <h3>${this.t('claims')}</h3>
+                        <div class="claims-list">${claimsHtml}</div>
                     </div>
                     <div>
-                        <h3>Bets</h3>
-                        ${betsHtml || '<div style="color: var(--muted);">No bets placed</div>'}
+                        <h3>${this.t('bets')}</h3>
+                        <div class="bets-list">${betsHtml || `<div class="text-muted">${this.t('no_bets')}</div>`}</div>
                     </div>
                 </div>
             </div>
@@ -861,9 +1286,13 @@ class Game {
 
         const actionArea = document.getElementById('action-area');
         actionArea.innerHTML = `
-            <button class="btn-primary" onclick="game.startCompleteContracts()">
-                Complete Contracts
-            </button>
+            <div class="action-content">
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="game.startCompleteContracts()">
+                        ${this.t('phase_complete')}
+                    </button>
+                </div>
+            </div>
         `;
     }
 
@@ -875,17 +1304,14 @@ class Game {
     renderCompleteContractsPhase() {
         const actionArea = document.getElementById('action-area');
         actionArea.innerHTML = `
-            <div style="text-align: center;">
-                <p style="margin-bottom: 1rem;">
-                    Players: Review your contracts and complete any that you've fulfilled this round.
-                </p>
-                <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.875rem;">
-                    (This is done manually - check your hand and the job results)
-                </p>
-                ${this.state.currentJob.isFinal ?
-                    `<button class="btn-primary" onclick="game.endGame()">Finish Game & Score</button>` :
-                    `<button class="btn-primary" onclick="game.nextJob()">Next Job</button>`
-                }
+            <div class="action-content">
+                <p class="action-text">${this.t('complete_contracts_hint')}</p>
+                <div class="action-buttons">
+                    ${this.state.currentJob.isFinal ?
+                        `<button class="btn btn-primary" onclick="game.endGame()">${this.t('finish_game')}</button>` :
+                        `<button class="btn btn-primary" onclick="game.nextJob()">${this.t('next_job')}</button>`
+                    }
+                </div>
             </div>
         `;
     }
@@ -904,19 +1330,14 @@ class Game {
     }
 
     endGame() {
-        // Calculate final scores
         this.state.players.forEach(p => {
             let score = p.chips;
-
-            // Subtract penalties for incomplete contracts
             p.hand.forEach(contract => {
                 score -= contract.penalty;
             });
-
             p.finalScore = score;
         });
 
-        // Sort by score
         this.state.players.sort((a, b) => b.finalScore - a.finalScore);
 
         this.state.phase = 'scoring';
@@ -926,34 +1347,22 @@ class Game {
 
     renderScoring() {
         const container = document.getElementById('final-scores');
-        container.innerHTML = `
-            <div style="max-width: 800px; margin: 0 auto;">
-                ${this.state.players.map((p, i) => `
-                    <div style="
-                        padding: var(--space-lg);
-                        border: var(--border-width) solid ${i === 0 ? 'var(--accent)' : 'var(--border)'};
-                        margin-bottom: var(--space-md);
-                        ${i === 0 ? 'background: rgba(0, 255, 0, 0.1);' : ''}
-                    ">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <div style="font-family: var(--font-mono); font-size: 1.5rem;">
-                                    ${i + 1}. ${p.name} ${i === 0 ? '🏆' : ''}
-                                </div>
-                                <div style="color: var(--muted); margin-top: 0.5rem;">
-                                    Chips: $${p.chips.toLocaleString()} •
-                                    Completed: ${Object.values(p.rapSheet).flat().length} •
-                                    Penalties: -$${p.hand.reduce((sum, c) => sum + c.penalty, 0).toLocaleString()}
-                                </div>
-                            </div>
-                            <div style="font-family: var(--font-mono); font-size: 2rem; color: var(--greed);">
-                                $${p.finalScore.toLocaleString()}
-                            </div>
-                        </div>
+        container.innerHTML = this.state.players.map((p, i) => `
+            <div class="score-card ${i === 0 ? 'winner' : ''}">
+                <div class="score-rank">${i + 1}${i === 0 ? '🏆' : ''}</div>
+                <div class="score-info">
+                    <div class="score-name">${p.name}</div>
+                    <div class="score-details">
+                        ${this.t('chips_label')}: ${this.formatMoney(p.chips)} •
+                        ${this.t('completed_label')}: ${Object.values(p.rapSheet).flat().length} •
+                        ${this.t('penalties_label')}: -${this.formatMoney(p.hand.reduce((sum, c) => sum + c.penalty, 0))}
                     </div>
-                `).join('')}
+                </div>
+                <div class="score-total">${this.formatMoney(p.finalScore)}</div>
             </div>
-        `;
+        `).join('');
+
+        this.updateLanguageUI();
     }
 }
 
@@ -970,11 +1379,19 @@ document.addEventListener('DOMContentLoaded', () => {
             game.addPlayerInput();
         }
     } else {
-        // Resume game
         game.showScreen('game-screen');
+        game.render();
+    }
+    game.updateLanguageUI();
+});
+
+// Handle page visibility
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && game.state.phase !== 'setup') {
+        game.loadState();
         game.render();
     }
 });
 
-// Export for use in HTML
+// Export for HTML
 window.game = game;

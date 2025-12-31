@@ -2,74 +2,185 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE TAKE • A Game of Heists, Greed, and Betrayal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>THE TAKE</title>
+
+    <!-- Premium Google Fonts (matching tracker) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="title">THE TAKE</h1>
-            <div class="game-status">
-                <span id="phase-indicator"></span>
-                <span id="pot-display"></span>
+        <!-- Language Selector -->
+        <div class="lang-selector">
+            <button class="lang-btn active" data-lang="en" onclick="game.setLanguage('en')">EN</button>
+            <span class="lang-divider">|</span>
+            <button class="lang-btn" data-lang="es" onclick="game.setLanguage('es')">ES</button>
+        </div>
+
+        <!-- Rules Button -->
+        <button class="rules-btn" onclick="game.toggleRules()">
+            <span data-i18n="rules_button">Rules</span>
+        </button>
+
+        <!-- Rules Panel -->
+        <div id="rules-panel" class="rules-panel">
+            <div class="rules-overlay" onclick="game.toggleRules()"></div>
+            <div class="rules-content">
+                <button class="rules-close" onclick="game.toggleRules()">&times;</button>
+
+                <h2 data-i18n="rules_title">How to Play</h2>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_overview_title">Game Overview</h3>
+                    <p data-i18n="rules_overview_text">THE TAKE is a game of heists, greed, and betrayal for 5-12 players. You're freelance criminals working jobs together, but everyone has their own agenda through secret contracts.</p>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_objective_title">Objective</h3>
+                    <p data-i18n="rules_objective_text">Earn the most money by the end of the game through successful heists, completing contracts, and strategic betting. The player with the most money (minus penalties for incomplete contracts) wins.</p>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_setup_title">Setup</h3>
+                    <p data-i18n="rules_setup_text">Each player starts with $10,000. The contract deck is shuffled and 5 cards are dealt face-up to form the contract board. The first Chair is chosen randomly.</p>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_phases_title">Game Phases</h3>
+                    <ol>
+                        <li data-i18n="rules_phase_1">Contract Draft - Starting with the Chair, players take turns drafting contracts</li>
+                        <li data-i18n="rules_phase_2">Black Market - 60 seconds for free trading of contracts and chips</li>
+                        <li data-i18n="rules_phase_3">Job Reveal - A new job card is revealed</li>
+                        <li data-i18n="rules_phase_4">Crew Selection - The Chair selects crew members for the job</li>
+                        <li data-i18n="rules_phase_5">Secret Claims - Crew members secretly write how much they want from the pot</li>
+                        <li data-i18n="rules_phase_6">Betting - Non-crew players bet on success or failure</li>
+                        <li data-i18n="rules_phase_7">Resolution - Claims are revealed and job succeeds or fails</li>
+                    </ol>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_success_title">Job Success</h3>
+                    <p data-i18n="rules_success_text">If total claims are equal to or less than the pot, the job succeeds! Each crew member receives their claimed amount. Investors get 2x their bet. Unclaimed money rolls over to the next job.</p>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_failure_title">Job Failure</h3>
+                    <p data-i18n="rules_failure_text">If total claims exceed the pot, the job fails! Crew receives nothing. Shorters get 2x their bet. The entire pot rolls over to the next job.</p>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_contracts_title">Contracts</h3>
+                    <p data-i18n="rules_contracts_text">Contracts have secret objectives. Complete them during gameplay to earn bonuses. Incomplete contracts at game end result in penalties. Contracts belong to 5 categories: Precision, Chaos, Trust, Greed, and Hustle.</p>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_setbonus_title">Set Bonuses</h3>
+                    <ul>
+                        <li data-i18n="rules_set_1">Specialist: 3 contracts in one category = +$4,000</li>
+                        <li data-i18n="rules_set_2">Versatile: 1 contract in each category = +$5,000</li>
+                        <li data-i18n="rules_set_3">Obsessed: 4 contracts in one category = +$7,000</li>
+                        <li data-i18n="rules_set_4">Legend: 6 total contracts = +$6,000</li>
+                        <li data-i18n="rules_set_5">Mastermind: 3 contracts in two categories = +$10,000</li>
+                    </ul>
+                </div>
+
+                <div class="rule-block">
+                    <h3 data-i18n="rules_chair_title">The Chair</h3>
+                    <p data-i18n="rules_chair_text">The Chair rotates to the player with the lowest chips after each job. In case of a tie, it goes clockwise from the current Chair. The Chair drafts first and selects the crew.</p>
+                </div>
             </div>
-        </header>
+        </div>
 
         <!-- Setup Screen -->
         <section id="setup-screen" class="screen active">
             <div class="container">
-                <h2>Game Setup</h2>
-                <div class="setup-content">
-                    <div class="player-setup">
-                        <h3>Players (5-12)</h3>
-                        <div id="player-inputs"></div>
-                        <button class="btn-add" onclick="game.addPlayerInput()">+ Add Player</button>
-                    </div>
-                    <button class="btn-primary" onclick="game.startGame()">Start Game</button>
+                <div class="hero-image">
+                    <img src="thief.png" alt="The Thief" class="thief-illustration">
+                </div>
+                <h1 class="logo">THE TAKE</h1>
+                <p class="tagline" data-i18n="subtitle">A Game of Heists, Greed & Betrayal</p>
+
+                <div class="setup-card">
+                    <h2 data-i18n="setup_title">Game Setup</h2>
+                    <p class="setup-hint" data-i18n="setup_hint">Enter player names (5-12 players)</p>
+
+                    <div id="player-inputs" class="player-inputs"></div>
+
+                    <button class="btn btn-secondary add-player-btn" onclick="game.addPlayerInput()">
+                        <span data-i18n="add_player">+ Add Player</span>
+                    </button>
+
+                    <button class="btn btn-primary start-btn" onclick="game.startGame()">
+                        <span data-i18n="start_game">Start Game</span>
+                    </button>
+                </div>
+
+                <div class="setup-actions">
+                    <button class="btn btn-outline" onclick="game.toggleRules()">
+                        <span data-i18n="view_rules">View Rules</span>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- Main Game Screen -->
         <section id="game-screen" class="screen">
-            <div class="container">
-                <!-- Player Status Bar -->
-                <div id="player-status" class="player-status"></div>
+            <div class="container game-container">
+                <!-- Phase Header -->
+                <div class="phase-header">
+                    <div class="phase-info">
+                        <span class="phase-label" data-i18n="phase_label">Phase</span>
+                        <span class="phase-name" id="phase-indicator"></span>
+                    </div>
+                    <div class="pot-info" id="pot-display"></div>
+                </div>
+
+                <!-- Player Status Carousel -->
+                <div class="player-carousel">
+                    <div id="player-status" class="player-status"></div>
+                </div>
 
                 <!-- Contract Board -->
-                <div id="contract-board-section" class="game-section">
-                    <h2>Contract Board</h2>
+                <div id="contract-board-section" class="game-section contract-section">
+                    <h2 class="section-title" data-i18n="contract_board">Contract Board</h2>
                     <div class="contract-board">
                         <div class="tier-row">
-                            <div class="tier-label easy">Easy</div>
+                            <div class="tier-label easy" data-i18n="tier_easy">Easy</div>
                             <div id="easy-contracts" class="contract-row"></div>
                         </div>
                         <div class="tier-row">
-                            <div class="tier-label medium">Medium</div>
+                            <div class="tier-label medium" data-i18n="tier_medium">Medium</div>
                             <div id="medium-contracts" class="contract-row"></div>
                         </div>
                         <div class="tier-row">
-                            <div class="tier-label hard">Hard</div>
+                            <div class="tier-label hard" data-i18n="tier_hard">Hard</div>
                             <div id="hard-contracts" class="contract-row"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Player Dashboard -->
-                <div id="player-dashboard" class="game-section">
+                <div id="player-dashboard" class="game-section dashboard-section">
                     <div class="dashboard-header">
-                        <h2 id="current-player-name"></h2>
+                        <div class="current-player-info">
+                            <span class="player-label" data-i18n="current_player">Current Player</span>
+                            <h2 id="current-player-name" class="player-name"></h2>
+                        </div>
                         <div class="player-chips" id="player-chips"></div>
                     </div>
                     <div class="dashboard-content">
                         <div class="hand-section">
-                            <h3>Your Hand</h3>
+                            <h3 data-i18n="your_hand">Your Hand</h3>
                             <div id="player-hand" class="contract-hand"></div>
                         </div>
                         <div class="rapsheet-section">
-                            <h3>Rap Sheet</h3>
+                            <h3 data-i18n="rap_sheet">Rap Sheet</h3>
                             <div id="rap-sheet" class="rap-sheet"></div>
                             <div id="set-bonuses" class="set-bonuses"></div>
                         </div>
@@ -77,15 +188,15 @@
                 </div>
 
                 <!-- Job Phase -->
-                <div id="job-section" class="game-section">
+                <div id="job-section" class="game-section job-section">
                     <div id="job-card" class="job-card"></div>
                     <div id="crew-selection" class="crew-selection"></div>
-                    <div id="claim-input" class="claim-input"></div>
+                    <div id="claim-input" class="claim-input-area"></div>
                     <div id="betting-area" class="betting-area"></div>
                     <div id="resolution" class="resolution"></div>
                 </div>
 
-                <!-- Action Area -->
+                <!-- Action Area (Fixed Bottom) -->
                 <div id="action-area" class="action-area"></div>
             </div>
         </section>
@@ -93,18 +204,29 @@
         <!-- Scoring Screen -->
         <section id="scoring-screen" class="screen">
             <div class="container">
-                <h2>Final Scores</h2>
+                <div class="hero-image hero-image-small">
+                    <img src="thief.png" alt="The Thief" class="thief-illustration">
+                </div>
+                <h1 class="logo" data-i18n="game_over">Game Over</h1>
+                <p class="tagline" data-i18n="final_standings">Final Standings</p>
                 <div id="final-scores" class="final-scores"></div>
-                <button class="btn-primary" onclick="game.reset()">New Game</button>
+                <button class="btn btn-primary" onclick="game.reset()">
+                    <span data-i18n="new_game">New Game</span>
+                </button>
             </div>
         </section>
 
-        <!-- Modal for passing device -->
+        <!-- Pass Device Modal -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <h3 id="modal-title"></h3>
-                <p id="modal-message"></p>
-                <button class="btn-primary" id="modal-btn">Continue</button>
+                <div class="modal-icon">
+                    <img src="thief.png" alt="The Thief" class="modal-thief">
+                </div>
+                <h3 id="modal-title" class="modal-title"></h3>
+                <p id="modal-message" class="modal-message"></p>
+                <button class="btn btn-primary modal-btn" id="modal-btn">
+                    <span data-i18n="continue">Continue</span>
+                </button>
             </div>
         </div>
     </div>
