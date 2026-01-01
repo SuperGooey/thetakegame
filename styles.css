@@ -707,13 +707,11 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
 }
 
 .contract-card:hover, .contract-card:active {
-    border-color: var(--purple-mauve);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(61, 36, 23, 0.15);
 }
 
 .contract-card.selected {
-    border-color: var(--purple-mauve);
     background: rgba(155, 107, 135, 0.1);
 }
 
@@ -724,7 +722,6 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
 
 .contract-card.disabled:hover {
     transform: none;
-    border-color: var(--navy-blue);
 }
 
 .contract-header {
@@ -770,12 +767,12 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
     color: var(--failure-red);
 }
 
-/* Category border colors */
-.contract-card[data-category="precision"] { border-left: 6px solid var(--precision); }
-.contract-card[data-category="chaos"] { border-left: 6px solid var(--chaos); }
-.contract-card[data-category="trust"] { border-left: 6px solid var(--trust); }
-.contract-card[data-category="greed"] { border-left: 6px solid var(--greed); }
-.contract-card[data-category="hustle"] { border-left: 6px solid var(--hustle); }
+/* Category border colors - full border */
+.contract-card[data-category="precision"] { border-color: var(--precision); }
+.contract-card[data-category="chaos"] { border-color: var(--chaos); }
+.contract-card[data-category="trust"] { border-color: var(--trust); }
+.contract-card[data-category="greed"] { border-color: var(--greed); }
+.contract-card[data-category="hustle"] { border-color: var(--hustle); }
 
 /* ========================================
    Dashboard
@@ -1462,7 +1459,6 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
 
 .player-turn-hand .contract-card:hover {
     transform: none;
-    border-color: var(--navy-blue);
 }
 
 .player-turn-hand .no-contracts {

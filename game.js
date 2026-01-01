@@ -848,7 +848,7 @@ class Game {
 
         // Hide player turn modal by default (phases that need it will show it)
         const playerTurnModal = document.getElementById('player-turn-modal');
-        if (playerTurnModal && this.state.phase !== 'claiming') {
+        if (playerTurnModal && this.state.phase !== 'claiming' && this.state.phase !== 'betting') {
             playerTurnModal.classList.remove('active');
         }
 
@@ -1298,11 +1298,31 @@ class Game {
     startBetting() {
         this.state.phase = 'betting';
         this.state.bets = {};
-        this.render();
+
+        // Get non-crew players who need to bet
+        const nonCrew = this.state.players
+            .map((p, i) => ({ player: p, index: i }))
+            .filter(({ index }) => !this.state.crew.includes(index));
+
+        if (nonCrew.length > 0) {
+            const firstBettor = nonCrew[0].player;
+            this.showModal(
+                this.t('pass_device'),
+                `${this.t('pass_to')} ${firstBettor.name}. ${this.t('ready_message')}`,
+                () => this.render()
+            );
+        } else {
+            this.render();
+        }
     }
 
     renderBettingPhase() {
         const actionArea = document.getElementById('action-area');
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        const job = this.state.currentJob;
+        const totalPot = job.pot + this.state.rollover;
+        const jobTypeKey = `job_${job.type.toLowerCase().replace(' ', '_')}`;
+
         const nonCrew = this.state.players
             .map((p, i) => ({ player: p, index: i }))
             .filter(({ index }) => !this.state.crew.includes(index));
@@ -1310,6 +1330,9 @@ class Game {
         const allBet = nonCrew.every(({ index }) => this.state.bets[index] !== undefined);
 
         if (allBet || nonCrew.length === 0) {
+            // Hide the player turn modal
+            playerTurnModal.classList.remove('active');
+
             actionArea.innerHTML = `
                 <div class="action-content">
                     <div class="action-buttons">
@@ -1319,23 +1342,57 @@ class Game {
             `;
         } else {
             const unbetPlayers = nonCrew.filter(({ index }) => this.state.bets[index] === undefined);
-            const nextPlayer = unbetPlayers[0].player;
-            const nextIndex = unbetPlayers[0].index;
+            const playerIndex = unbetPlayers[0].index;
+            const player = unbetPlayers[0].player;
 
-            actionArea.innerHTML = `
-                <div class="action-content">
-                    <p class="action-text">${nextPlayer.name}: ${this.t('place_bet')} (${this.t('chips')}: ${this.formatMoney(nextPlayer.chips)})</p>
-                    <p style="font-size: 0.75rem; color: var(--navy-blue); margin-bottom: 1rem;">${this.t('max_bet')}</p>
-                    <div style="margin-bottom: 1rem;">
-                        <input type="number" id="bet-amount" min="0" max="6000" step="1000" placeholder="0" inputmode="numeric" style="max-width: 150px; text-align: center; margin: 0 auto; display: block;">
-                    </div>
-                    <div class="betting-buttons">
-                        <button class="btn btn-success" onclick="game.placeBet(${nextIndex}, 'invest')">${this.t('invest')}</button>
-                        <button class="btn btn-danger" onclick="game.placeBet(${nextIndex}, 'short')">${this.t('short')}</button>
-                        <button class="btn btn-secondary" onclick="game.placeBet(${nextIndex}, 'pass')">${this.t('pass')}</button>
-                    </div>
+            // Show the player turn modal with their info
+            playerTurnModal.classList.add('active');
+
+            // Populate the modal
+            document.getElementById('player-turn-label').textContent = this.t('phase_betting');
+            document.getElementById('player-turn-name').textContent = player.name;
+            document.getElementById('player-turn-chips').textContent = this.formatMoney(player.chips);
+
+            document.getElementById('player-turn-job').innerHTML = `
+                <div class="player-turn-job-title">${this.t(jobTypeKey)}</div>
+                <div class="player-turn-job-details">
+                    <span class="player-turn-pot">${this.t('pot')}: ${this.formatMoney(totalPot)}</span>
+                    <span class="player-turn-crew">${this.t('crew_size')}: ${job.crewSize}</span>
                 </div>
             `;
+
+            document.getElementById('player-turn-claim').innerHTML = `
+                <label>${this.t('place_bet')}</label>
+                <p style="font-size: 0.875rem; color: var(--navy-blue); margin-bottom: 1rem;">${this.t('max_bet')}</p>
+                <input type="number" id="bet-amount" min="0" max="6000" step="1000" placeholder="0" inputmode="numeric">
+                <div class="betting-buttons" style="margin-top: 1rem;">
+                    <button class="btn btn-success" onclick="game.placeBet(${playerIndex}, 'invest')">${this.t('invest')}</button>
+                    <button class="btn btn-danger" onclick="game.placeBet(${playerIndex}, 'short')">${this.t('short')}</button>
+                    <button class="btn btn-secondary" onclick="game.placeBet(${playerIndex}, 'pass')">${this.t('pass')}</button>
+                </div>
+            `;
+
+            // Render the player's hand in the modal
+            const handHtml = player.hand.length > 0
+                ? `<h3>${this.t('your_hand')}</h3>
+                   <div class="contract-hand">
+                       ${player.hand.map((contract, i) =>
+                           this.renderContractCard(contract, contract.tier, i, { disabled: true, onClick: '' })
+                       ).join('')}
+                   </div>`
+                : `<h3>${this.t('your_hand')}</h3>
+                   <div class="no-contracts">No contracts in hand</div>`;
+
+            document.getElementById('player-turn-hand').innerHTML = handHtml;
+
+            // Clear the main action area
+            actionArea.innerHTML = '';
+
+            // Focus the input
+            setTimeout(() => {
+                const input = document.getElementById('bet-amount');
+                if (input) input.focus();
+            }, 100);
         }
     }
 
@@ -1359,6 +1416,10 @@ class Game {
             this.state.bets[playerIndex] = { type, amount };
             player.chips -= amount;
         }
+
+        // Hide the player turn modal before showing pass device modal
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        playerTurnModal.classList.remove('active');
 
         // Check if there are more players to bet
         const nonCrew = this.state.players
