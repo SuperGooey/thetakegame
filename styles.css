@@ -1548,12 +1548,68 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
     background: white;
     border-radius: var(--border-radius-sm);
     margin-bottom: var(--space-xs);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
 }
 
-.pending-trade span {
+.pending-trade .trade-info {
+    flex: 1;
+    min-width: 150px;
+}
+
+.pending-trade .trade-info span {
     font-family: var(--font-mono);
     font-size: 0.875rem;
     color: var(--dark-brown);
+    display: block;
+}
+
+.pending-trade .trade-wants {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--purple-mauve);
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.pending-trade .trade-buttons {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.trade-config {
+    background: white;
+    border: 2px solid var(--navy-blue);
+    border-radius: var(--border-radius-sm);
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+}
+
+.trade-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(26, 58, 82, 0.1);
+}
+
+.trade-row:last-child {
+    border-bottom: none;
+}
+
+.trade-row span {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--navy-blue);
+}
+
+.trade-row input {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: var(--space-xs) var(--space-sm);
+    border: 2px solid var(--navy-blue);
+    border-radius: var(--border-radius-sm);
 }
 
 .player-selection {

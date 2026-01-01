@@ -151,13 +151,20 @@ const TRANSLATIONS = {
         // Trading
         done_trading: "Done - Next Player",
         discard: "Discard",
-        offer: "Offer to...",
-        offer_to: "Offer",
+        trade: "Trade",
         to: "to",
         cancel: "Cancel",
-        pending_trades: "Pending Trades",
+        pending_trades: "Pending Offers",
         offers: "offers",
+        wants: "Wants",
         accept: "Accept",
+        decline: "Decline",
+        select_trade_partner: "Select who to trade with:",
+        add_chips: "Include chips:",
+        request_chips: "Request chips:",
+        trade_negotiate_hint: "Negotiate verbally, then set chip amounts",
+        send_offer: "Send Offer",
+        no_contracts_hand: "No contracts in hand",
 
         // Contract Fulfillment
         contracts_completed: "Contracts Completed!",
@@ -375,13 +382,20 @@ const TRANSLATIONS = {
         // Trading
         done_trading: "Listo - Siguiente Jugador",
         discard: "Descartar",
-        offer: "Ofrecer a...",
-        offer_to: "Ofrecer",
+        trade: "Intercambiar",
         to: "a",
         cancel: "Cancelar",
-        pending_trades: "Intercambios Pendientes",
+        pending_trades: "Ofertas Pendientes",
         offers: "ofrece",
+        wants: "Quiere",
         accept: "Aceptar",
+        decline: "Rechazar",
+        select_trade_partner: "Selecciona con quién intercambiar:",
+        add_chips: "Incluir fichas:",
+        request_chips: "Pedir fichas:",
+        trade_negotiate_hint: "Negocien verbalmente, luego configura las fichas",
+        send_offer: "Enviar Oferta",
+        no_contracts_hand: "Sin contratos en mano",
 
         // Contract Fulfillment
         contracts_completed: "¡Contratos Completados!",
@@ -617,6 +631,8 @@ class GameState {
     drawJob() {
         if (this.jobDeck.length > 0) {
             this.currentJob = this.jobDeck.shift();
+            // Capture rollover at job start for contract evaluation
+            this.currentJob.startingRollover = this.rollover;
             return this.currentJob;
         }
         return null;
@@ -1209,13 +1225,21 @@ class Game {
         if (pendingForMe.length > 0) {
             pendingHtml = `
                 <div class="pending-trades">
-                    <h4>${this.t('pending_trades') || 'Pending Trades'}</h4>
+                    <h4>${this.t('pending_trades')}</h4>
                     ${pendingForMe.map((trade, i) => {
                         const fromPlayer = this.state.players[trade.fromPlayer];
+                        const chipsText = trade.chipsOffered > 0 ? ` + ${this.formatMoney(trade.chipsOffered)}` : '';
+                        const wantText = trade.chipsWanted > 0 ? `<div class="trade-wants">${this.t('wants')}: ${this.formatMoney(trade.chipsWanted)}</div>` : '';
                         return `
                             <div class="pending-trade">
-                                <span>${fromPlayer.name} ${this.t('offers') || 'offers'}: ${trade.contract.name}</span>
-                                <button class="btn btn-success" onclick="game.acceptTrade(${i})" style="padding: 8px 16px; min-height: auto;">${this.t('accept') || 'Accept'}</button>
+                                <div class="trade-info">
+                                    <span>${fromPlayer.name} ${this.t('offers')}: ${trade.contract.name}${chipsText}</span>
+                                    ${wantText}
+                                </div>
+                                <div class="trade-buttons">
+                                    <button class="btn btn-success" onclick="game.acceptTrade(${i})" style="padding: 8px 16px; min-height: auto;">${this.t('accept')}</button>
+                                    <button class="btn btn-danger" onclick="game.declineTrade(${i})" style="padding: 8px 16px; min-height: auto;">${this.t('decline')}</button>
+                                </div>
                             </div>
                         `;
                     }).join('')}
@@ -1232,7 +1256,7 @@ class Game {
         // Render trading actions
         document.getElementById('player-turn-claim').innerHTML = `
             <div class="trading-actions">
-                <button class="btn btn-secondary" onclick="game.nextTrader()" style="margin-bottom: 0.5rem;">${this.t('done_trading') || 'Done - Next Player'}</button>
+                <button class="btn btn-secondary" onclick="game.nextTrader()" style="margin-bottom: 0.5rem;">${this.t('done_trading')}</button>
                 <button class="btn btn-primary" onclick="game.finishTrading()">${this.t('end_trading')}</button>
             </div>
         `;
@@ -1246,17 +1270,17 @@ class Game {
                            ${this.renderContractCard(contract, contract.tier, i, { disabled: true, onClick: '' })}
                            <div class="contract-actions">
                                <button class="btn btn-danger" onclick="game.discardContract(${i})" style="padding: 8px 12px; min-height: auto; font-size: 0.75rem;">
-                                   ${this.t('discard') || 'Discard'} (-$1,000)
+                                   ${this.t('discard')} (-$1,000)
                                </button>
-                               <button class="btn btn-secondary" onclick="game.offerContract(${i})" style="padding: 8px 12px; min-height: auto; font-size: 0.75rem;">
-                                   ${this.t('offer') || 'Offer to...'}
+                               <button class="btn btn-secondary" onclick="game.startTrade(${i})" style="padding: 8px 12px; min-height: auto; font-size: 0.75rem;">
+                                   ${this.t('trade')}
                                </button>
                            </div>
                        </div>
                    `).join('')}
                </div>`
             : `<h3>${this.t('your_hand')}</h3>
-               <div class="no-contracts">No contracts in hand</div>`;
+               <div class="no-contracts">${this.t('no_contracts_hand')}</div>`;
 
         document.getElementById('player-turn-hand').innerHTML = handHtml;
 
@@ -1277,36 +1301,82 @@ class Game {
         this.render();
     }
 
-    offerContract(contractIndex) {
+    startTrade(contractIndex) {
         const currentPlayer = this.state.getCurrentPlayer();
         const contract = currentPlayer.hand[contractIndex];
 
-        // Show player selection
+        // Store the contract being traded
+        this.state.tradingContract = { contract, contractIndex };
+
+        // Show trade configuration UI
         const otherPlayers = this.state.players
             .map((p, i) => ({ player: p, index: i }))
             .filter(({ index }) => index !== this.state.currentPlayerIndex);
 
         const playerOptions = otherPlayers.map(({ player, index }) =>
-            `<button class="btn btn-outline" onclick="game.confirmOffer(${contractIndex}, ${index})" style="margin: 4px;">${player.name}</button>`
+            `<button class="btn btn-outline player-select-btn" onclick="game.selectTradePartner(${index})" style="margin: 4px;">${player.name}</button>`
         ).join('');
 
-        // Update the claim section to show player selection
         document.getElementById('player-turn-claim').innerHTML = `
-            <label>${this.t('offer_to') || 'Offer'} "${contract.name}" ${this.t('to') || 'to'}:</label>
-            <div class="player-selection" style="display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 1rem;">
+            <label>${this.t('trade')} "${contract.name}"</label>
+            <p style="font-size: 0.875rem; color: var(--navy-blue); margin-bottom: 1rem;">${this.t('select_trade_partner')}</p>
+            <div class="player-selection">
                 ${playerOptions}
             </div>
-            <button class="btn btn-secondary" onclick="game.render()" style="max-width: 200px; margin: 0 auto;">${this.t('cancel') || 'Cancel'}</button>
+            <button class="btn btn-secondary" onclick="game.cancelTrade()" style="max-width: 200px; margin: 1rem auto 0;">${this.t('cancel')}</button>
         `;
     }
 
-    confirmOffer(contractIndex, toPlayerIndex) {
+    selectTradePartner(toPlayerIndex) {
+        const contract = this.state.tradingContract.contract;
         const currentPlayer = this.state.getCurrentPlayer();
-        const contract = currentPlayer.hand[contractIndex];
+        const toPlayer = this.state.players[toPlayerIndex];
 
-        // Remove from hand and add to pending trades
+        // Show chip negotiation UI
+        document.getElementById('player-turn-claim').innerHTML = `
+            <label>${this.t('trade')} "${contract.name}" ${this.t('to')} ${toPlayer.name}</label>
+
+            <div class="trade-config">
+                <div class="trade-row">
+                    <span>${this.t('add_chips')}</span>
+                    <input type="number" id="chips-offered" min="0" max="${currentPlayer.chips}" step="1000" value="0" inputmode="numeric" style="width: 120px; text-align: center;">
+                </div>
+                <div class="trade-row">
+                    <span>${this.t('request_chips')}</span>
+                    <input type="number" id="chips-wanted" min="0" step="1000" value="0" inputmode="numeric" style="width: 120px; text-align: center;">
+                </div>
+            </div>
+
+            <p style="font-size: 0.75rem; color: var(--navy-blue); margin: 1rem 0;">${this.t('trade_negotiate_hint')}</p>
+
+            <div class="trading-actions">
+                <button class="btn btn-primary" onclick="game.confirmTrade(${toPlayerIndex})" style="margin-bottom: 0.5rem;">${this.t('send_offer')}</button>
+                <button class="btn btn-secondary" onclick="game.cancelTrade()">${this.t('cancel')}</button>
+            </div>
+        `;
+    }
+
+    confirmTrade(toPlayerIndex) {
+        const currentPlayer = this.state.getCurrentPlayer();
+        const { contract, contractIndex } = this.state.tradingContract;
+        const chipsOffered = parseInt(document.getElementById('chips-offered').value) || 0;
+        const chipsWanted = parseInt(document.getElementById('chips-wanted').value) || 0;
+
+        // Validate chips offered
+        if (chipsOffered > currentPlayer.chips) {
+            alert(this.t('error_chips'));
+            return;
+        }
+
+        // Remove contract from hand
         currentPlayer.hand.splice(contractIndex, 1);
 
+        // Deduct chips offered (held in escrow until accepted)
+        if (chipsOffered > 0) {
+            currentPlayer.chips -= chipsOffered;
+        }
+
+        // Create pending trade
         if (!this.state.pendingTrades) {
             this.state.pendingTrades = [];
         }
@@ -1314,19 +1384,60 @@ class Game {
         this.state.pendingTrades.push({
             fromPlayer: this.state.currentPlayerIndex,
             toPlayer: toPlayerIndex,
-            contract: contract
+            contract: contract,
+            chipsOffered: chipsOffered,
+            chipsWanted: chipsWanted
         });
 
+        // Clear trading state
+        this.state.tradingContract = null;
+        this.render();
+    }
+
+    cancelTrade() {
+        this.state.tradingContract = null;
         this.render();
     }
 
     acceptTrade(tradeIndex) {
         const pendingForMe = this.state.pendingTrades.filter(t => t.toPlayer === this.state.currentPlayerIndex);
         const trade = pendingForMe[tradeIndex];
-
-        // Add contract to current player's hand
         const currentPlayer = this.state.getCurrentPlayer();
+
+        // Check if we can pay the requested chips
+        if (trade.chipsWanted > 0 && currentPlayer.chips < trade.chipsWanted) {
+            alert(this.t('error_chips'));
+            return;
+        }
+
+        // Execute the trade
+        // Receiver gets contract + chips offered
         currentPlayer.hand.push(trade.contract);
+        currentPlayer.chips += trade.chipsOffered;
+
+        // Receiver pays chips wanted
+        if (trade.chipsWanted > 0) {
+            currentPlayer.chips -= trade.chipsWanted;
+            // Sender receives the wanted chips
+            this.state.players[trade.fromPlayer].chips += trade.chipsWanted;
+        }
+
+        // Remove from pending trades
+        const globalIndex = this.state.pendingTrades.indexOf(trade);
+        this.state.pendingTrades.splice(globalIndex, 1);
+
+        this.render();
+    }
+
+    declineTrade(tradeIndex) {
+        const pendingForMe = this.state.pendingTrades.filter(t => t.toPlayer === this.state.currentPlayerIndex);
+        const trade = pendingForMe[tradeIndex];
+
+        // Return the contract and chips to the sender
+        this.state.players[trade.fromPlayer].hand.push(trade.contract);
+        if (trade.chipsOffered > 0) {
+            this.state.players[trade.fromPlayer].chips += trade.chipsOffered;
+        }
 
         // Remove from pending trades
         const globalIndex = this.state.pendingTrades.indexOf(trade);
@@ -2026,7 +2137,8 @@ class Game {
                 return sameClaims.length >= 2;
 
             case 'Bail Out':
-                return isOnCrew && result.success && this.state.rollover > 0;
+                // Check if there was rollover at the START of this job (from previous failures)
+                return isOnCrew && result.success && (this.state.currentJob.startingRollover || 0) > 0;
 
             case 'Saboteur':
                 return isOnCrew && !result.success && claim > fairShare;
@@ -2046,7 +2158,8 @@ class Game {
                 return player.chips >= Math.max(...othersChips) + 4000;
 
             case 'Demolition Expert':
-                return !result.success && this.state.rollover >= 8000;
+                // Check if there was rollover ≥$8,000 at the START of this job
+                return !result.success && (this.state.currentJob.startingRollover || 0) >= 8000;
 
             case 'Masterstroke':
                 if (!isOnCrew || !result.success) return false;
