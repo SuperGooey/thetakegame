@@ -980,6 +980,16 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
     margin-top: var(--space-sm);
 }
 
+.job-crew-names {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy-blue);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--navy-blue);
+}
+
 /* ========================================
    Crew Selection
    ======================================== */
