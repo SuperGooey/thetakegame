@@ -28,6 +28,11 @@
             <span data-i18n="rules_button">Rules</span>
         </button>
 
+        <!-- Reset Button -->
+        <button class="reset-btn" onclick="game.confirmReset()">
+            <span data-i18n="reset_button">Reset</span>
+        </button>
+
         <!-- Rules Panel -->
         <div id="rules-panel" class="rules-panel">
             <div class="rules-overlay" onclick="game.toggleRules()"></div>
@@ -227,6 +232,25 @@
                 <button class="btn btn-primary modal-btn" id="modal-btn">
                     <span data-i18n="continue">Continue</span>
                 </button>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-icon">
+                    <img src="thief.png" alt="The Thief" class="modal-thief">
+                </div>
+                <h3 id="confirm-modal-title" class="modal-title"></h3>
+                <p id="confirm-modal-message" class="modal-message"></p>
+                <div class="confirm-modal-buttons">
+                    <button class="btn btn-danger" id="confirm-modal-yes">
+                        <span data-i18n="yes">Yes</span>
+                    </button>
+                    <button class="btn btn-secondary" id="confirm-modal-no">
+                        <span data-i18n="no">No</span>
+                    </button>
+                </div>
             </div>
         </div>
 
