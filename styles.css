@@ -196,7 +196,7 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
 .reset-btn {
     position: fixed;
     top: var(--space-md);
-    left: calc(var(--space-md) + 100px);
+    left: calc(var(--space-md) + 120px);
     font-family: var(--font-mono);
     font-size: 0.875rem;
     padding: 12px 24px;
