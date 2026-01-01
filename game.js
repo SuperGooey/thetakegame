@@ -19,6 +19,11 @@ const TRANSLATIONS = {
         view_rules: "View Rules",
         continue: "Continue",
         new_game: "New Game",
+        reset_button: "Reset",
+        reset_title: "Reset Game?",
+        reset_message: "Are you sure you want to reset? All progress will be lost.",
+        yes: "Yes",
+        no: "No",
         game_over: "Game Over",
         final_standings: "Final Standings",
 
@@ -250,6 +255,11 @@ const TRANSLATIONS = {
         view_rules: "Ver Reglas",
         continue: "Continuar",
         new_game: "Nuevo Juego",
+        reset_button: "Reiniciar",
+        reset_title: "¿Reiniciar Juego?",
+        reset_message: "¿Estás seguro de que quieres reiniciar? Se perderá todo el progreso.",
+        yes: "Sí",
+        no: "No",
         game_over: "Fin del Juego",
         final_standings: "Resultados Finales",
 
@@ -774,6 +784,37 @@ class Game {
     toggleRules() {
         const panel = document.getElementById('rules-panel');
         panel.classList.toggle('open');
+    }
+
+    // ========================================
+    // Confirmation Modal
+    // ========================================
+
+    showConfirmModal(title, message, onConfirm, onCancel) {
+        const modal = document.getElementById('confirm-modal');
+        document.getElementById('confirm-modal-title').textContent = title;
+        document.getElementById('confirm-modal-message').textContent = message;
+
+        document.getElementById('confirm-modal-yes').onclick = () => {
+            modal.classList.remove('active');
+            if (onConfirm) onConfirm();
+        };
+
+        document.getElementById('confirm-modal-no').onclick = () => {
+            modal.classList.remove('active');
+            if (onCancel) onCancel();
+        };
+
+        modal.classList.add('active');
+    }
+
+    confirmReset() {
+        this.showConfirmModal(
+            this.t('reset_title'),
+            this.t('reset_message'),
+            () => this.reset(),
+            null
+        );
     }
 
     // ========================================
