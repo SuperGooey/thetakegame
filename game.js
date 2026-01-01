@@ -148,6 +148,30 @@ const TRANSLATIONS = {
         rules_chair_title: "The Chair",
         rules_chair_text: "The Chair rotates to the player with the lowest chips after each job. In case of a tie, it goes clockwise from the current Chair. The Chair drafts first and selects the crew.",
 
+        // Trading
+        done_trading: "Done - Next Player",
+        discard: "Discard",
+        trade: "Trade",
+        to: "to",
+        cancel: "Cancel",
+        pending_trades: "Pending Offers",
+        offers: "offers",
+        wants: "Wants",
+        accept: "Accept",
+        decline: "Decline",
+        select_trade_partner: "Select who to trade with:",
+        add_chips: "Include chips:",
+        request_chips: "Request chips:",
+        trade_negotiate_hint: "Negotiate verbally, then set chip amounts",
+        send_offer: "Send Offer",
+        no_contracts_hand: "No contracts in hand",
+
+        // Contract Fulfillment
+        contracts_completed: "Contracts Completed!",
+        no_contracts_completed: "No contracts completed this job.",
+        contract_board: "Contract Board",
+        select_contract: "Select a contract or pass",
+
         // Errors
         error_players: "Please enter 5-12 player names",
         error_chips: "Not enough chips!",
@@ -354,6 +378,30 @@ const TRANSLATIONS = {
         rules_set_5: "Cerebro: 3 contratos en dos categorías = +$10,000",
         rules_chair_title: "El Jefe",
         rules_chair_text: "El Jefe rota al jugador con menos fichas después de cada trabajo. En caso de empate, va en sentido horario desde el Jefe actual. El Jefe selecciona primero y elige el equipo.",
+
+        // Trading
+        done_trading: "Listo - Siguiente Jugador",
+        discard: "Descartar",
+        trade: "Intercambiar",
+        to: "a",
+        cancel: "Cancelar",
+        pending_trades: "Ofertas Pendientes",
+        offers: "ofrece",
+        wants: "Quiere",
+        accept: "Aceptar",
+        decline: "Rechazar",
+        select_trade_partner: "Selecciona con quién intercambiar:",
+        add_chips: "Incluir fichas:",
+        request_chips: "Pedir fichas:",
+        trade_negotiate_hint: "Negocien verbalmente, luego configura las fichas",
+        send_offer: "Enviar Oferta",
+        no_contracts_hand: "Sin contratos en mano",
+
+        // Contract Fulfillment
+        contracts_completed: "¡Contratos Completados!",
+        no_contracts_completed: "Ningún contrato completado en este trabajo.",
+        contract_board: "Tablero de Contratos",
+        select_contract: "Selecciona un contrato o pasa",
 
         // Errors
         error_players: "Por favor ingresa 5-12 nombres de jugadores",
@@ -583,6 +631,8 @@ class GameState {
     drawJob() {
         if (this.jobDeck.length > 0) {
             this.currentJob = this.jobDeck.shift();
+            // Capture rollover at job start for contract evaluation
+            this.currentJob.startingRollover = this.rollover;
             return this.currentJob;
         }
         return null;
@@ -809,7 +859,14 @@ class Game {
 
         this.saveState();
         this.showScreen('game-screen');
-        this.render();
+
+        // Show pass device modal for first drafter (the Chair)
+        const firstPlayer = this.state.players[this.state.chairIndex];
+        this.showModal(
+            this.t('pass_device'),
+            `${this.t('pass_to')} ${firstPlayer.name}. ${this.t('ready_message')}`,
+            () => this.render()
+        );
     }
 
     // ========================================
@@ -848,13 +905,12 @@ class Game {
 
         // Hide player turn modal by default (phases that need it will show it)
         const playerTurnModal = document.getElementById('player-turn-modal');
-        if (playerTurnModal && this.state.phase !== 'claiming' && this.state.phase !== 'betting') {
+        const phasesWithModal = ['initial-draft', 'draft', 'trading', 'claiming', 'betting'];
+        if (playerTurnModal && !phasesWithModal.includes(this.state.phase)) {
             playerTurnModal.classList.remove('active');
         }
 
         this.renderPlayerStatus();
-        this.renderContractBoard();
-        this.renderDashboard();
         this.renderPhase();
         this.updateLanguageUI();
         this.saveState();
@@ -1023,16 +1079,59 @@ class Game {
 
     renderDraftPhase(isInitial) {
         const actionArea = document.getElementById('action-area');
+        const playerTurnModal = document.getElementById('player-turn-modal');
         const currentPlayer = this.state.getCurrentPlayer();
 
-        actionArea.innerHTML = `
-            <div class="action-content">
-                <p class="action-text">${currentPlayer.name}${this.t('draft_turn')}</p>
-                <div class="action-buttons">
-                    <button class="btn btn-secondary" onclick="game.passDraft()">${this.t('pass')}</button>
+        // Show the player turn modal
+        playerTurnModal.classList.add('active');
+
+        // Populate the modal header
+        document.getElementById('player-turn-label').textContent = isInitial ? this.t('phase_initial_draft') : this.t('phase_draft');
+        document.getElementById('player-turn-name').textContent = currentPlayer.name;
+        document.getElementById('player-turn-chips').textContent = this.formatMoney(currentPlayer.chips);
+
+        // Render the contract board in the job section (repurposed for draft)
+        const boardHtml = ['easy', 'medium', 'hard'].map(tier => {
+            const contracts = this.state.contractBoard[tier];
+            if (contracts.length === 0) return '';
+            return `
+                <div class="tier-row">
+                    <span class="tier-label ${tier}">${this.t('tier_' + tier)}</span>
+                    <div class="contract-row">
+                        ${contracts.map((contract, index) =>
+                            this.renderContractCard(contract, tier, index)
+                        ).join('')}
+                    </div>
                 </div>
-            </div>
+            `;
+        }).join('');
+
+        document.getElementById('player-turn-job').innerHTML = `
+            <div class="player-turn-job-title">${this.t('contract_board')}</div>
+            <div class="draft-board">${boardHtml}</div>
         `;
+
+        // Render pass button in claim section
+        document.getElementById('player-turn-claim').innerHTML = `
+            <label>${this.t('select_contract')}</label>
+            <button class="btn btn-secondary" onclick="game.passDraft()" style="max-width: 280px; margin: 0 auto;">${this.t('pass')}</button>
+        `;
+
+        // Render the player's current hand
+        const handHtml = currentPlayer.hand.length > 0
+            ? `<h3>${this.t('your_hand')}</h3>
+               <div class="contract-hand">
+                   ${currentPlayer.hand.map((contract, i) =>
+                       this.renderContractCard(contract, contract.tier, i, { disabled: true, onClick: '' })
+                   ).join('')}
+               </div>`
+            : `<h3>${this.t('your_hand')}</h3>
+               <div class="no-contracts">No contracts in hand</div>`;
+
+        document.getElementById('player-turn-hand').innerHTML = handHtml;
+
+        // Clear the main action area
+        actionArea.innerHTML = '';
     }
 
     selectContract(tier, index) {
@@ -1050,6 +1149,10 @@ class Game {
     }
 
     advanceDraft() {
+        // Hide the player turn modal before showing pass device modal
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        playerTurnModal.classList.remove('active');
+
         this.state.nextPlayer();
 
         if (this.state.currentPlayerIndex === this.state.chairIndex) {
@@ -1057,10 +1160,17 @@ class Game {
                 this.startBetweenJobs();
             } else {
                 this.state.phase = 'trading';
+                this.startTrading();
             }
+        } else {
+            // Show pass device modal for next drafter
+            const nextPlayer = this.state.getCurrentPlayer();
+            this.showModal(
+                this.t('pass_device'),
+                `${this.t('pass_to')} ${nextPlayer.name}. ${this.t('ready_message')}`,
+                () => this.render()
+            );
         }
-
-        this.render();
     }
 
     startBetweenJobs() {
@@ -1068,19 +1178,296 @@ class Game {
         this.state.currentPlayerIndex = this.state.chairIndex;
         this.state.phase = 'draft';
         this.state.refillBoard();
-        this.render();
+
+        // Show pass device modal for the new Chair
+        const chair = this.state.getChair();
+        this.showModal(
+            this.t('pass_device'),
+            `${this.t('pass_to')} ${chair.name}. ${this.t('ready_message')}`,
+            () => this.render()
+        );
+    }
+
+    startTrading() {
+        // Initialize trading state
+        if (!this.state.pendingTrades) {
+            this.state.pendingTrades = [];
+        }
+        this.state.currentPlayerIndex = 0;
+
+        // Show pass device modal for first player
+        const firstPlayer = this.state.players[0];
+        this.showModal(
+            this.t('pass_device'),
+            `${this.t('pass_to')} ${firstPlayer.name}. ${this.t('ready_message')}`,
+            () => this.render()
+        );
     }
 
     renderTradingPhase() {
         const actionArea = document.getElementById('action-area');
-        actionArea.innerHTML = `
-            <div class="action-content">
-                <p class="action-text">${this.t('trading_hint')}</p>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="game.endTrading()">${this.t('end_trading')}</button>
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        const currentPlayer = this.state.getCurrentPlayer();
+
+        // Show the player turn modal
+        playerTurnModal.classList.add('active');
+
+        // Populate the modal header
+        document.getElementById('player-turn-label').textContent = this.t('phase_trading');
+        document.getElementById('player-turn-name').textContent = currentPlayer.name;
+        document.getElementById('player-turn-chips').textContent = this.formatMoney(currentPlayer.chips);
+
+        // Check for pending trades for this player
+        const pendingForMe = (this.state.pendingTrades || []).filter(t => t.toPlayer === this.state.currentPlayerIndex);
+
+        // Render pending trades section
+        let pendingHtml = '';
+        if (pendingForMe.length > 0) {
+            pendingHtml = `
+                <div class="pending-trades">
+                    <h4>${this.t('pending_trades')}</h4>
+                    ${pendingForMe.map((trade, i) => {
+                        const fromPlayer = this.state.players[trade.fromPlayer];
+                        const chipsText = trade.chipsOffered > 0 ? ` + ${this.formatMoney(trade.chipsOffered)}` : '';
+                        const wantText = trade.chipsWanted > 0 ? `<div class="trade-wants">${this.t('wants')}: ${this.formatMoney(trade.chipsWanted)}</div>` : '';
+                        return `
+                            <div class="pending-trade">
+                                <div class="trade-info">
+                                    <span>${fromPlayer.name} ${this.t('offers')}: ${trade.contract.name}${chipsText}</span>
+                                    ${wantText}
+                                </div>
+                                <div class="trade-buttons">
+                                    <button class="btn btn-success" onclick="game.acceptTrade(${i})" style="padding: 8px 16px; min-height: auto;">${this.t('accept')}</button>
+                                    <button class="btn btn-danger" onclick="game.declineTrade(${i})" style="padding: 8px 16px; min-height: auto;">${this.t('decline')}</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
+            `;
+        }
+
+        document.getElementById('player-turn-job').innerHTML = `
+            <div class="player-turn-job-title">${this.t('phase_trading')}</div>
+            <p style="font-size: 0.875rem; color: var(--navy-blue); margin-bottom: 1rem;">${this.t('trading_hint')}</p>
+            ${pendingHtml}
+        `;
+
+        // Render trading actions
+        document.getElementById('player-turn-claim').innerHTML = `
+            <div class="trading-actions">
+                <button class="btn btn-secondary" onclick="game.nextTrader()" style="margin-bottom: 0.5rem;">${this.t('done_trading')}</button>
+                <button class="btn btn-primary" onclick="game.finishTrading()">${this.t('end_trading')}</button>
             </div>
         `;
+
+        // Render the player's hand with discard and trade options
+        const handHtml = currentPlayer.hand.length > 0
+            ? `<h3>${this.t('your_hand')}</h3>
+               <div class="contract-hand">
+                   ${currentPlayer.hand.map((contract, i) => `
+                       <div class="tradeable-contract">
+                           ${this.renderContractCard(contract, contract.tier, i, { disabled: true, onClick: '' })}
+                           <div class="contract-actions">
+                               <button class="btn btn-danger" onclick="game.discardContract(${i})" style="padding: 8px 12px; min-height: auto; font-size: 0.75rem;">
+                                   ${this.t('discard')} (-$1,000)
+                               </button>
+                               <button class="btn btn-secondary" onclick="game.startTrade(${i})" style="padding: 8px 12px; min-height: auto; font-size: 0.75rem;">
+                                   ${this.t('trade')}
+                               </button>
+                           </div>
+                       </div>
+                   `).join('')}
+               </div>`
+            : `<h3>${this.t('your_hand')}</h3>
+               <div class="no-contracts">${this.t('no_contracts_hand')}</div>`;
+
+        document.getElementById('player-turn-hand').innerHTML = handHtml;
+
+        // Clear the main action area
+        actionArea.innerHTML = '';
+    }
+
+    discardContract(contractIndex) {
+        const currentPlayer = this.state.getCurrentPlayer();
+
+        if (currentPlayer.chips < 1000) {
+            alert(this.t('error_chips'));
+            return;
+        }
+
+        currentPlayer.chips -= 1000;
+        currentPlayer.hand.splice(contractIndex, 1);
+        this.render();
+    }
+
+    startTrade(contractIndex) {
+        const currentPlayer = this.state.getCurrentPlayer();
+        const contract = currentPlayer.hand[contractIndex];
+
+        // Store the contract being traded
+        this.state.tradingContract = { contract, contractIndex };
+
+        // Show trade configuration UI
+        const otherPlayers = this.state.players
+            .map((p, i) => ({ player: p, index: i }))
+            .filter(({ index }) => index !== this.state.currentPlayerIndex);
+
+        const playerOptions = otherPlayers.map(({ player, index }) =>
+            `<button class="btn btn-outline player-select-btn" onclick="game.selectTradePartner(${index})" style="margin: 4px;">${player.name}</button>`
+        ).join('');
+
+        document.getElementById('player-turn-claim').innerHTML = `
+            <label>${this.t('trade')} "${contract.name}"</label>
+            <p style="font-size: 0.875rem; color: var(--navy-blue); margin-bottom: 1rem;">${this.t('select_trade_partner')}</p>
+            <div class="player-selection">
+                ${playerOptions}
+            </div>
+            <button class="btn btn-secondary" onclick="game.cancelTrade()" style="max-width: 200px; margin: 1rem auto 0;">${this.t('cancel')}</button>
+        `;
+    }
+
+    selectTradePartner(toPlayerIndex) {
+        const contract = this.state.tradingContract.contract;
+        const currentPlayer = this.state.getCurrentPlayer();
+        const toPlayer = this.state.players[toPlayerIndex];
+
+        // Show chip negotiation UI
+        document.getElementById('player-turn-claim').innerHTML = `
+            <label>${this.t('trade')} "${contract.name}" ${this.t('to')} ${toPlayer.name}</label>
+
+            <div class="trade-config">
+                <div class="trade-row">
+                    <span>${this.t('add_chips')}</span>
+                    <input type="number" id="chips-offered" min="0" max="${currentPlayer.chips}" step="1000" value="0" inputmode="numeric" style="width: 120px; text-align: center;">
+                </div>
+                <div class="trade-row">
+                    <span>${this.t('request_chips')}</span>
+                    <input type="number" id="chips-wanted" min="0" step="1000" value="0" inputmode="numeric" style="width: 120px; text-align: center;">
+                </div>
+            </div>
+
+            <p style="font-size: 0.75rem; color: var(--navy-blue); margin: 1rem 0;">${this.t('trade_negotiate_hint')}</p>
+
+            <div class="trading-actions">
+                <button class="btn btn-primary" onclick="game.confirmTrade(${toPlayerIndex})" style="margin-bottom: 0.5rem;">${this.t('send_offer')}</button>
+                <button class="btn btn-secondary" onclick="game.cancelTrade()">${this.t('cancel')}</button>
+            </div>
+        `;
+    }
+
+    confirmTrade(toPlayerIndex) {
+        const currentPlayer = this.state.getCurrentPlayer();
+        const { contract, contractIndex } = this.state.tradingContract;
+        const chipsOffered = parseInt(document.getElementById('chips-offered').value) || 0;
+        const chipsWanted = parseInt(document.getElementById('chips-wanted').value) || 0;
+
+        // Validate chips offered
+        if (chipsOffered > currentPlayer.chips) {
+            alert(this.t('error_chips'));
+            return;
+        }
+
+        // Remove contract from hand
+        currentPlayer.hand.splice(contractIndex, 1);
+
+        // Deduct chips offered (held in escrow until accepted)
+        if (chipsOffered > 0) {
+            currentPlayer.chips -= chipsOffered;
+        }
+
+        // Create pending trade
+        if (!this.state.pendingTrades) {
+            this.state.pendingTrades = [];
+        }
+
+        this.state.pendingTrades.push({
+            fromPlayer: this.state.currentPlayerIndex,
+            toPlayer: toPlayerIndex,
+            contract: contract,
+            chipsOffered: chipsOffered,
+            chipsWanted: chipsWanted
+        });
+
+        // Clear trading state
+        this.state.tradingContract = null;
+        this.render();
+    }
+
+    cancelTrade() {
+        this.state.tradingContract = null;
+        this.render();
+    }
+
+    acceptTrade(tradeIndex) {
+        const pendingForMe = this.state.pendingTrades.filter(t => t.toPlayer === this.state.currentPlayerIndex);
+        const trade = pendingForMe[tradeIndex];
+        const currentPlayer = this.state.getCurrentPlayer();
+
+        // Check if we can pay the requested chips
+        if (trade.chipsWanted > 0 && currentPlayer.chips < trade.chipsWanted) {
+            alert(this.t('error_chips'));
+            return;
+        }
+
+        // Execute the trade
+        // Receiver gets contract + chips offered
+        currentPlayer.hand.push(trade.contract);
+        currentPlayer.chips += trade.chipsOffered;
+
+        // Receiver pays chips wanted
+        if (trade.chipsWanted > 0) {
+            currentPlayer.chips -= trade.chipsWanted;
+            // Sender receives the wanted chips
+            this.state.players[trade.fromPlayer].chips += trade.chipsWanted;
+        }
+
+        // Remove from pending trades
+        const globalIndex = this.state.pendingTrades.indexOf(trade);
+        this.state.pendingTrades.splice(globalIndex, 1);
+
+        this.render();
+    }
+
+    declineTrade(tradeIndex) {
+        const pendingForMe = this.state.pendingTrades.filter(t => t.toPlayer === this.state.currentPlayerIndex);
+        const trade = pendingForMe[tradeIndex];
+
+        // Return the contract and chips to the sender
+        this.state.players[trade.fromPlayer].hand.push(trade.contract);
+        if (trade.chipsOffered > 0) {
+            this.state.players[trade.fromPlayer].chips += trade.chipsOffered;
+        }
+
+        // Remove from pending trades
+        const globalIndex = this.state.pendingTrades.indexOf(trade);
+        this.state.pendingTrades.splice(globalIndex, 1);
+
+        this.render();
+    }
+
+    nextTrader() {
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        playerTurnModal.classList.remove('active');
+
+        this.state.currentPlayerIndex = (this.state.currentPlayerIndex + 1) % this.state.players.length;
+
+        const nextPlayer = this.state.getCurrentPlayer();
+        this.showModal(
+            this.t('pass_device'),
+            `${this.t('pass_to')} ${nextPlayer.name}. ${this.t('ready_message')}`,
+            () => this.render()
+        );
+    }
+
+    finishTrading() {
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        playerTurnModal.classList.remove('active');
+
+        // Clear any pending trades (unclaimed offers are lost)
+        this.state.pendingTrades = [];
+
+        this.endTrading();
     }
 
     endTrading() {
@@ -1538,14 +1925,332 @@ class Game {
 
     startCompleteContracts() {
         this.state.phase = 'complete-contracts';
+
+        // Automatically check all contracts for fulfillment
+        this.state.fulfilledThisJob = [];
+        const result = this.state.currentJobResult;
+
+        this.state.players.forEach((player, playerIndex) => {
+            const contractsToComplete = [];
+
+            player.hand.forEach((contract, contractIndex) => {
+                if (this.checkContractFulfillment(playerIndex, contract, result)) {
+                    contractsToComplete.push({ contract, contractIndex });
+                }
+            });
+
+            // Complete contracts (in reverse order to maintain indices)
+            contractsToComplete.reverse().forEach(({ contract, contractIndex }) => {
+                // Remove from hand
+                player.hand.splice(contractIndex, 1);
+
+                // Add to rap sheet
+                if (!player.rapSheet[contract.category]) {
+                    player.rapSheet[contract.category] = [];
+                }
+                player.rapSheet[contract.category].push(contract);
+
+                // Add bonus to chips
+                player.chips += contract.bonus;
+
+                // Track for display
+                this.state.fulfilledThisJob.push({
+                    playerName: player.name,
+                    contract: contract
+                });
+            });
+        });
+
         this.render();
+    }
+
+    checkContractFulfillment(playerIndex, contract, result) {
+        const player = this.state.players[playerIndex];
+        const isOnCrew = this.state.crew.includes(playerIndex);
+        const claim = this.state.claims[playerIndex] || 0;
+        const bet = this.state.bets[playerIndex];
+        const crewSize = result.crew.length;
+        const fairShare = result.totalPot / crewSize;
+        const prevJob = this.state.jobHistory.length > 1 ? this.state.jobHistory[this.state.jobHistory.length - 2] : null;
+        const wasOnPrevCrew = prevJob ? prevJob.crew.includes(playerIndex) : false;
+
+        // Get all claims sorted for position checking
+        const crewClaims = result.crew.map(i => this.state.claims[i]).sort((a, b) => a - b);
+        const myClaim = claim;
+
+        switch (contract.name) {
+            // EASY CONTRACTS
+            case 'Quick Score':
+                return isOnCrew && result.success && claim >= 3000;
+
+            case 'Team Player':
+                return isOnCrew && result.success;
+
+            case 'Bet Winner':
+                return bet && bet.type !== 'pass' && (
+                    (bet.type === 'invest' && result.success) ||
+                    (bet.type === 'short' && !result.success)
+                );
+
+            case 'Small Fry':
+                return isOnCrew && claim === 2000;
+
+            case 'Troublemaker':
+                return isOnCrew && !result.success;
+
+            case 'Benchwarmer':
+                return !isOnCrew && result.totalPot >= 14000;
+
+            case 'Momentum':
+                return isOnCrew && result.success && prevJob && prevJob.success;
+
+            case 'Penny Pincher':
+                return player.chips >= 15000;
+
+            case 'Nibble':
+                return isOnCrew && result.success && claim <= 2000;
+
+            case 'Lucky Guess':
+                return bet && bet.type === 'invest' && result.success;
+
+            case 'Dodged Bullet':
+                return !isOnCrew && !result.success;
+
+            case 'Fair Share':
+                return isOnCrew && result.success && Math.abs(claim - fairShare) <= 1000;
+
+            case 'Helping Hand':
+                return isOnCrew && result.totalClaims <= result.totalPot * 0.8;
+
+            case 'Side Bet':
+                return bet && bet.type !== 'pass' && (
+                    (bet.type === 'invest' && result.success && bet.amount >= 1000) ||
+                    (bet.type === 'short' && !result.success && bet.amount >= 1000)
+                );
+
+            case 'Modesty':
+                if (!isOnCrew || !result.success) return false;
+                const minClaim = Math.min(...crewClaims);
+                return myClaim === minClaim && crewClaims.filter(c => c === minClaim).length === 1;
+
+            case 'Spoiler':
+                return isOnCrew && !result.success && prevJob && prevJob.success;
+
+            case 'Table Scraps':
+                return isOnCrew && result.success && claim <= 1000 && result.totalPot >= 15000;
+
+            case 'Against the Grain':
+                if (!bet || bet.type === 'pass') return false;
+                const myWon = (bet.type === 'invest' && result.success) || (bet.type === 'short' && !result.success);
+                if (!myWon) return false;
+                const oppositeBets = Object.entries(this.state.bets).filter(([i, b]) =>
+                    parseInt(i) !== playerIndex && b.type !== 'pass' && b.type !== bet.type
+                );
+                return oppositeBets.length >= 1;
+
+            case 'Second Fiddle':
+                if (!isOnCrew || !result.success || crewSize < 4) return false;
+                const sortedClaims = [...crewClaims];
+                return sortedClaims.length >= 2 && myClaim === sortedClaims[1];
+
+            case 'Cleanup Crew':
+                return isOnCrew && result.success && prevJob && !prevJob.success;
+
+            // MEDIUM CONTRACTS
+            case 'Big Claim':
+                return isOnCrew && result.success && claim >= 5000;
+
+            case 'Firestarter':
+                return !result.success && result.totalPot >= 12000;
+
+            case 'Sharpshooter':
+                return isOnCrew && result.success && Math.abs(claim - fairShare) <= 500;
+
+            case 'Smart Money':
+                return bet && bet.type !== 'pass' && prevJob && !prevJob.success && (
+                    (bet.type === 'invest' && result.success) ||
+                    (bet.type === 'short' && !result.success)
+                );
+
+            case 'Crew Builder':
+                return playerIndex === this.state.chairIndex && result.success;
+
+            case 'Smooth Sailing':
+                return isOnCrew && result.success && prevJob && prevJob.success && wasOnPrevCrew;
+
+            case 'Nest Egg':
+                return player.chips >= 22000;
+
+            case 'Calculated Risk':
+                return bet && bet.type === 'short' && !result.success;
+
+            case 'Surgical Strike':
+                return isOnCrew && !result.success && Math.abs(result.margin) <= 3000;
+
+            case 'Tight Crew':
+                return isOnCrew && Math.abs(result.totalClaims - result.totalPot) <= 1000;
+
+            case 'Anchor':
+                return isOnCrew && result.success && claim >= 3000;
+
+            case 'Fat Cat':
+                const otherChips = this.state.players.filter((_, i) => i !== playerIndex).map(p => p.chips);
+                return player.chips > Math.max(...otherChips);
+
+            case 'Double Down':
+                return bet && bet.type === 'invest' && bet.amount >= 4000 && result.success;
+
+            case 'Repeat Offender':
+                return isOnCrew && !result.success && prevJob && !prevJob.success;
+
+            case "Razor's Edge":
+                return isOnCrew && result.totalClaims === result.totalPot;
+
+            case 'Kingmaker':
+                return playerIndex === this.state.chairIndex && result.success && !isOnCrew;
+
+            case 'Contrarian':
+                if (!bet || bet.type === 'pass') return false;
+                const iWon = (bet.type === 'invest' && result.success) || (bet.type === 'short' && !result.success);
+                if (!iWon) return false;
+                const oppLost = Object.entries(this.state.bets).filter(([i, b]) => {
+                    if (parseInt(i) === playerIndex || b.type === 'pass') return false;
+                    const theyWon = (b.type === 'invest' && result.success) || (b.type === 'short' && !result.success);
+                    return !theyWon;
+                });
+                return oppLost.length >= 2;
+
+            case 'Restraint':
+                return isOnCrew && result.success && claim === 0;
+
+            case 'Controlled Burn':
+                return !result.success && Math.abs(result.margin) <= 2000;
+
+            case "Lion's Share":
+                if (!isOnCrew || !result.success) return false;
+                const maxClaim = Math.max(...crewClaims);
+                return myClaim === maxClaim && crewClaims.filter(c => c === maxClaim).length === 1;
+
+            case 'Trendsetter':
+                if (!isOnCrew || !result.success) return false;
+                const sameClaims = crewClaims.filter(c => c === myClaim);
+                return sameClaims.length >= 2;
+
+            case 'Bail Out':
+                // Check if there was rollover at the START of this job (from previous failures)
+                return isOnCrew && result.success && (this.state.currentJob.startingRollover || 0) > 0;
+
+            case 'Saboteur':
+                return isOnCrew && !result.success && claim > fairShare;
+
+            case 'Steady Hand':
+                return isOnCrew && result.success && wasOnPrevCrew && prevJob && prevJob.success;
+
+            case 'High Roller':
+                return bet && bet.type !== 'pass' && bet.amount >= 5000 && (
+                    (bet.type === 'invest' && result.success) ||
+                    (bet.type === 'short' && !result.success)
+                );
+
+            // HARD CONTRACTS
+            case 'Kingpin':
+                const othersChips = this.state.players.filter((_, i) => i !== playerIndex).map(p => p.chips);
+                return player.chips >= Math.max(...othersChips) + 4000;
+
+            case 'Demolition Expert':
+                // Check if there was rollover ≥$8,000 at the START of this job
+                return !result.success && (this.state.currentJob.startingRollover || 0) >= 8000;
+
+            case 'Masterstroke':
+                if (!isOnCrew || !result.success) return false;
+                const maxClaimHere = Math.max(...crewClaims);
+                return myClaim === maxClaimHere && result.margin <= 2000 && result.margin >= 0;
+
+            case 'Market Maker':
+                return bet && bet.type !== 'pass' && bet.amount >= 2500 && (
+                    (bet.type === 'invest' && result.success) ||
+                    (bet.type === 'short' && !result.success)
+                );
+
+            case 'Untouchable':
+                return isOnCrew && result.success && this.state.currentJob.isFinal;
+
+            case 'Scorched Earth':
+                return !result.success && result.totalPot >= 18000;
+
+            case 'Last Laugh':
+                if (!isOnCrew || !this.state.currentJob.isFinal) return false;
+                const sortedDesc = [...crewClaims].sort((a, b) => b - a);
+                return sortedDesc.length >= 2 && myClaim === sortedDesc[1];
+
+            case 'Ironclad':
+                if (!isOnCrew || !result.success) return false;
+                return crewClaims.every(c => c >= 2000);
+
+            case 'All In':
+                return bet && bet.type !== 'pass' && bet.amount === 6000 && (
+                    (bet.type === 'invest' && result.success) ||
+                    (bet.type === 'short' && !result.success)
+                );
+
+            case 'Greed is Good':
+                return isOnCrew && result.success && claim >= 6000;
+
+            case 'Mirror Match':
+                if (!isOnCrew) return false;
+                const exactMatches = crewClaims.filter(c => c === myClaim);
+                return exactMatches.length === 3; // Me + 2 others
+
+            case 'Puppet Master':
+                return playerIndex === this.state.chairIndex && result.success && result.margin <= 2000;
+
+            case 'Oracle':
+                if (!bet || bet.type === 'pass') return false;
+                const myWin = (bet.type === 'invest' && result.success) || (bet.type === 'short' && !result.success);
+                if (!myWin) return false;
+                const sameDirBets = Object.entries(this.state.bets).filter(([i, b]) =>
+                    parseInt(i) !== playerIndex && b.type === bet.type
+                );
+                return sameDirBets.length === 0;
+
+            case 'Sole Survivor':
+                if (!isOnCrew || result.success) return false;
+                const underFairShare = result.crew.filter(i => this.state.claims[i] <= fairShare);
+                return underFairShare.length === 1 && underFairShare[0] === playerIndex;
+
+            case 'Photo Finish':
+                return isOnCrew && result.success && Math.abs(result.totalClaims - result.totalPot) <= 500;
+
+            default:
+                return false;
+        }
     }
 
     renderCompleteContractsPhase() {
         const actionArea = document.getElementById('action-area');
+        const fulfilled = this.state.fulfilledThisJob || [];
+
+        let fulfilledHtml = '';
+        if (fulfilled.length > 0) {
+            fulfilledHtml = `
+                <div class="fulfilled-contracts">
+                    <h3>${this.t('contracts_completed') || 'Contracts Completed!'}</h3>
+                    ${fulfilled.map(f => `
+                        <div class="fulfilled-item">
+                            <span class="fulfilled-player">${f.playerName}</span>
+                            <span class="fulfilled-contract">${f.contract.name}</span>
+                            <span class="fulfilled-bonus">+${this.formatMoney(f.contract.bonus)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        } else {
+            fulfilledHtml = `<p class="action-text">${this.t('no_contracts_completed') || 'No contracts completed this job.'}</p>`;
+        }
+
         actionArea.innerHTML = `
             <div class="action-content">
-                <p class="action-text">${this.t('complete_contracts_hint')}</p>
+                ${fulfilledHtml}
                 <div class="action-buttons">
                     ${this.state.currentJob.isFinal ?
                         `<button class="btn btn-primary" onclick="game.endGame()">${this.t('finish_game')}</button>` :

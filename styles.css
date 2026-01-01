@@ -1469,6 +1469,208 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
     padding: var(--space-md);
 }
 
+/* Draft Board in Modal */
+.draft-board {
+    text-align: left;
+}
+
+.draft-board .tier-row {
+    margin-bottom: var(--space-md);
+}
+
+.draft-board .tier-label {
+    display: inline-block;
+    margin-bottom: var(--space-xs);
+}
+
+.draft-board .contract-row {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    padding: var(--space-xs) 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.draft-board .contract-card {
+    flex-shrink: 0;
+    width: 180px;
+}
+
+/* Trading UI */
+.tradeable-contract {
+    margin-bottom: var(--space-md);
+}
+
+.tradeable-contract .contract-card {
+    margin-bottom: var(--space-xs);
+}
+
+.contract-actions {
+    display: flex;
+    gap: var(--space-xs);
+    justify-content: center;
+}
+
+.trading-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.trading-actions .btn {
+    max-width: 280px;
+    width: 100%;
+}
+
+.pending-trades {
+    background: rgba(123, 168, 101, 0.15);
+    border: 2px solid var(--success-green);
+    border-radius: var(--border-radius);
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.pending-trades h4 {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--success-green);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pending-trade {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm);
+    background: white;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--space-xs);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.pending-trade .trade-info {
+    flex: 1;
+    min-width: 150px;
+}
+
+.pending-trade .trade-info span {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--dark-brown);
+    display: block;
+}
+
+.pending-trade .trade-wants {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--purple-mauve);
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.pending-trade .trade-buttons {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.trade-config {
+    background: white;
+    border: 2px solid var(--navy-blue);
+    border-radius: var(--border-radius-sm);
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+}
+
+.trade-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(26, 58, 82, 0.1);
+}
+
+.trade-row:last-child {
+    border-bottom: none;
+}
+
+.trade-row span {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--navy-blue);
+}
+
+.trade-row input {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: var(--space-xs) var(--space-sm);
+    border: 2px solid var(--navy-blue);
+    border-radius: var(--border-radius-sm);
+}
+
+.player-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin: var(--space-md) 0;
+}
+
+/* Fulfilled Contracts */
+.fulfilled-contracts {
+    background: rgba(123, 168, 101, 0.15);
+    border: 3px solid var(--success-green);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.fulfilled-contracts h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--success-green);
+    margin-bottom: var(--space-md);
+}
+
+.fulfilled-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: white;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--space-xs);
+    gap: var(--space-sm);
+}
+
+.fulfilled-player {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--dark-brown);
+}
+
+.fulfilled-contract {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--navy-blue);
+    flex: 1;
+    text-align: center;
+}
+
+.fulfilled-bonus {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--success-green);
+}
+
 /* ========================================
    Final Scores
    ======================================== */
