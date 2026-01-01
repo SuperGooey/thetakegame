@@ -1612,6 +1612,23 @@ class Game {
             // Hide the player turn modal
             playerTurnModal.classList.remove('active');
 
+            // Show job card with crew in the job section
+            const jobSection = document.getElementById('job-section');
+            const crewNames = this.state.crew.map(i => this.state.players[i].name).join(', ');
+
+            jobSection.innerHTML = `
+                <div class="job-card">
+                    <div class="job-title">${this.t(jobTypeKey)}</div>
+                    <div class="job-details">
+                        <div class="job-pot">${this.t('pot')}: ${this.formatMoney(totalPot)}</div>
+                        <div class="job-crew">${this.t('crew_size')}: ${job.crewSize}</div>
+                    </div>
+                    ${this.state.rollover > 0 ? `<div class="job-rollover">+${this.formatMoney(this.state.rollover)} ${this.t('rollover')}</div>` : ''}
+                    ${job.isFinal ? `<div class="final-badge">${this.t('final_job_badge')}</div>` : ''}
+                    <div class="job-crew-names">${crewNames}</div>
+                </div>
+            `;
+
             actionArea.innerHTML = `
                 <div class="action-content">
                     <p class="action-text">${this.t('all_claims_in')}</p>
@@ -1735,6 +1752,23 @@ class Game {
         if (allBet || nonCrew.length === 0) {
             // Hide the player turn modal
             playerTurnModal.classList.remove('active');
+
+            // Show job card with crew in the job section
+            const jobSection = document.getElementById('job-section');
+            const crewNames = this.state.crew.map(i => this.state.players[i].name).join(', ');
+
+            jobSection.innerHTML = `
+                <div class="job-card">
+                    <div class="job-title">${this.t(jobTypeKey)}</div>
+                    <div class="job-details">
+                        <div class="job-pot">${this.t('pot')}: ${this.formatMoney(totalPot)}</div>
+                        <div class="job-crew">${this.t('crew_size')}: ${job.crewSize}</div>
+                    </div>
+                    ${this.state.rollover > 0 ? `<div class="job-rollover">+${this.formatMoney(this.state.rollover)} ${this.t('rollover')}</div>` : ''}
+                    ${job.isFinal ? `<div class="final-badge">${this.t('final_job_badge')}</div>` : ''}
+                    <div class="job-crew-names">${crewNames}</div>
+                </div>
+            `;
 
             actionArea.innerHTML = `
                 <div class="action-content">
