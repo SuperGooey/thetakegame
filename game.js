@@ -910,6 +910,22 @@ class Game {
             playerTurnModal.classList.remove('active');
         }
 
+        // Show/hide contract board section (only visible during phases that don't use modal)
+        const contractBoardSection = document.getElementById('contract-board-section');
+        const dashboardSection = document.getElementById('player-dashboard');
+
+        // These sections should be hidden when using the player turn modal
+        // and during job phases where they're not relevant
+        const hideMainSections = phasesWithModal.includes(this.state.phase) ||
+            ['job-reveal', 'crew-select', 'reveal', 'complete-contracts'].includes(this.state.phase);
+
+        if (contractBoardSection) {
+            contractBoardSection.style.display = hideMainSections ? 'none' : 'block';
+        }
+        if (dashboardSection) {
+            dashboardSection.style.display = hideMainSections ? 'none' : 'block';
+        }
+
         this.renderPlayerStatus();
         this.renderPhase();
         this.updateLanguageUI();
