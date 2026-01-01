@@ -151,7 +151,69 @@ const TRANSLATIONS = {
         // Errors
         error_players: "Please enter 5-12 player names",
         error_chips: "Not enough chips!",
-        error_max_bet: "Maximum bet is $6,000"
+        error_max_bet: "Maximum bet is $6,000",
+
+        // Contract Objectives
+        contract_quick_score: "Claim ≥$3,000 on a successful job",
+        contract_team_player: "Be on a successful crew",
+        contract_bet_winner: "Profit from a bet",
+        contract_small_fry: "Claim exactly $2,000 on a job",
+        contract_troublemaker: "Be on a crew that fails",
+        contract_benchwarmer: "Be excluded from a crew on a job with pot ≥$14,000",
+        contract_momentum: "Be on a successful crew when the previous job also succeeded",
+        contract_penny_pincher: "Have ≥$15,000 total chips when completing this contract",
+        contract_nibble: "Claim ≤$2,000 on a successful job",
+        contract_lucky_guess: "Invest on a job that succeeds",
+        contract_dodged_bullet: "Be excluded from a crew that fails",
+        contract_fair_share: "Claim within $1,000 of (Pot ÷ Crew Size) on a successful job",
+        contract_helping_hand: "Be on a crew where total claims ≤80% of pot",
+        contract_side_bet: "Profit ≥$2,000 from a single bet",
+        contract_modesty: "Claim the smallest share on a successful crew (no ties)",
+        contract_spoiler: "Be on a crew that fails when the previous job succeeded",
+        contract_table_scraps: "Claim ≤$1,000 on a job with pot ≥$15,000 that succeeds",
+        contract_against_the_grain: "Profit from a bet when at least one other player bet opposite",
+        contract_second_fiddle: "Claim the second-smallest share on a successful crew of 4+",
+        contract_cleanup_crew: "Be on a successful crew when the previous job failed",
+        contract_big_claim: "Claim ≥$5,000 on a successful job",
+        contract_firestarter: "A job fails with pot ≥$12,000",
+        contract_sharpshooter: "Claim within $500 of (Pot ÷ Crew Size) on a successful job",
+        contract_smart_money: "Profit from a bet on a job following a failed job",
+        contract_crew_builder: "Be Chair for a successful job",
+        contract_smooth_sailing: "Be on a successful crew when the previous job also succeeded and you were on that crew too",
+        contract_nest_egg: "Have ≥$22,000 total chips when completing this contract",
+        contract_calculated_risk: "Short a job and it fails",
+        contract_surgical_strike: "Be on a crew that fails by ≤$3,000",
+        contract_tight_crew: "Be on a crew that claims within $1,000 of the pot",
+        contract_anchor: "Be on a successful crew where you also claimed ≥$3,000",
+        contract_fat_cat: "Have more chips than every other player when completing this contract",
+        contract_double_down: "Invest ≥$4,000 on a single job and win",
+        contract_repeat_offender: "Be on a failed crew when the previous job also failed",
+        contract_razors_edge: "Be on a crew where total claims equal exactly the pot",
+        contract_kingmaker: "Be Chair for a successful job you're not on",
+        contract_contrarian: "Profit from a bet when at least two others bet opposite and lost",
+        contract_restraint: "Claim $0 on a job that succeeds",
+        contract_controlled_burn: "A job fails by ≤$2,000",
+        contract_lions_share: "Claim the largest share on a successful crew (no ties)",
+        contract_trendsetter: "Claim an amount that at least one other crew member also claimed exactly, on a successful job",
+        contract_bail_out: "Be on a successful crew on a job with rollover from a previous failure",
+        contract_saboteur: "Be on a failed crew where you claimed more than (Pot ÷ Crew Size)",
+        contract_steady_hand: "Be on two consecutive successful crews",
+        contract_high_roller: "Win a bet of ≥$5,000",
+        contract_kingpin: "Be chip leader by at least $4,000 when completing this contract",
+        contract_demolition_expert: "A job fails that has rollover ≥$8,000 from previous failures",
+        contract_masterstroke: "Claim the largest share on a crew that succeeds by ≤$2,000 margin",
+        contract_market_maker: "Profit ≥$5,000 from betting on a single job",
+        contract_untouchable: "Be on a successful crew on the Final Job",
+        contract_scorched_earth: "A job with pot ≥$18,000 (including rollover) fails",
+        contract_last_laugh: "Claim the second-highest cut on the crew on The Final Job",
+        contract_ironclad: "Be on a successful crew where every crew member claimed ≥$2,000",
+        contract_all_in: "Bet $6,000 on a single job and win",
+        contract_greed_is_good: "Claim ≥$6,000 on a successful job",
+        contract_mirror_match: "Claim an amount that exactly two other crew members also claimed",
+        contract_puppet_master: "Be Chair for a job that succeeds by ≤$2,000 margin",
+        contract_oracle: "Be the only player to bet a direction (all others bet opposite or pass) and win",
+        contract_sole_survivor: "Be the only crew member to claim ≤(Pot ÷ Crew Size) on a failed job",
+        contract_photo_finish: "Be on a successful crew where total claims are within $500 of the pot"
     },
     es: {
         // UI Elements
@@ -296,7 +358,69 @@ const TRANSLATIONS = {
         // Errors
         error_players: "Por favor ingresa 5-12 nombres de jugadores",
         error_chips: "¡No tienes suficientes fichas!",
-        error_max_bet: "La apuesta máxima es $6,000"
+        error_max_bet: "La apuesta máxima es $6,000",
+
+        // Contract Objectives
+        contract_quick_score: "Reclama ≥$3,000 en un trabajo exitoso",
+        contract_team_player: "Sé parte de un equipo exitoso",
+        contract_bet_winner: "Gana con una apuesta",
+        contract_small_fry: "Reclama exactamente $2,000 en un trabajo",
+        contract_troublemaker: "Sé parte de un equipo que fracasa",
+        contract_benchwarmer: "Quédate fuera de un equipo en un trabajo con bote ≥$14,000",
+        contract_momentum: "Sé parte de un equipo exitoso cuando el trabajo anterior también tuvo éxito",
+        contract_penny_pincher: "Ten ≥$15,000 fichas totales al completar este contrato",
+        contract_nibble: "Reclama ≤$2,000 en un trabajo exitoso",
+        contract_lucky_guess: "Invierte en un trabajo que tiene éxito",
+        contract_dodged_bullet: "Quédate fuera de un equipo que fracasa",
+        contract_fair_share: "Reclama dentro de $1,000 de (Bote ÷ Tamaño del Equipo) en un trabajo exitoso",
+        contract_helping_hand: "Sé parte de un equipo donde los reclamos totales sean ≤80% del bote",
+        contract_side_bet: "Gana ≥$2,000 de una sola apuesta",
+        contract_modesty: "Reclama la parte más pequeña en un equipo exitoso (sin empates)",
+        contract_spoiler: "Sé parte de un equipo que fracasa cuando el trabajo anterior tuvo éxito",
+        contract_table_scraps: "Reclama ≤$1,000 en un trabajo con bote ≥$15,000 que tiene éxito",
+        contract_against_the_grain: "Gana con una apuesta cuando al menos otro jugador apostó lo contrario",
+        contract_second_fiddle: "Reclama la segunda parte más pequeña en un equipo exitoso de 4+",
+        contract_cleanup_crew: "Sé parte de un equipo exitoso cuando el trabajo anterior fracasó",
+        contract_big_claim: "Reclama ≥$5,000 en un trabajo exitoso",
+        contract_firestarter: "Un trabajo fracasa con bote ≥$12,000",
+        contract_sharpshooter: "Reclama dentro de $500 de (Bote ÷ Tamaño del Equipo) en un trabajo exitoso",
+        contract_smart_money: "Gana con una apuesta en un trabajo después de uno que fracasó",
+        contract_crew_builder: "Sé Jefe de un trabajo exitoso",
+        contract_smooth_sailing: "Sé parte de un equipo exitoso cuando el trabajo anterior también tuvo éxito y estuviste en ese equipo también",
+        contract_nest_egg: "Ten ≥$22,000 fichas totales al completar este contrato",
+        contract_calculated_risk: "Apuesta contra un trabajo y fracasa",
+        contract_surgical_strike: "Sé parte de un equipo que fracasa por ≤$3,000",
+        contract_tight_crew: "Sé parte de un equipo que reclama dentro de $1,000 del bote",
+        contract_anchor: "Sé parte de un equipo exitoso donde también reclamaste ≥$3,000",
+        contract_fat_cat: "Ten más fichas que todos los demás jugadores al completar este contrato",
+        contract_double_down: "Invierte ≥$4,000 en un solo trabajo y gana",
+        contract_repeat_offender: "Sé parte de un equipo que fracasa cuando el trabajo anterior también fracasó",
+        contract_razors_edge: "Sé parte de un equipo donde los reclamos totales igualan exactamente el bote",
+        contract_kingmaker: "Sé Jefe de un trabajo exitoso en el que no participas",
+        contract_contrarian: "Gana con una apuesta cuando al menos otros dos apostaron lo contrario y perdieron",
+        contract_restraint: "Reclama $0 en un trabajo que tiene éxito",
+        contract_controlled_burn: "Un trabajo fracasa por ≤$2,000",
+        contract_lions_share: "Reclama la parte más grande en un equipo exitoso (sin empates)",
+        contract_trendsetter: "Reclama una cantidad que al menos otro miembro del equipo también reclamó exactamente, en un trabajo exitoso",
+        contract_bail_out: "Sé parte de un equipo exitoso en un trabajo con acumulado de un fracaso anterior",
+        contract_saboteur: "Sé parte de un equipo que fracasa donde reclamaste más que (Bote ÷ Tamaño del Equipo)",
+        contract_steady_hand: "Sé parte de dos equipos exitosos consecutivos",
+        contract_high_roller: "Gana una apuesta de ≥$5,000",
+        contract_kingpin: "Sé líder en fichas por al menos $4,000 al completar este contrato",
+        contract_demolition_expert: "Un trabajo fracasa que tiene acumulado ≥$8,000 de fracasos anteriores",
+        contract_masterstroke: "Reclama la parte más grande en un equipo que tiene éxito por ≤$2,000 de margen",
+        contract_market_maker: "Gana ≥$5,000 apostando en un solo trabajo",
+        contract_untouchable: "Sé parte de un equipo exitoso en el Trabajo Final",
+        contract_scorched_earth: "Un trabajo con bote ≥$18,000 (incluyendo acumulado) fracasa",
+        contract_last_laugh: "Reclama la segunda parte más alta del equipo en El Trabajo Final",
+        contract_ironclad: "Sé parte de un equipo exitoso donde cada miembro reclamó ≥$2,000",
+        contract_all_in: "Apuesta $6,000 en un solo trabajo y gana",
+        contract_greed_is_good: "Reclama ≥$6,000 en un trabajo exitoso",
+        contract_mirror_match: "Reclama una cantidad que exactamente otros dos miembros del equipo también reclamaron",
+        contract_puppet_master: "Sé Jefe de un trabajo que tiene éxito por ≤$2,000 de margen",
+        contract_oracle: "Sé el único jugador en apostar en una dirección (todos los demás apuestan lo contrario o pasan) y gana",
+        contract_sole_survivor: "Sé el único miembro del equipo en reclamar ≤(Bote ÷ Tamaño del Equipo) en un trabajo que fracasa",
+        contract_photo_finish: "Sé parte de un equipo exitoso donde los reclamos totales están dentro de $500 del bote"
     }
 };
 
@@ -722,6 +846,12 @@ class Game {
             return;
         }
 
+        // Hide player turn modal by default (phases that need it will show it)
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        if (playerTurnModal && this.state.phase !== 'claiming') {
+            playerTurnModal.classList.remove('active');
+        }
+
         this.renderPlayerStatus();
         this.renderContractBoard();
         this.renderDashboard();
@@ -750,10 +880,19 @@ class Game {
         });
     }
 
+    getContractObjective(contract) {
+        // Convert contract name to translation key (e.g., "Quick Score" -> "contract_quick_score")
+        const key = 'contract_' + contract.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+$/, '');
+        const translated = this.t(key);
+        // If translation exists and differs from key, use it; otherwise fallback to original
+        return (translated && translated !== key) ? translated : contract.objective;
+    }
+
     renderContractCard(contract, tier, index, options = {}) {
         const disabled = options.disabled ? 'disabled' : '';
         const selected = options.selected ? 'selected' : '';
         const onClick = options.onClick || `game.selectContract('${tier}', ${index})`;
+        const objective = this.getContractObjective(contract);
 
         return `
             <div class="contract-card ${disabled} ${selected}"
@@ -763,7 +902,7 @@ class Game {
                     <div class="contract-name">${contract.name}</div>
                     <div class="contract-category">${contract.icon}</div>
                 </div>
-                <div class="contract-objective">${contract.objective}</div>
+                <div class="contract-objective">${objective}</div>
                 <div class="contract-footer">
                     <div class="contract-bonus">+${this.formatMoney(contract.bonus)}</div>
                     <div class="contract-penalty">-${this.formatMoney(contract.penalty)}</div>
@@ -1062,8 +1201,14 @@ class Game {
         const totalPot = this.state.currentJob.pot + this.state.rollover;
         const allClaimed = this.state.crew.every(i => this.state.claims[i] !== undefined);
         const actionArea = document.getElementById('action-area');
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        const job = this.state.currentJob;
+        const jobTypeKey = `job_${job.type.toLowerCase().replace(' ', '_')}`;
 
         if (allClaimed) {
+            // Hide the player turn modal
+            playerTurnModal.classList.remove('active');
+
             actionArea.innerHTML = `
                 <div class="action-content">
                     <p class="action-text">${this.t('all_claims_in')}</p>
@@ -1073,18 +1218,48 @@ class Game {
                 </div>
             `;
         } else {
+            // Get the next unclaimed crew member
             const unclaimedCrew = this.state.crew.filter(i => this.state.claims[i] === undefined);
-            const nextPlayer = this.state.players[unclaimedCrew[0]];
+            const playerIndex = unclaimedCrew[0];
+            const player = this.state.players[playerIndex];
 
-            actionArea.innerHTML = `
-                <div class="action-content">
-                    <p class="action-text">${nextPlayer.name}: ${this.t('enter_claim')} (${this.t('pot')}: ${this.formatMoney(totalPot)})</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-                        <input type="number" id="claim-input" min="0" max="${totalPot}" step="1000" placeholder="0" inputmode="numeric" style="max-width: 150px; text-align: center;">
-                        <button class="btn btn-primary" onclick="game.submitClaim()" style="max-width: 200px;">${this.t('submit_claim')}</button>
-                    </div>
+            // Show the player turn modal with their info
+            playerTurnModal.classList.add('active');
+
+            // Populate the modal
+            document.getElementById('player-turn-label').textContent = this.t('phase_claiming');
+            document.getElementById('player-turn-name').textContent = player.name;
+            document.getElementById('player-turn-chips').textContent = this.formatMoney(player.chips);
+
+            document.getElementById('player-turn-job').innerHTML = `
+                <div class="player-turn-job-title">${this.t(jobTypeKey)}</div>
+                <div class="player-turn-job-details">
+                    <span class="player-turn-pot">${this.t('pot')}: ${this.formatMoney(totalPot)}</span>
+                    <span class="player-turn-crew">${this.t('crew_size')}: ${job.crewSize}</span>
                 </div>
             `;
+
+            document.getElementById('player-turn-claim').innerHTML = `
+                <label>${this.t('enter_claim')}</label>
+                <input type="number" id="claim-input" min="0" max="${totalPot}" step="1000" placeholder="0" inputmode="numeric">
+                <button class="btn btn-primary" onclick="game.submitClaim()">${this.t('submit_claim')}</button>
+            `;
+
+            // Render the player's hand in the modal
+            const handHtml = player.hand.length > 0
+                ? `<h3>${this.t('your_hand')}</h3>
+                   <div class="contract-hand">
+                       ${player.hand.map((contract, i) =>
+                           this.renderContractCard(contract, contract.tier, i, { disabled: true, onClick: '' })
+                       ).join('')}
+                   </div>`
+                : `<h3>${this.t('your_hand')}</h3>
+                   <div class="no-contracts">No contracts in hand</div>`;
+
+            document.getElementById('player-turn-hand').innerHTML = handHtml;
+
+            // Clear the main action area
+            actionArea.innerHTML = '';
 
             // Focus the input
             setTimeout(() => {
@@ -1101,6 +1276,10 @@ class Game {
         const playerIndex = unclaimedCrew[0];
 
         this.state.claims[playerIndex] = claim;
+
+        // Hide the player turn modal before showing pass device modal
+        const playerTurnModal = document.getElementById('player-turn-modal');
+        playerTurnModal.classList.remove('active');
 
         // Check if there are more crew members to claim
         const nextUnclaimed = this.state.crew.filter(i => this.state.claims[i] === undefined);

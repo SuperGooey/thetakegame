@@ -14,12 +14,12 @@
     --success-green: #7ba865;
     --failure-red: #b85d5d;
 
-    /* Category Colors */
-    --precision: #4a90e2;
-    --chaos: #e24a4a;
-    --trust: #4ae290;
-    --greed: #e2d44a;
-    --hustle: #9b4ae2;
+    /* Category Colors (matching print-boards) */
+    --precision: #1a3a52;  /* navy-blue */
+    --chaos: #e2d44a;      /* gold/yellow */
+    --trust: #b4c75f;      /* lime-green */
+    --greed: #a8c5d9;      /* sky-blue */
+    --hustle: #9b6b87;     /* purple-mauve */
 
     /* Tier Colors */
     --easy: #7ba865;
@@ -1290,6 +1290,187 @@ h3 { font-size: 1.125rem; margin-bottom: var(--space-sm); color: var(--navy-blue
 
 .modal-btn {
     min-width: 200px;
+}
+
+/* ========================================
+   Player Turn Modal (Claiming/Betting)
+   ======================================== */
+
+.player-turn-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--sky-blue);
+    z-index: 900;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-top: calc(var(--space-xl) + 60px);
+    padding-bottom: calc(var(--space-xl) + var(--safe-area-bottom));
+}
+
+.player-turn-modal.active {
+    display: block;
+}
+
+.player-turn-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.player-turn-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--cream);
+    border: 4px solid var(--purple-mauve);
+    border-radius: var(--border-radius);
+}
+
+.player-turn-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--navy-blue);
+    margin-bottom: var(--space-xs);
+}
+
+.player-turn-name {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--purple-mauve);
+    margin-bottom: var(--space-sm);
+}
+
+.player-turn-chips {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--success-green);
+}
+
+.player-turn-job {
+    background: var(--cream);
+    border: 3px solid var(--lime-green);
+    border-radius: var(--border-radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.player-turn-job-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark-brown);
+    margin-bottom: var(--space-xs);
+}
+
+.player-turn-job-details {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
+}
+
+.player-turn-pot {
+    color: var(--success-green);
+    font-weight: 700;
+}
+
+.player-turn-crew {
+    color: var(--navy-blue);
+    font-weight: 700;
+}
+
+.player-turn-claim {
+    background: var(--cream);
+    border: 4px solid var(--navy-blue);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.player-turn-claim label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy-blue);
+    margin-bottom: var(--space-md);
+}
+
+.player-turn-claim input {
+    width: 100%;
+    max-width: 280px;
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    padding: var(--space-md);
+    background: white;
+    color: var(--dark-brown);
+    border: 4px solid var(--navy-blue);
+    border-radius: var(--border-radius);
+    outline: none;
+    transition: all 0.2s;
+    margin-bottom: var(--space-md);
+}
+
+.player-turn-claim input:focus {
+    border-color: var(--purple-mauve);
+    box-shadow: 0 0 0 4px rgba(155, 107, 135, 0.2);
+}
+
+.player-turn-claim .btn {
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.player-turn-hand {
+    background: var(--cream);
+    border: 3px solid var(--navy-blue);
+    border-radius: var(--border-radius);
+    padding: var(--space-md);
+}
+
+.player-turn-hand h3 {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy-blue);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.player-turn-hand .contract-hand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.player-turn-hand .contract-card {
+    width: 100%;
+    cursor: default;
+}
+
+.player-turn-hand .contract-card:hover {
+    transform: none;
+    border-color: var(--navy-blue);
+}
+
+.player-turn-hand .no-contracts {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--navy-blue);
+    padding: var(--space-md);
 }
 
 /* ========================================
